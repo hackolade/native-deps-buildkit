@@ -1,0 +1,31 @@
+diff --git a/node_modules/couchbase/CMakeLists.txt b/node_modules/couchbase/CMakeLists.txt
+index 0ce5bc3..3512b67 100644
+--- a/node_modules/couchbase/CMakeLists.txt
++++ b/node_modules/couchbase/CMakeLists.txt
+@@ -117,7 +117,7 @@ include_directories(${NODEJS_INC_DIR})
+ set(COUCHBASE_CXX_CLIENT_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+ set(COUCHBASE_CXX_CLIENT_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+ set(COUCHBASE_CXX_CLIENT_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
+-set(COUCHBASE_CXX_CLIENT_POST_LINKED_OPENSSL ON CACHE BOOL "")
++set(COUCHBASE_CXX_CLIENT_POST_LINKED_OPENSSL OFF CACHE BOOL "")
+ set(COUCHBASE_CXX_CLIENT_STATIC_STDLIB ON CACHE BOOL "" FORCE)
+ add_subdirectory(deps/couchbase-cxx-client)
+ 
+diff --git a/node_modules/couchbase/scripts/install.js b/node_modules/couchbase/scripts/install.js
+index 4bf054f..a4f8801 100755
+--- a/node_modules/couchbase/scripts/install.js
++++ b/node_modules/couchbase/scripts/install.js
+@@ -37,9 +37,9 @@ function installPrebuild() {
+       require('cmake-js/package.json').bin['cmake-js']
+     )
+     // @TODO: is spawning sync a problem? Seemed to be easiest way to get Ctrl-C to kill the whole build process
+-    const cmakejsProc = proc.spawnSync(process.execPath, [cmakejs, 'compile'], {
+-      stdio: 'inherit',
+-    })
+-    process.exit(cmakejsProc.status)
++    // const cmakejsProc = proc.spawnSync(process.execPath, [cmakejs, 'compile'], {
++    //   stdio: 'inherit',
++    // })
++    // process.exit(cmakejsProc.status)
+   }
+ }

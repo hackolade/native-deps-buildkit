@@ -1,0 +1,39 @@
+name: Prebuilds
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            arch: x64
+            node: 18
+          - os: macos-latest
+            arch: x64
+            node: 18
+          - os: macos-latest
+            arch: arm64
+            node: 18
+          - os: ubuntu-latest
+            arch: x64
+            libc: glibc
+            node: 18
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+      - run: npm install --force
+      - run: npm run prepare
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: modulesToBuildForElectron
+          path: moduleToBuild.json
+    

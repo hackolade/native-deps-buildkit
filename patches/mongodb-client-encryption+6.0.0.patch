@@ -1,0 +1,13 @@
+diff --git a/node_modules/mongodb-client-encryption/package.json b/node_modules/mongodb-client-encryption/package.json
+index 30f4b1c..74f6184 100644
+--- a/node_modules/mongodb-client-encryption/package.json
++++ b/node_modules/mongodb-client-encryption/package.json
+@@ -16,7 +16,7 @@
+     "lib": "lib"
+   },
+   "scripts": {
+-    "install": "prebuild-install --runtime napi --tag-prefix node-v || node-gyp rebuild",
++    "install": "prebuild-install --runtime napi --tag-prefix node-v",
+     "build:ts": "tsc",
+     "clang-format": "clang-format --style=file:.clang-format --Werror -i addon/*",
+     "check:eslint": "eslint src test",

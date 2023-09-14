@@ -1,0 +1,13 @@
+diff --git a/node_modules/kerberos/package.json b/node_modules/kerberos/package.json
+index c6b48a5..5614db3 100644
+--- a/node_modules/kerberos/package.json
++++ b/node_modules/kerberos/package.json
+@@ -50,7 +50,7 @@
+     "standard-version": "^9.5.0"
+   },
+   "scripts": {
+-    "install": "prebuild-install --runtime napi || node-gyp rebuild",
++    "install": "prebuild-install --runtime napi",
+     "format-cxx": "clang-format -i 'src/**/*'",
+     "format-js": "eslint lib test --fix",
+     "check:lint": "eslint lib test",

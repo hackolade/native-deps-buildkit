@@ -1,0 +1,25 @@
+diff --git a/node_modules/keytar/package.json b/node_modules/keytar/package.json
+index 12cbafc..3e22f6a 100644
+--- a/node_modules/keytar/package.json
++++ b/node_modules/keytar/package.json
+@@ -30,7 +30,7 @@
+   ],
+   "types": "./keytar.d.ts",
+   "scripts": {
+-    "install": "prebuild-install || npm run build",
++    "install": "prebuild-install",
+     "build": "node-gyp rebuild",
+     "lint": "npm run cpplint",
+     "cpplint": "node-cpplint --filters legal-copyright,build-include,build-namespaces src/*.cc",
+diff --git a/node_modules/keytar/prebuilds/darwin-arm64/keytar.node b/node_modules/keytar/prebuilds/darwin-arm64/keytar.node
+new file mode 100755
+index 0000000..9e93e78
+Binary files /dev/null and b/node_modules/keytar/prebuilds/darwin-arm64/keytar.node differ
+diff --git a/node_modules/keytar/prebuilds/darwin-x64/keytar.node b/node_modules/keytar/prebuilds/darwin-x64/keytar.node
+new file mode 100755
+index 0000000..ba7176e
+Binary files /dev/null and b/node_modules/keytar/prebuilds/darwin-x64/keytar.node differ
+diff --git a/node_modules/keytar/prebuilds/win32-x64/keytar.node b/node_modules/keytar/prebuilds/win32-x64/keytar.node
+new file mode 100644
+index 0000000..41f700f
+Binary files /dev/null and b/node_modules/keytar/prebuilds/win32-x64/keytar.node differ

@@ -1,0 +1,13 @@
+diff --git a/node_modules/node-krb5/package.json b/node_modules/node-krb5/package.json
+index 4308418..42ab04c 100644
+--- a/node_modules/node-krb5/package.json
++++ b/node_modules/node-krb5/package.json
+@@ -26,7 +26,7 @@
+     "node-gyp": "0.13.1"
+   },
+   "scripts": {
+-    "install": "node-gyp rebuild"
++    "rebuild": "electron-rebuild -w ."
+   },
+   "devDependencies": {},
+   "optionalDependencies": {}

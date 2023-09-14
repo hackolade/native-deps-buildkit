@@ -1,0 +1,13 @@
+diff --git a/node_modules/os-dns-native/package.json b/node_modules/os-dns-native/package.json
+index 80b9caa..a72f563 100644
+--- a/node_modules/os-dns-native/package.json
++++ b/node_modules/os-dns-native/package.json
+@@ -6,7 +6,7 @@
+   "scripts": {
+     "pretest": "npm run build",
+     "test": "mocha",
+-    "install": "node-gyp rebuild",
++    "rebuild": "electron-rebuild -w .",
+     "prepack": "npm run build",
+     "build": "gen-esm-wrapper . ./.esm-wrapper.mjs"
+   },
