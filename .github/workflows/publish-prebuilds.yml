@@ -35,5 +35,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: modulesToBuildForElectron
-          path: moduleToBuild.json
+          path: modulesToBuild.json
     
