@@ -1,4 +1,4 @@
-name: Prebuilds
+name: clean-npm-packages-prebuilds
 on:
   workflow_dispatch:
 jobs:
