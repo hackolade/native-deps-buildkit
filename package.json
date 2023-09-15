@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prepare": "DEBUG=* node index.js",
-    "patch-package":"./node_modules/.bin/patch-package --exclude 'nothing'"
+    "patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
+    "rebuild-custom-for-target": "DEBUG=* node --trace-uncaught rebuild.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "node-abi": "^3.47.0",
     "node-gyp": "9.4.0",
     "patch-package": "^8.0.0",
-    "prebuild-install": "^7.1.1"
+    "prebuild-install": "^7.1.1",
+    "semver": "^7.5.4"
   },
   "dependencies": {
     "@parcel/watcher": "2.3.0",
@@ -33,7 +35,7 @@
     "@parcel/watcher-linux-arm64-glibc": "2.3.0",
     "@parcel/watcher-linux-x64-glibc": "2.3.0",
     "@parcel/watcher-win32-x64": "2.3.0",
-    "couchbase": "https://github.com/couchbase/couchnode/archive/refs/tags/v4.2.7.tar.gz",
+    "couchbase": "4.2.7",
     "desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
     "kerberos": "2.0.3",
     "kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
@@ -50,5 +52,10 @@
   "engines": {
     "node": ">18.x",
     "npm": ">9.x"
+  },
+  "overrides": {
+    "kerberos-plugins": {
+      "node-abi": "3.47.0"
+    }
   }
 }
