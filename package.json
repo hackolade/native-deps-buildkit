@@ -48,10 +48,6 @@
     "#lib/*.js": "./lib/*.js",
     "#root": "./root.js"
   },
-  "engines": {
-    "node": ">18.x",
-    "npm": ">9.x"
-  },
   "overrides": {
     "kerberos-plugins": {
       "node-abi": "3.47.0"
