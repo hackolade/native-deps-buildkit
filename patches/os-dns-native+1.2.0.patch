@@ -1,3 +1,15 @@
+diff --git a/node_modules/os-dns-native/index.js b/node_modules/os-dns-native/index.js
+index cc8ee44..4b4fc6f 100644
+--- a/node_modules/os-dns-native/index.js
++++ b/node_modules/os-dns-native/index.js
+@@ -1,5 +1,6 @@
+ 'use strict';
+-const { lookup, constants } = require('bindings')('os_dns_native');
++const os = require('os');
++const { lookup, constants } = require(`@hackolade/os_dns_native-${os.platform()}-${os.arch()}/prebuild.node`);
+ const { promisify } = require('util');
+ const ipv6normalize = require('ipv6-normalize');
+ const nodeDns = require('dns');
 diff --git a/node_modules/os-dns-native/package.json b/node_modules/os-dns-native/package.json
 index 80b9caa..a72f563 100644
 --- a/node_modules/os-dns-native/package.json

@@ -1,8 +1,24 @@
+diff --git a/node_modules/mongodb-client-encryption/lib/index.js b/node_modules/mongodb-client-encryption/lib/index.js
+index d3cac09..5c1ff7f 100644
+--- a/node_modules/mongodb-client-encryption/lib/index.js
++++ b/node_modules/mongodb-client-encryption/lib/index.js
+@@ -1,8 +1,8 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.MongoCryptContextCtor = exports.MongoCrypt = void 0;
+-const bindings = require("bindings");
+-const mc = bindings('mongocrypt');
++const os = require('os');
++const mc = require(`@hackolade/mongodb-client-encryption-${os.platform()}-${os.arch()}`);
+ exports.MongoCrypt = mc.MongoCrypt;
+ exports.MongoCryptContextCtor = mc.MongoCryptContextCtor;
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
 diff --git a/node_modules/mongodb-client-encryption/package.json b/node_modules/mongodb-client-encryption/package.json
-index 30f4b1c..74f6184 100644
+index 30f4b1c..b7dfc8c 100644
 --- a/node_modules/mongodb-client-encryption/package.json
 +++ b/node_modules/mongodb-client-encryption/package.json
-@@ -16,7 +16,7 @@
+@@ -16,13 +16,12 @@
      "lib": "lib"
    },
    "scripts": {
@@ -11,3 +27,17 @@ index 30f4b1c..74f6184 100644
      "build:ts": "tsc",
      "clang-format": "clang-format --style=file:.clang-format --Werror -i addon/*",
      "check:eslint": "eslint src test",
+     "check:clang-format": "clang-format --style=file:.clang-format --dry-run --Werror addon/*",
+     "test": "mocha test",
+-    "prepare": "node etc/prepare.js",
+     "rebuild": "prebuild --compile",
+     "release": "standard-version --tag-prefix node-v --path bindings/node",
+     "prebuild": "prebuild --runtime napi --strip --verbose --tag-prefix node-v --all"
+@@ -37,7 +36,6 @@
+   "license": "Apache-2.0",
+   "gypfile": true,
+   "dependencies": {
+-    "bindings": "^1.5.0",
+     "node-addon-api": "^4.3.0",
+     "prebuild-install": "^7.1.1"
+   },

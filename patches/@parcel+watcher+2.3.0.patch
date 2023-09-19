@@ -1,0 +1,12 @@
+diff --git a/node_modules/@parcel/watcher/index.js b/node_modules/@parcel/watcher/index.js
+index 4929c54..56eeb35 100644
+--- a/node_modules/@parcel/watcher/index.js
++++ b/node_modules/@parcel/watcher/index.js
+@@ -1,6 +1,6 @@
+ const {createWrapper} = require('./wrapper');
+ 
+-let name = `@parcel/watcher-${process.platform}-${process.arch}`;
++let name = `@hackolade/watcher-${process.platform}-${process.arch}`;
+ if (process.platform === 'linux') {
+   const { MUSL, family } = require('detect-libc');
+   if (family === MUSL) {

@@ -1,3 +1,16 @@
+diff --git a/node_modules/kerberos/lib/kerberos.js b/node_modules/kerberos/lib/kerberos.js
+index 09f8425..8bb0f44 100644
+--- a/node_modules/kerberos/lib/kerberos.js
++++ b/node_modules/kerberos/lib/kerberos.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+-
+-const kerberos = require('bindings')('kerberos');
++const os = require('os');
++const kerberos = require(`@hackolade/kerberos-${os.platform()}-${os.arch()}/prebuild.node`);
+ const KerberosClient = kerberos.KerberosClient;
+ const KerberosServer = kerberos.KerberosServer;
+ const defineOperation = require('./util').defineOperation;
 diff --git a/node_modules/kerberos/package.json b/node_modules/kerberos/package.json
 index c6b48a5..5614db3 100644
 --- a/node_modules/kerberos/package.json

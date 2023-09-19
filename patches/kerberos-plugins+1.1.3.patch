@@ -38,6 +38,19 @@ index 43c7d9a..f254919 100644
          }]
        ]
      }
+diff --git a/node_modules/kerberos-plugins/lib/kerberos.js b/node_modules/kerberos-plugins/lib/kerberos.js
+index 09f8425..15806f6 100644
+--- a/node_modules/kerberos-plugins/lib/kerberos.js
++++ b/node_modules/kerberos-plugins/lib/kerberos.js
+@@ -1,6 +1,7 @@
+ 'use strict';
+ 
+-const kerberos = require('bindings')('kerberos');
++const os = require('os');
++const kerberos = require(`@hackolade/kerberos-plugins-${os.platform()}-${os.arch()}/prebuild.node`);
+ const KerberosClient = kerberos.KerberosClient;
+ const KerberosServer = kerberos.KerberosServer;
+ const defineOperation = require('./util').defineOperation;
 diff --git a/node_modules/kerberos-plugins/package-lock.json b/node_modules/kerberos-plugins/package-lock.json
 new file mode 100644
 index 0000000..40d2c6b

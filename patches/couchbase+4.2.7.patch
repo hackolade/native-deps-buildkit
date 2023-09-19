@@ -29,3 +29,16 @@ index 4bf054f..a4f8801 100755
 +    // process.exit(cmakejsProc.status)
    }
  }
+diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
+index 0da8ef5..9fc4036 100644
+--- a/node_modules/couchbase/scripts/prebuilds.js
++++ b/node_modules/couchbase/scripts/prebuilds.js
+@@ -203,7 +203,7 @@ function resolvePrebuild(dir, runtimeResolve = true) {
+         platform === 'linux' ? libc : platform
+       }-${arch}-${sslType}`
+       if (supportedPackages.includes(platformPkg)) {
+-        const fullPlatformPkgName = `@${packageName}/${platformPkg}`
++        const fullPlatformPkgName = `@hackolade/${platformPkg}`
+         const packageRequire = require('module').createRequire(
+           path.join(dir, 'package.json')
+         )
