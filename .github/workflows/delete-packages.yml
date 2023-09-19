@@ -11,6 +11,13 @@ jobs:
           - desktop-trampoline-win32-x64
           - desktop-trampoline-darwin-x64
           - desktop-trampoline-linux-x64
+          - kerberos
+          - kerberos-plugins
+          - node-krb5
+          - couchbase
+          - os-dns-native
+          - keytar
+          - desktop-trampoline
           - kerberos-linux-x64
           - kerberos-darwin-arm64
           - kerberos-win32-x64
