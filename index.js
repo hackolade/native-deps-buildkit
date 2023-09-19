@@ -8,6 +8,7 @@ import { exec, npmCommand } from "#lib/commands.js";
 import {
   publishToGitHubPackages,
   prepareParcelWatcherPrebuildsPackages,
+  normalizeNativeModulesUnderHackolade,
 } from "#lib/publish.js";
 
 await exec(npmCommand, [
@@ -39,7 +40,10 @@ const targets = [
 ];
 
 const custom = [];
-const toPublish = await prepareParcelWatcherPrebuildsPackages();
+const customizedNativeModules = await normalizeNativeModulesUnderHackolade(installedNativeModules);
+const parcelPrebuilds = await prepareParcelWatcherPrebuildsPackages();
+
+const toPublish = [...parcelPrebuilds, ...customizedNativeModules];
 
 for (const module of installedNativeModules) {
   for (const { targetPlatform, targetArch } of targets) {

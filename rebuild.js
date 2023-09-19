@@ -8,12 +8,14 @@ import { mkdir, rename, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { writePkgTpl } from "#lib/publish.js";
 
+// run patch package
+await exec(npmCommand, ["run", `patch-package`]);
+
 const modulesToBuild = modules.filter(
   (mod) => mod.targetPlatform === platform() && mod.targetArch === arch(),
 );
 
 for (const { module, targetPlatform, targetArch } of modulesToBuild) {
-  if (module.name !== "couchbase") {
     log("building custom native bindings for module %o", module);
     await prebuildNativeModule(module);
 

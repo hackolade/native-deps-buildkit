@@ -1,0 +1,23 @@
+diff --git a/node_modules/node-krb5/package.json b/node_modules/node-krb5/package.json
+index c4387d1..6ec8d3a 100644
+--- a/node_modules/node-krb5/package.json
++++ b/node_modules/node-krb5/package.json
+@@ -1,7 +1,7 @@
+ {
+-  "name": "krb5",
++  "name": "node-krb5",
+   "version": "0.5.4",
+-  "description": "Kerberos library bindings for Node.js",
++  "description": "Kerberos library bindings for Node.js forked under hackolade organization",
+   "main": "./lib/index.js",
+   "dependencies": {
+     "bindings": "1.5.0",
+@@ -39,7 +39,7 @@
+     "minor": "npm version minor -m 'Bump to version %s'",
+     "major": "npm version major -m 'Bump to version %s'",
+     "coffee": "coffee -b -o lib src",
+-    "rebuild": "node-gyp rebuild",
++    "rebuild": "electron-rebuild -w .",
+     "test": "mocha test/*.coffee",
+     "install": "node-gyp rebuild",
+     "krb5-lib": "./install_krb5.sh",
