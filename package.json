@@ -4,9 +4,9 @@
   "description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
   "main": "index.js",
   "scripts": {
-    "prepare": "DEBUG=* node index.js",
+    "prepare": "DEBUG=prebuilds* node index.js",
     "patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-    "rebuild-custom-for-target": "DEBUG=* node --trace-uncaught rebuild.js"
+    "rebuild-custom-for-target": "DEBUG=prebuilds* node --trace-uncaught rebuild.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
     "node-gyp": "9.4.0",
     "patch-package": "^8.0.0",
     "prebuild-install": "^7.1.1",
-    "prettier": "3.0.3",
+    "prettier": "^3.0.3",
     "semver": "^7.5.4"
   },
   "dependencies": {
