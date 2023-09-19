@@ -13,6 +13,7 @@ import {
 await exec(npmCommand, [
   "install",
   "--force",
+  "--no-save",
   "@parcel/watcher-darwin-arm64@2.3.0",
   "@parcel/watcher-darwin-x64@2.3.0",
   "@parcel/watcher-linux-arm64-glibc@2.3.0",
@@ -62,10 +63,13 @@ await writeFile(
   JSON.stringify(custom),
 );
 
-await Promise.all(
-  toPublish.map(async (packagePath) => publishToGitHubPackages(packagePath)),
-);
+log('publishing packages to internal GitHub registry of Hackolade organization...');
+for(const packagePath of toPublish){ 
 
+  await publishToGitHubPackages(packagePath);
+  log('---> %o published', packagePath);
+}
+ 
 // then trigger other jobs for each platform and upload artifacts
 //https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
 // This is done as GitHub actions steps
