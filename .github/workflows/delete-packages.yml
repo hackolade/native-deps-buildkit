@@ -26,6 +26,19 @@ jobs:
           - kerberos-plugins-darwin-arm64
           - kerberos-plugins-win32-x64
           - kerberos-plugins-darwin-x64
+    steps:
+      - uses: actions/delete-package-versions@v4
+        with:
+          owner: hackolade
+          package-name: ${{ matrix.packages }}
+          package-type: npm
+          min-versions-to-keep: 0
+          token: ${{ secrets.GH_PACKAGES_TOKEN }}
+
+  cleanup-npm-native-dependencies2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
         packages2:
           - keytar-darwin-x64
           - keytar-linux-x64
