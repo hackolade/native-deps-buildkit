@@ -34,6 +34,7 @@ jobs:
           - mongodb-client-encryption-win32-x64
           - mongodb-client-encryption-darwin-x64
           - mongodb-client-encryption-linux-x64
+          - watcher
           - watcher-linux-arm64-glibc
           - watcher-darwin-arm64
           - watcher-linux-x64-glibc
