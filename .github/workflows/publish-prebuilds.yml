@@ -23,12 +23,16 @@ jobs:
     #         libc: glibc
     #         node: 18
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           cache: npm
           node-version: 18
+      - name: Install krb5
+        run: sudo apt-get install -y libkrb5-dev
       - run: npm install --force
       - run: npm run prepare
       - name: Build on Linux x64
@@ -38,4 +42,49 @@ jobs:
         with:
           name: modulesToBuildForElectron
           path: modulesToBuild.json
-    
+
+  build-mac-intel:
+    runs-on: macos-latest
+    env:
+      LDFLAGS: "${LDFLAGS} -L/usr/local/opt/openssl@3/lib"
+      CPPFLAGS: "${CPPFLAGS} -I/usr/local/opt/openssl@3/include"
+      LDFLAGS: "${LDFLAGS} -L/usr/local/opt/krb5/lib"
+      CPPFLAGS: "${CPPFLAGS} -I/usr/local/opt/krb5/include"
+      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+      - uses: actions/download-artifact@v3
+        with:
+          name: modulesToBuildForElectron
+          path: modulesToBuild.json
+      - name: Install krb5
+        run: brew install krb5 openssl@3
+      - name: Install tookit dependencies
+        run: npm install --force
+      - name: Build on Linux x64
+        run: npm run rebuild-custom-for-target
+  
+  build-windows-intel:
+    runs-on: windows-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+      - uses: actions/download-artifact@v3
+        with:
+          name: modulesToBuildForElectron
+          path: modulesToBuild.json
+      - name: Install MIT Kerberos
+        run: choco install mitkerberos
+      - name: Install tookit dependencies 
+        run: npm install --force
+      - name: Build on Linux x64
+        run: npm run rebuild-custom-for-target
