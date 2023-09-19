@@ -44,8 +44,8 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
       moduleName: module.name,
       targetPlatform,
       targetArch,
-      scopedPkgPath: nativeModuleScopedPackage,
-      version: "1.0.0",
+      scopedPackagePath: nativeModuleScopedPackage,
+      version: module.version,
     });
     const ghPackageNpmrc = `//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}
         @hackolade:registry=https://npm.pkg.github.com
