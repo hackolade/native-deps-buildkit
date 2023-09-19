@@ -1,3 +1,33 @@
+diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
+index 0891bae..52458cc 100644
+--- a/node_modules/desktop-trampoline/index.js
++++ b/node_modules/desktop-trampoline/index.js
+@@ -1,10 +1,12 @@
+-const Path = require('path')
++const Path = require('path');
++const os = require('os');
++
++const binaries = require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`);
+ 
+ function getDesktopTrampolinePath() {
++  
+   return Path.join(
+-    __dirname,
+-    'build',
+-    'Release',
++    binaries,
+     getDesktopTrampolineFilename()
+   )
+ }
+@@ -16,7 +18,7 @@ function getDesktopTrampolineFilename() {
+ }
+ 
+ function getSSHWrapperPath() {
+-  return Path.join(__dirname, 'build', 'Release', getSSHWrapperFilename())
++  return Path.join(binaries, getSSHWrapperFilename())
+ }
+ 
+ function getSSHWrapperFilename() {
 diff --git a/node_modules/desktop-trampoline/package.json b/node_modules/desktop-trampoline/package.json
 index 0cc0262..5fb6cfc 100644
 --- a/node_modules/desktop-trampoline/package.json

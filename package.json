@@ -47,10 +47,5 @@
   "imports": {
     "#lib/*.js": "./lib/*.js",
     "#root": "./root.js"
-  },
-  "overrides": {
-    "kerberos-plugins": {
-      "node-abi": "3.47.0"
-    }
   }
 }

@@ -4,9 +4,9 @@ import { prebuildNativeModule } from "#lib/prebuilds.js";
 import { npmCommand, exec } from "#lib/commands.js";
 import modules from "./modulesToBuild.json" assert { type: "json" };
 import { ROOT_DIR } from "#root";
-import { mkdir, rename, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, cp, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { writePkgTpl } from "#lib/publish.js";
+import { publishToGitHubPackages, writePkgTpl } from "#lib/publish.js";
 
 // run patch package
 await exec(npmCommand, ["run", `patch-package`]);
@@ -16,6 +16,12 @@ const modulesToBuild = modules.filter(
 );
 
 for (const { module, targetPlatform, targetArch } of modulesToBuild) {
+
+  await rm(
+    path.join(module.baseDir, "build", "Release"),
+    {recursive: true, force: true},
+  );
+
   log("building custom native bindings for module %o", module);
   await prebuildNativeModule(module);
 
@@ -37,8 +43,11 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
   const [prebuild] = releaseContent
     .filter((entry) => entry.isFile() && entry.name.endsWith(".node"))
     .map((entry) => entry.name);
+  
+    log("normalizing prebuild name: %o - %o", module.baseDir, prebuild);
   const prebuildSrc = path.join(module.baseDir, "build", "Release", prebuild);
-  await rename(
+  
+  await cp(
     prebuildSrc,
     path.join(nativeModuleScopedPackage, "prebuild.node"),
   );
@@ -49,12 +58,6 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
     scopedPackagePath: nativeModuleScopedPackage,
     version: module.version,
   });
-  const ghPackageNpmrc = `//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}
-      @hackolade:registry=https://npm.pkg.github.com
-      always-auth=true`;
-  await writeFile(
-    path.join(nativeModuleScopedPackage, ".npmrc"),
-    ghPackageNpmrc,
-  );
-  await exec(npmCommand, ["publish"], { cwd: nativeModuleScopedPackage });
+
+  await publishToGitHubPackages(nativeModuleScopedPackage);
 }
