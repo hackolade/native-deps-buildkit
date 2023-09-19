@@ -7,34 +7,33 @@ jobs:
     strategy:
       matrix:
         packages: 
-          - '@hackolade/desktop-trampoline-darwin-arm64'
-          - '@hackolade/desktop-trampoline-win32-x64'
-          - '@hackolade/kerberos-linux-x64'
-          - '@hackolade/keytar-darwin-x64'
-          - '@hackolade/mongodb-client-encryption-darwin-arm64'
-          - '@hackolade/mongodb-client-encryption-win32-x64'
-          - '@hackolade/watcher-linux-arm64-glib'
-          - '@hackolade/desktop-trampoline-darwin-x64'
-          - '@hackolade/kerberos-darwin-arm64'
-          - '@hackolade/kerberos-win32-x64'
-          - '@hackolade/keytar-linux-x64'
-          - '@hackolade/mongodb-client-encryption-darwin-x64	'
-          - '@hackolade/watcher-darwin-arm64'
-          - '@hackolade/watcher-linux-x64-glibc'
-          - '@hackolade/desktop-trampoline-linux-x64'
-          - '@hackolade/kerberos-darwin-x64'
-          - '@hackolade/keytar-darwin-arm64'
-          - '@hackolade/keytar-win32-x64'
-          - '@hackolade/mongodb-client-encryption-linux-x64'
-          - '@hackolade/watcher-darwin-x64'
-          - '@hackolade/watcher-win32-x64'
+          - desktop-trampoline-darwin-arm64
+          - desktop-trampoline-win32-x64
+          - kerberos-linux-x64
+          - keytar-darwin-x64
+          - mongodb-client-encryption-darwin-arm64
+          - mongodb-client-encryption-win32-x64
+          - watcher-linux-arm64-glib
+          - desktop-trampoline-darwin-x64
+          - kerberos-darwin-arm64
+          - kerberos-win32-x64
+          - keytar-linux-x64
+          - mongodb-client-encryption-darwin-x64	
+          - watcher-darwin-arm64
+          - watcher-linux-x64-glibc
+          - desktop-trampoline-linux-x64
+          - kerberos-darwin-x64
+          - keytar-darwin-arm64
+          - keytar-win32-x64
+          - mongodb-client-encryption-linux-x64
+          - watcher-darwin-x64
+          - watcher-win32-x64
     steps:
       - uses: actions/delete-package-versions@v4
         with:
+          owner: hackolade
           package-name: ${{ matrix.packages }}
-          package-type: 'npm'
+          package-type: npm
           min-versions-to-keep: 0
-
-
-
+          token: ${{ secrets.GH_PACKAGES_TOKEN }}
           
