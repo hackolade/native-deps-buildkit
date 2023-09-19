@@ -11,6 +11,39 @@ index 0ce5bc3..3512b67 100644
  set(COUCHBASE_CXX_CLIENT_STATIC_STDLIB ON CACHE BOOL "" FORCE)
  add_subdirectory(deps/couchbase-cxx-client)
  
+diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
+index 324198c..6dbb6dc 100644
+--- a/node_modules/couchbase/package.json
++++ b/node_modules/couchbase/package.json
+@@ -64,7 +64,6 @@
+     "build": "cmake-js build && tsc",
+     "rebuild": "cmake-js rebuild && tsc",
+     "prebuild": "prebuild --backend cmake-js --verbose --strip",
+-    "prepare": "tsc",
+     "help-prune": "node ./scripts/prune.js",
+     "build-docs": "typedoc",
+     "test": "ts-mocha test/*.test.*",
+@@ -78,19 +77,5 @@
+     "napi_versions": [
+       6
+     ]
+-  },
+-  "optionalDependencies": {
+-    "@couchbase/couchbase-darwin-arm64-openssl1": "4.2.7",
+-    "@couchbase/couchbase-darwin-arm64-openssl3": "4.2.7",
+-    "@couchbase/couchbase-darwin-x64-openssl1": "4.2.7",
+-    "@couchbase/couchbase-darwin-x64-openssl3": "4.2.7",
+-    "@couchbase/couchbase-linux-arm64-openssl1": "4.2.7",
+-    "@couchbase/couchbase-linux-arm64-openssl3": "4.2.7",
+-    "@couchbase/couchbase-linux-x64-openssl1": "4.2.7",
+-    "@couchbase/couchbase-linux-x64-openssl3": "4.2.7",
+-    "@couchbase/couchbase-linuxmusl-x64-openssl1": "4.2.7",
+-    "@couchbase/couchbase-linuxmusl-x64-openssl3": "4.2.7",
+-    "@couchbase/couchbase-win32-x64-openssl1": "4.2.7",
+-    "@couchbase/couchbase-win32-x64-openssl3": "4.2.7"
+   }
+ }
+\ No newline at end of file
 diff --git a/node_modules/couchbase/scripts/install.js b/node_modules/couchbase/scripts/install.js
 index 4bf054f..a4f8801 100755
 --- a/node_modules/couchbase/scripts/install.js
