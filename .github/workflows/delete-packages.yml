@@ -13,7 +13,7 @@ jobs:
           - keytar-darwin-x64
           - mongodb-client-encryption-darwin-arm64
           - mongodb-client-encryption-win32-x64
-          - watcher-linux-arm64-glib
+          - watcher-linux-arm64-glibc
           - desktop-trampoline-darwin-x64
           - kerberos-darwin-arm64
           - kerberos-win32-x64
