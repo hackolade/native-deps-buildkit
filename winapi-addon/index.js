@@ -1,1 +1,1 @@
-module.exports = require('bindings')('winApiHandler');
+module.exports = require("bindings")("winApiHandler");

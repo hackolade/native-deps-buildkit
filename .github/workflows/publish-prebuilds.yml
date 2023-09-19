@@ -45,7 +45,7 @@ jobs:
 
   build-mac-intel:
     runs-on: macos-latest
-    needs: identify-native-modules-to-handle	 
+    needs: identify-native-modules-to-handle
     env:
       LDFLAGS: "${LDFLAGS} -L/usr/local/opt/openssl@3/lib  -L/usr/local/opt/krb5/lib"
       CPPFLAGS: "${CPPFLAGS} -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include"
@@ -66,10 +66,10 @@ jobs:
         run: npm install --force
       - name: Build on Linux x64
         run: npm run rebuild-custom-for-target
-  
+
   build-windows-intel:
     runs-on: windows-latest
-    needs: identify-native-modules-to-handle	
+    needs: identify-native-modules-to-handle
     env:
       NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
     steps:
@@ -84,7 +84,7 @@ jobs:
           path: modulesToBuild.json
       - name: Install MIT Kerberos
         run: choco install mitkerberos
-      - name: Install tookit dependencies 
+      - name: Install tookit dependencies
         run: npm install --force
       - name: Build on Linux x64
         run: npm run rebuild-custom-for-target

@@ -1,3 +1,3 @@
-import {resolve} from "node:path";
+import { resolve } from "node:path";
 
-export const ROOT_DIR = resolve('.');
+export const ROOT_DIR = resolve(".");

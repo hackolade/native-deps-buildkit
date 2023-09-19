@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        packages: 
+        packages:
           - desktop-trampoline-darwin-arm64
           - desktop-trampoline-win32-x64
           - kerberos-linux-x64
@@ -18,7 +18,7 @@ jobs:
           - kerberos-darwin-arm64
           - kerberos-win32-x64
           - keytar-linux-x64
-          - mongodb-client-encryption-darwin-x64	
+          - mongodb-client-encryption-darwin-x64
           - watcher-darwin-arm64
           - watcher-linux-x64-glibc
           - desktop-trampoline-linux-x64
@@ -36,4 +36,3 @@ jobs:
           package-type: npm
           min-versions-to-keep: 0
           token: ${{ secrets.GH_PACKAGES_TOKEN }}
-          
