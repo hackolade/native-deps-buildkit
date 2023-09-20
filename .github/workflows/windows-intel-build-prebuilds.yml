@@ -34,7 +34,7 @@ jobs:
           workflow_conclusion: success
           name: modulesToBuildForElectron
       - name: Install MIT Kerberos
-        run: choco install mitkerberos
+        run: choco install mitkerberos --install-arguments="ADDLOCAL=all"
       - name: Install tookit dependencies
         run: npm install --omit=optional
       - name: Build on Windows x64
