@@ -1,7 +1,7 @@
 {
-  "name": "winapi",
-  "version": "0.0.0",
-  "description": "Node.js WinAPI Addon",
+  "name": "@hackolade/winapi",
+  "version": "1.0.0",
+  "description": "Node.js WinAPI Addon for Remote Desktop detection",
   "main": "index.js",
   "private": true,
   "dependencies": {
@@ -9,7 +9,7 @@
     "node-addon-api": "^1.0.0"
   },
   "scripts": {
-    "rebuild": "node-gyp rebuild"
+    "rebuild": "electron-rebuild -w ."
   },
   "gypfile": true
 }

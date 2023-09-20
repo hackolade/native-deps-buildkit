@@ -12,9 +12,25 @@ index 0ce5bc3..3512b67 100644
  add_subdirectory(deps/couchbase-cxx-client)
  
 diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
-index 324198c..6dbb6dc 100644
+index 324198c..8a37fe1 100644
 --- a/node_modules/couchbase/package.json
 +++ b/node_modules/couchbase/package.json
+@@ -20,7 +20,6 @@
+   "license": "Apache-2.0",
+   "name": "couchbase",
+   "dependencies": {
+-    "cmake-js": "^7.2.0",
+     "node-addon-api": "^5.0.0"
+   },
+   "devDependencies": {
+@@ -32,6 +31,7 @@
+     "@typescript-eslint/eslint-plugin": "^5.32.0",
+     "@typescript-eslint/parser": "^5.32.0",
+     "chai": "^4.3.6",
++    "cmake-js": "^7.2.0",
+     "eslint": "^8.21.0",
+     "eslint-config-prettier": "^8.5.0",
+     "eslint-plugin-jsdoc": "^41.1.0",
 @@ -64,7 +64,6 @@
      "build": "cmake-js build && tsc",
      "rebuild": "cmake-js rebuild && tsc",

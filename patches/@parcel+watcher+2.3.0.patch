@@ -10,3 +10,27 @@ index 4929c54..56eeb35 100644
  if (process.platform === 'linux') {
    const { MUSL, family } = require('detect-libc');
    if (family === MUSL) {
+diff --git a/node_modules/@parcel/watcher/package.json b/node_modules/@parcel/watcher/package.json
+index 0ab049f..00cbc8e 100644
+--- a/node_modules/@parcel/watcher/package.json
++++ b/node_modules/@parcel/watcher/package.json
+@@ -63,19 +63,5 @@
+     "napi_versions": [
+       3
+     ]
+-  },
+-  "optionalDependencies": {
+-    "@parcel/watcher-darwin-x64": "2.3.0",
+-    "@parcel/watcher-darwin-arm64": "2.3.0",
+-    "@parcel/watcher-win32-x64": "2.3.0",
+-    "@parcel/watcher-win32-arm64": "2.3.0",
+-    "@parcel/watcher-win32-ia32": "2.3.0",
+-    "@parcel/watcher-linux-x64-glibc": "2.3.0",
+-    "@parcel/watcher-linux-x64-musl": "2.3.0",
+-    "@parcel/watcher-linux-arm64-glibc": "2.3.0",
+-    "@parcel/watcher-linux-arm64-musl": "2.3.0",
+-    "@parcel/watcher-linux-arm-glibc": "2.3.0",
+-    "@parcel/watcher-android-arm64": "2.3.0",
+-    "@parcel/watcher-freebsd-x64": "2.3.0"
+   }
+ }
