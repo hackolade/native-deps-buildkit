@@ -16,7 +16,7 @@ const modulesToBuild = modules
 	.filter(mod => mod.targetPlatform === platform() && mod.targetArch === arch())
 	.map(module => {
 		// Base dir might have changed between runs
-		const oldBaseDir = module.baseDir;
+		const oldBaseDir = module.module.baseDir;
     const reg = new RegExp('.+/native-deps-buildkit/node_modules', 'gi')
     const fixedBaseDir = oldBaseDir.replaceAll(reg, `${ROOT_DIR}/node_modules`)
     log('--> using new baseDir: %o', fixedBaseDir);
