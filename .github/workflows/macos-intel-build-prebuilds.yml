@@ -7,8 +7,8 @@ jobs:
   build-mac-intel:
     runs-on: macos-latest
     env:
-      LDFLAGS: '${LDFLAGS} -L/usr/local/opt/openssl@3/lib  -L/usr/local/opt/krb5/lib'
-      CPPFLAGS: '${CPPFLAGS} -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include'
+      # LDFLAGS: ${LDFLAGS} -L/usr/local/opt/openssl@3/lib  -L/usr/local/opt/krb5/lib
+      # CPPFLAGS: ${CPPFLAGS} -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include
       NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +35,7 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron
+      - run: brew install llvm
       # Openssl3 and krb5 are already installed on Github host Mac OS runners
       - name: Install toolkit
         run: npm install --omit=optional
