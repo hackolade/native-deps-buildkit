@@ -1,0 +1,25 @@
+name: Prebuilds
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows-intel:
+    runs-on: windows-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+      - uses: actions/download-artifact@v3
+        with:
+          name: modulesToBuildForElectron
+      - name: Install MIT Kerberos
+        run: choco install mitkerberos
+      - name: Install tookit dependencies
+        run: npm install
+      - name: Build on Windows x64
+        run: npm run rebuild-custom-for-target

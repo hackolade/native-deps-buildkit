@@ -1,0 +1,32 @@
+name: Prebuilds
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-mac-intel:
+    runs-on: macos-latest
+    env:
+      LDFLAGS: '${LDFLAGS} -L/usr/local/opt/openssl@3/lib  -L/usr/local/opt/krb5/lib'
+      CPPFLAGS: '${CPPFLAGS} -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include'
+      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+      - name: Download list of modules to rebuild for Electron
+        uses: actions/download-artifact@v3
+        with:
+          name: modulesToBuildForElectron
+
+      # Openssl3 and krb5 are already installed on Github host Mac OS runners
+      - name: Install toolkit
+        run: npm install
+
+      - name: Show repository status
+        run: ls -alih
+
+      - name: Build native modules on Mac OS x64
+        run: npm run rebuild-custom-for-target
