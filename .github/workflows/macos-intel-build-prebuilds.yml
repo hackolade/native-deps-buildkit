@@ -40,7 +40,7 @@ jobs:
         run: npm install
 
       - name: Show repository status
-        run: ls -alih
+        run: which npm
 
       - name: Build native modules on Mac OS x64
         run: npm run rebuild-custom-for-target
