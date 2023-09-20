@@ -37,6 +37,6 @@ jobs:
           name: modulesToBuildForElectron
       # Openssl3 and krb5 are already installed on Github host Mac OS runners
       - name: Install toolkit
-        run: npm install --no-optional
+        run: npm install --omit=optional
       - name: Build native modules on Mac OS x64
         run: npm run rebuild-custom-for-target
