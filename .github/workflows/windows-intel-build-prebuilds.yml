@@ -33,8 +33,15 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron
-      - name: Install MIT Kerberos
-        run: choco install mitkerberos --install-arguments="ADDLOCAL=all"
+      - name: Install MIT Kerberos MSI
+        run: |
+          $file = "kfw-4.1-amd64.msi" 
+          curl -o "$file" https://web.mit.edu/kerberos/dist/kfw/4.1/kfw-4.1-amd64.msi
+          $log = "install.log" 
+          $procMain = Start-Process "msiexec" "/i `"$file`" /qn /norestart /l*! `"$log`"" -NoNewWindow -PassThru
+          $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru 
+          $procMain.WaitForExit() 
+          $procLog.Kill()
       - name: Install tookit dependencies
         run: npm install --omit=optional
       - name: Build on Windows x64
