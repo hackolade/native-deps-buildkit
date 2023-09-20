@@ -40,7 +40,10 @@ jobs:
         run: npm install
 
       - name: Show repository status
-        run: which npm
-
+        run: echo $PWD
+      - name: Show repository status
+        run: ls node_modules
+      - name: Show repository status
+        run: cat modulesToBuild.json | jq
       - name: Build native modules on Mac OS x64
         run: npm run rebuild-custom-for-target
