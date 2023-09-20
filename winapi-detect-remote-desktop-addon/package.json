@@ -1,0 +1,15 @@
+{
+	"name": "winapi-detect-remote-desktop-addon",
+	"version": "1.0.0",
+	"description": "Node.js WinAPI Addon for Remote Desktop detection",
+	"main": "index.js",
+	"private": true,
+	"dependencies": {
+		"bindings": "~1.2.1",
+		"node-addon-api": "^1.0.0"
+	},
+	"scripts": {
+		"rebuild": "electron-rebuild -w ."
+	},
+	"gypfile": true
+}

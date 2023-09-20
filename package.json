@@ -1,51 +1,51 @@
 {
-  "name": "custom-native-deps-prebuilds",
-  "version": "1.0.0",
-  "description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
-  "main": "index.js",
-  "scripts": {
-    "prepare": "DEBUG=prebuilds* node index.js",
-    "patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-    "rebuild-custom-for-target": "DEBUG=prebuilds* node --trace-uncaught rebuild.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hackolade/custom-native-deps-prebuilds.git"
-  },
-  "bugs": {
-    "url": "https://github.com/hackolade/custom-native-deps-prebuilds/issues"
-  },
-  "homepage": "https://github.com/hackolade/custom-native-deps-prebuilds#readme",
-  "author": "Hackolade",
-  "license": "MIT",
-  "devDependencies": {
-    "@electron/rebuild": "^3.3.0",
-    "debug": "^4.3.4",
-    "electron": "^22.3.23",
-    "eslint": "^8.49.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "node-abi": "^3.47.0",
-    "node-gyp": "9.4.0",
-    "patch-package": "^8.0.0",
-    "prebuild-install": "^7.1.1",
-    "prettier": "^3.0.3",
-    "semver": "^7.5.4"
-  },
-  "dependencies": {
-    "@parcel/watcher": "2.3.0",
-    "couchbase": "4.2.7",
-    "desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
-    "kerberos": "2.0.3",
-    "kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
-    "keytar": "7.9.0",
-    "mongodb-client-encryption": "^6.0.0",
-    "node-krb5": "git+https://github.com/hackolade/node-krb5.git",
-    "os-dns-native": "1.2.0"
-  },
-  "type": "module",
-  "imports": {
-    "#lib/*.js": "./lib/*.js",
-    "#root": "./root.js"
-  }
+	"name": "custom-native-deps-prebuilds",
+	"version": "1.0.0",
+	"description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
+	"main": "index.js",
+	"scripts": {
+		"prepare": "DEBUG=prebuilds* node index.js",
+		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
+		"rebuild-custom-for-target": "DEBUG=prebuilds* node --trace-uncaught rebuild.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hackolade/custom-native-deps-prebuilds.git"
+	},
+	"bugs": {
+		"url": "https://github.com/hackolade/custom-native-deps-prebuilds/issues"
+	},
+	"homepage": "https://github.com/hackolade/custom-native-deps-prebuilds#readme",
+	"author": "Hackolade",
+	"license": "MIT",
+	"devDependencies": {
+		"@electron/rebuild": "^3.3.0",
+		"debug": "^4.3.4",
+		"electron": "^22.3.23",
+		"eslint": "^8.49.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.28.1",
+		"node-abi": "^3.47.0",
+		"node-gyp": "9.4.0",
+		"patch-package": "^8.0.0",
+		"prebuild-install": "^7.1.1",
+		"prettier": "^3.0.3",
+		"semver": "^7.5.4"
+	},
+	"dependencies": {
+		"@parcel/watcher": "2.3.0",
+		"couchbase": "4.2.7",
+		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
+		"kerberos": "2.0.3",
+		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
+		"keytar": "7.9.0",
+		"mongodb-client-encryption": "^6.0.0",
+		"node-krb5": "git+https://github.com/hackolade/node-krb5.git",
+		"os-dns-native": "1.2.0"
+	},
+	"type": "module",
+	"imports": {
+		"#lib/*.js": "./lib/*.js",
+		"#root": "./root.js"
+	}
 }

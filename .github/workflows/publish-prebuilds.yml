@@ -47,8 +47,8 @@ jobs:
     runs-on: macos-latest
     needs: identify-native-modules-to-handle
     env:
-      LDFLAGS: "${LDFLAGS} -L/usr/local/opt/openssl@3/lib  -L/usr/local/opt/krb5/lib"
-      CPPFLAGS: "${CPPFLAGS} -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include"
+      LDFLAGS: '${LDFLAGS} -L/usr/local/opt/openssl@3/lib  -L/usr/local/opt/krb5/lib'
+      CPPFLAGS: '${CPPFLAGS} -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include'
       NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
     steps:
       - uses: actions/checkout@v3
