@@ -1,4 +1,4 @@
-name: Prebuilds
+name: Discover native modules and publish upstream
 
 on:
   workflow_dispatch:

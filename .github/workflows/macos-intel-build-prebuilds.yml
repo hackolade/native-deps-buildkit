@@ -1,4 +1,4 @@
-name: Prebuilds
+name: Prebuild for Mac x64
 
 on:
   workflow_dispatch:
