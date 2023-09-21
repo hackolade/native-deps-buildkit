@@ -23,7 +23,7 @@ jobs:
           $procMain.WaitForExit() 
           $procLog.Kill()
       - name: Install tookit dependencies
-        run: npm install --omit=optional
+        run: npm ci
       - name: Set Electron Major version in env
         run: echo "ELECTRON_MAJOR_VERSION=$(node --eval='const semver = require(\"semver\"); const electron = require(\"electron/package.json\"); console.log(semver.major(electron.version))')" >> $GITHUB_ENV
       - name: Download artifact
