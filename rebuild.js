@@ -51,8 +51,6 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
 		'@hackolade',
 		`${module.name}-${targetPlatform}-${targetArch}`,
 	);
-	const token = env.NODE_AUTH_TOKEN;
-	const isPackageVersionAlreadyPublished = await checkPackageVersionExistsFromPath({packagePath: nativeModuleScopedPackage, token});
 	await rm(nativeModuleScopedPackage, { force: true, recursive: true });
 	await mkdir(nativeModuleScopedPackage, { force: true, recursive: true });
 
@@ -63,6 +61,10 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
 		scopedPackagePath: nativeModuleScopedPackage,
 		version: module.version,
 	});
+
+	const token = env.NODE_AUTH_TOKEN;
+	const isPackageVersionAlreadyPublished = await checkPackageVersionExistsFromPath({packagePath: nativeModuleScopedPackage, token});
+	
 	if(isPackageVersionAlreadyPublished){
 		const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${module.name}/versions`;
 		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${module.name}"`;
