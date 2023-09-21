@@ -21,7 +21,6 @@ jobs:
           $log = "install.log" 
           $procMain = Start-Process "msiexec" "/i `"$file`" /qn /norestart /l*! `"$log`"" -NoNewWindow -PassThru
           $procMain.WaitForExit() 
-          $procLog.Kill()
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
