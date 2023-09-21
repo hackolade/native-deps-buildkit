@@ -7,7 +7,7 @@ import modules from './modulesToBuild.json' assert { type: 'json' };
 import { ROOT_DIR } from '#root';
 import { mkdir, cp, readdir, rm } from 'node:fs/promises';
 import path from 'node:path';
-import { publishToGitHubPackages, writePkgTpl } from '#lib/publish.js';
+import { checkPackageVersionExistsFromPath, publishToGitHubPackages, writePkgTpl } from '#lib/publish.js';
 import winAddon from './winapi-detect-remote-desktop-addon/package.json' assert { type: 'json' };
 
 // run patch package
