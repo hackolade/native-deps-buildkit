@@ -20,7 +20,6 @@ jobs:
           curl -o "$file" https://web.mit.edu/kerberos/dist/kfw/4.1/kfw-4.1-amd64.msi
           $log = "install.log" 
           $procMain = Start-Process "msiexec" "/i `"$file`" /qn /norestart /l*! `"$log`"" -NoNewWindow -PassThru
-          $procLog = Start-Process "powershell" "Get-Content -Path `"$log`" -Wait" -NoNewWindow -PassThru 
           $procMain.WaitForExit() 
           $procLog.Kill()
       - name: Install tookit dependencies
