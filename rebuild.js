@@ -2,7 +2,7 @@ import { platform, arch } from 'node:os';
 import { env } from 'node:process';
 import { log } from '#lib/logger.js';
 import { prebuildNativeModule } from '#lib/prebuilds.js';
-import { npmCommand, exec } from '#lib/commands.js';
+import { npxCommand, exec } from '#lib/commands.js';
 import modules from './modulesToBuild.json' assert { type: 'json' };
 import { ROOT_DIR } from '#root';
 import { mkdir, cp, readdir, rm } from 'node:fs/promises';
@@ -11,7 +11,7 @@ import { checkPackageVersionExistsFromPath, publishToGitHubPackages, writePkgTpl
 import winAddon from './winapi-detect-remote-desktop-addon/package.json' assert { type: 'json' };
 
 // run patch package
-await exec(npmCommand, ['run', 'patch-package']);
+await exec(npxCommand, ['patch-package']);
 
 const modulesToBuild = modules
 	.filter(mod => mod.targetPlatform === platform() && mod.targetArch === arch())
