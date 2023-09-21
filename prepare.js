@@ -83,7 +83,7 @@ const finalPackageListToPublish = filterOutPackagesWithVersionAlreadyPublished.f
 		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${name}"`;
 		log('--> skip publish package %o with version %o is already published to GitHub packages', name, version );
 		log('--> check %o to delete the version %o', githubPackageVersionsURL, version );
-		log('--> or use the following command with your Personnal Access Token to delete the version %o', deletePackageCurlCmd );
+		log('--> or use the following command with your Personal Access Token to delete the version %o', deletePackageCurlCmd );
 	}
 	return !isPackageVersionAlreadyPublished;
 })

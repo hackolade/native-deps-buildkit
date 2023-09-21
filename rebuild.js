@@ -1,4 +1,5 @@
 import { platform, arch } from 'node:os';
+import { env } from 'node:process';
 import { log } from '#lib/logger.js';
 import { prebuildNativeModule } from '#lib/prebuilds.js';
 import { npmCommand, exec } from '#lib/commands.js';
@@ -6,7 +7,7 @@ import modules from './modulesToBuild.json' assert { type: 'json' };
 import { ROOT_DIR } from '#root';
 import { mkdir, cp, readdir, rm } from 'node:fs/promises';
 import path from 'node:path';
-import { checkPackageVersionAlreadyExists, publishToGitHubPackages, writePkgTpl } from '#lib/publish.js';
+import { publishToGitHubPackages, writePkgTpl } from '#lib/publish.js';
 import winAddon from './winapi-detect-remote-desktop-addon/package.json' assert { type: 'json' };
 
 // run patch package
@@ -43,54 +44,18 @@ if (platform() === 'win32') {
 	modulesToBuild.push(remoteDesktopDetectionAddon);
 }
 
-log(">>>>>>>>>>>>>>>>>> modulesToBuild %O", modulesToBuild);
-const filterOutPackagesWithVersionAlreadyPublished = await Promise.all(
-	modulesToBuild.map(async module => {
-		const token = process.env.NODE_AUTH_TOKEN;
-		const checkVersionExistsResult =  await checkPackageVersionAlreadyExists({token, packageName: module.name, version: module.module.version});
-		if(checkVersionExistsResult.isPackageVersionAlreadyPublished){
-
-			const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${checkVersionExistsResult.name}/versions`;
-			const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${checkVersionExistsResult.name}"`;
-			log('--> skip publish package %o with version %o is already published to GitHub packages', checkVersionExistsResult.name, checkVersionExistsResult.version );
-			log('--> check %o to delete the version %o', githubPackageVersionsURL, checkVersionExistsResult.version );
-			log('--> or use the following command with your Personnal Access Token to delete the version %o', deletePackageCurlCmd );
-		}
-
-		return checkVersionExistsResult && Object.assign(module, checkVersionExistsResult) || module;
-	})
-);
-
-log(">>>>>>>>>>>>>>>>>> %O", filterOutPackagesWithVersionAlreadyPublished);
-const finalPackageListToBuildAndPublish = filterOutPackagesWithVersionAlreadyPublished.filter( module => !module.isPackageVersionAlreadyPublished);
-
-log(">>>>>>>>>>>>>>>>>> %O", finalPackageListToBuildAndPublish);
-for (const { module, targetPlatform, targetArch } of finalPackageListToBuildAndPublish) {
-	await rm(path.join(module.baseDir, 'build', 'Release'), { recursive: true, force: true });
-
-	log('building custom native bindings for module %o', module);
-	await prebuildNativeModule(module);
-
+for (const { module, targetPlatform, targetArch } of modulesToBuild) {
 	const nativeModuleScopedPackage = path.join(
 		ROOT_DIR,
 		'node_modules',
 		'@hackolade',
 		`${module.name}-${targetPlatform}-${targetArch}`,
 	);
+	const token = env.NODE_AUTH_TOKEN;
+	const isPackageVersionAlreadyPublished = await checkPackageVersionExistsFromPath({packagePath: nativeModuleScopedPackage, token});
 	await rm(nativeModuleScopedPackage, { force: true, recursive: true });
 	await mkdir(nativeModuleScopedPackage, { force: true, recursive: true });
 
-	const releaseContent = await readdir(path.resolve(module.baseDir, 'build', 'Release'), {
-		withFileTypes: true,
-	});
-	const [prebuild] = releaseContent
-		.filter(entry => entry.isFile() && entry.name.endsWith('.node'))
-		.map(entry => entry.name);
-
-	log('normalizing prebuild name: %o - %o', module.baseDir, prebuild);
-	const prebuildSrc = path.join(module.baseDir, 'build', 'Release', prebuild);
-
-	await cp(prebuildSrc, path.join(nativeModuleScopedPackage, 'prebuild.node'));
 	await writePkgTpl({
 		moduleName: module.name,
 		targetPlatform,
@@ -98,6 +63,29 @@ for (const { module, targetPlatform, targetArch } of finalPackageListToBuildAndP
 		scopedPackagePath: nativeModuleScopedPackage,
 		version: module.version,
 	});
+	if(isPackageVersionAlreadyPublished){
+		const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${module.name}/versions`;
+		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${module.name}"`;
+		log('--> skip publish package %o with version %o is already published to GitHub packages', module.name, module.version );
+		log('--> check %o to delete the version %o', githubPackageVersionsURL, module.version );
+		log('--> or use the following command with your Personal Access Token to delete the version %o', deletePackageCurlCmd );
+	}
+	else{
+		log('building custom native bindings for module %o', module);
+		await rm(path.join(module.baseDir, 'build', 'Release'), { recursive: true, force: true });
+		await prebuildNativeModule(module);
+		const releaseContent = await readdir(path.resolve(module.baseDir, 'build', 'Release'), {
+			withFileTypes: true,
+		});
+		const [prebuild] = releaseContent
+			.filter(entry => entry.isFile() && entry.name.endsWith('.node'))
+			.map(entry => entry.name);
 
-	await publishToGitHubPackages(nativeModuleScopedPackage);
+		log('normalizing prebuild name: %o - %o', module.baseDir, prebuild);
+		const prebuildSrc = path.join(module.baseDir, 'build', 'Release', prebuild);
+
+		await cp(prebuildSrc, path.join(nativeModuleScopedPackage, 'prebuild.node'));
+
+		await publishToGitHubPackages(nativeModuleScopedPackage);
+	}
 }
