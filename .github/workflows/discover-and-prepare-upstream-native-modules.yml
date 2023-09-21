@@ -33,10 +33,12 @@ jobs:
           node-version: 18
       - name: Install krb5
         run: sudo apt-get install -y libkrb5-dev
-      - run: npm install
+      - run: npm install --omit=optional
+      - name: Set Electron Major version in env
+        run: echo "ELECTRON_MAJOR_VERSION=$(node --eval='const semver = require(\"semver\"); const electron = require(\"electron/package.json\"); console.log(semver.major(electron.version))')" >> $GITHUB_ENV
       - run: npm run prepare
       - name: Upload list of modules to build
         uses: actions/upload-artifact@v3
         with:
-          name: modulesToBuildForElectron
+          name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
           path: modulesToBuild.json

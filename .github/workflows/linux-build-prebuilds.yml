@@ -14,6 +14,12 @@ jobs:
         with:
           cache: npm
           node-version: 18
+      - name: Install krb5
+        run: sudo apt-get install -y libkrb5-dev
+      - name: Install toolkit
+        run: npm install --omit=optional
+      - name: Set Electron Major version in env
+        run: echo "ELECTRON_MAJOR_VERSION=$(node --eval='const semver = require(\"semver\"); const electron = require(\"electron/package.json\"); console.log(semver.major(electron.version))')" >> $GITHUB_ENV
       - name: Download artifact
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
@@ -32,11 +38,6 @@ jobs:
           #   "completed", "in_progress", "queued"
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
-          name: modulesToBuildForElectron
-      - name: Install krb5
-        run: sudo apt-get install -y libkrb5-dev
-
-      - name: Install toolkit
-        run: npm install --omit=optional
+          name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
       - name: Build native modules on Linux x64
         run: npm run rebuild-custom-for-target
