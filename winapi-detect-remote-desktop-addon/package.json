@@ -11,5 +11,8 @@
 	"scripts": {
 		"rebuild": "electron-rebuild -w ."
 	},
-	"gypfile": true
+	"gypfile": true,
+	"files":{
+		
+	}
 }

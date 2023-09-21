@@ -1,4 +1,5 @@
 import { join, resolve } from 'node:path';
+import { env } from 'node:process';
 import { writeFile } from 'node:fs/promises';
 import { ROOT_DIR } from '#root';
 import { discoverRegularNativeModules, getElectronAbi } from '#lib/module.js';
@@ -6,6 +7,7 @@ import { installAvailablePrebuilts } from '#lib/install.js';
 import { log } from '#lib/logger.js';
 import { exec, npmCommand } from '#lib/commands.js';
 import {
+	checkPackageVersionExistsFromPath,
 	publishToGitHubPackages,
 	prepareParcelWatcherPrebuildsPackages,
 	normalizeNativeModulesUnderHackolade,
@@ -51,6 +53,8 @@ for (const module of installedNativeModules) {
 			targetArch,
 			electron,
 		});
+
+		log("##########################@ %O", installOutput);
 		if (installOutput.toBuild) {
 			custom.push(installOutput);
 		} else {
@@ -63,7 +67,28 @@ for (const module of installedNativeModules) {
 await writeFile(resolve(ROOT_DIR, 'modulesToBuild.json'), JSON.stringify(custom));
 
 log('publishing packages to internal GitHub registry of Hackolade organization...');
-for (const packagePath of toPublish) {
+
+const filterOutPackagesWithVersionAlreadyPublished = await Promise.all(
+	toPublish.map(async packagePath => {
+		const token = env.NODE_AUTH_TOKEN;
+		return await checkPackageVersionExistsFromPath({token, packagePath});
+	})
+);
+
+
+const finalPackageListToPublish = filterOutPackagesWithVersionAlreadyPublished.filter(({name,  version, isPackageVersionAlreadyPublished}) => {
+	
+	if(isPackageVersionAlreadyPublished){
+		const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${name}/versions`;
+		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${name}"`;
+		log('--> skip publish package %o with version %o is already published to GitHub packages', name, version );
+		log('--> check %o to delete the version %o', githubPackageVersionsURL, version );
+		log('--> or use the following command with your Personnal Access Token to delete the version %o', deletePackageCurlCmd );
+	}
+	return !isPackageVersionAlreadyPublished;
+})
+
+for (const {packagePath} of finalPackageListToPublish) {
 	await publishToGitHubPackages(packagePath);
 	log('---> %o published', packagePath);
 }

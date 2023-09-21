@@ -15,10 +15,20 @@ index d3cac09..5c1ff7f 100644
  //# sourceMappingURL=index.js.map
 \ No newline at end of file
 diff --git a/node_modules/mongodb-client-encryption/package.json b/node_modules/mongodb-client-encryption/package.json
-index 30f4b1c..e1462e3 100644
+index 30f4b1c..8c694a3 100644
 --- a/node_modules/mongodb-client-encryption/package.json
 +++ b/node_modules/mongodb-client-encryption/package.json
-@@ -16,13 +16,12 @@
+@@ -7,22 +7,18 @@
+   "files": [
+     "README.md",
+     "CHANGELOG.md",
+-    "addon",
+-    "lib",
+-    "src",
+-    "binding.gyp"
++    "lib"
+   ],
+   "directories": {
      "lib": "lib"
    },
    "scripts": {
@@ -33,7 +43,7 @@ index 30f4b1c..e1462e3 100644
      "rebuild": "prebuild --compile",
      "release": "standard-version --tag-prefix node-v --path bindings/node",
      "prebuild": "prebuild --runtime napi --strip --verbose --tag-prefix node-v --all"
-@@ -37,9 +36,7 @@
+@@ -37,9 +33,7 @@
    "license": "Apache-2.0",
    "gypfile": true,
    "dependencies": {
@@ -44,7 +54,7 @@ index 30f4b1c..e1462e3 100644
    },
    "devDependencies": {
      "@types/bindings": "^1.5.1",
-@@ -57,6 +54,7 @@
+@@ -57,6 +51,7 @@
      "mocha": "^10.2.0",
      "node-gyp": "^9.4.0",
      "prebuild": "^11.0.4",

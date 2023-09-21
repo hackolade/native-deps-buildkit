@@ -4,9 +4,9 @@
 	"description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
 	"main": "index.js",
 	"scripts": {
-		"prepare": "DEBUG=prebuilds* node index.js",
+		"prepare": "cross-env DEBUG=prebuilds* node prepare.js",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-		"rebuild-custom-for-target": "DEBUG=prebuilds* node --trace-uncaught rebuild.js"
+		"rebuild-custom-for-target": "cross-env DEBUG=prebuilds* node --trace-uncaught rebuild.js"
 	},
 	"repository": {
 		"type": "git",
@@ -20,6 +20,8 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@electron/rebuild": "^3.3.0",
+		"@octokit/rest": "^20.0.1",
+		"cross-env": "^7.0.3",
 		"debug": "^4.3.4",
 		"electron": "^22.3.23",
 		"eslint": "^8.49.0",

@@ -1318,7 +1318,7 @@ index 0000000..e1dbf42
 +  }
 +}
 diff --git a/node_modules/os-dns-native/package.json b/node_modules/os-dns-native/package.json
-index 80b9caa..7f424b9 100644
+index 80b9caa..6bb06f5 100644
 --- a/node_modules/os-dns-native/package.json
 +++ b/node_modules/os-dns-native/package.json
 @@ -6,14 +6,13 @@
@@ -1337,7 +1337,15 @@ index 80b9caa..7f424b9 100644
      "debug": "^4.3.3",
      "ipv6-normalize": "^1.0.1",
      "node-addon-api": "^4.3.0"
-@@ -39,6 +38,7 @@
+@@ -31,14 +30,13 @@
+   "bugs": "https://github.com/mongodb-js/os-dns-native/issues",
+   "typings": "index.d.ts",
+   "files": [
+-    "binding.cc",
+-    "binding.gyp",
+     "index.d.ts",
+     "index.js",
+     "LICENSE",
      ".esm-wrapper.mjs"
    ],
    "devDependencies": {
