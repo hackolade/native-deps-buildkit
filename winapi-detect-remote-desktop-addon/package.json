@@ -12,7 +12,7 @@
 		"rebuild": "electron-rebuild -w ."
 	},
 	"gypfile": true,
-	"files":{
-		
-	}
+	"files": [
+		"index.js"
+	]
 }
