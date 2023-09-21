@@ -45,6 +45,8 @@ if (platform() === 'win32') {
 }
 
 for (const { module, targetPlatform, targetArch } of modulesToBuild) {
+	
+	const prebuildModuleNameForTarget = `${module.name}-${targetPlatform}-${targetArch}`;
 	const nativeModuleScopedPackage = path.join(
 		ROOT_DIR,
 		'node_modules',
@@ -63,12 +65,12 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
 	});
 
 	const token = env.NODE_AUTH_TOKEN;
-	const isPackageVersionAlreadyPublished = await checkPackageVersionExistsFromPath({packagePath: nativeModuleScopedPackage, token});
-	
-	if(isPackageVersionAlreadyPublished){
-		const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${module.name}/versions`;
-		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${module.name}"`;
-		log('--> skip publish package %o with version %o is already published to GitHub packages', module.name, module.version );
+	const check = await checkPackageVersionExistsFromPath({packagePath: nativeModuleScopedPackage, token});
+
+	if(check.isPackageVersionAlreadyPublished){
+		const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${prebuildModuleNameForTarget}/versions`;
+		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${prebuildModuleNameForTarget}"`;
+		log('--> skip publish package %o with version %o is already published to GitHub packages', prebuildModuleNameForTarget, module.version );
 		log('--> check %o to delete the version %o', githubPackageVersionsURL, module.version );
 		log('--> or use the following command with your Personal Access Token to delete the version %o', deletePackageCurlCmd );
 	}
