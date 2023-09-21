@@ -16,7 +16,7 @@ jobs:
         with:
           cache: npm
           node-version: 18
-      - run: brew install llvm
+      # - run: brew install llvm
       # Openssl3 and krb5 are already installed on Github host Mac OS runners
       - name: Install toolkit
         run: npm ci
