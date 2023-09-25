@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix:
         packages:
-          - desktop-trampoline-darwin-arm64
-          - desktop-trampoline-win32-x64
-          - desktop-trampoline-darwin-x64
-          - desktop-trampoline-linux-x64
+          # - desktop-trampoline-darwin-arm64
+          # - desktop-trampoline-win32-x64
+          # - desktop-trampoline-darwin-x64
+          # - desktop-trampoline-linux-x64
           - kerberos
           - kerberos-plugins
           - node-krb5
@@ -18,21 +18,21 @@ jobs:
           - os-dns-native
           - keytar
           - desktop-trampoline
-          - kerberos-linux-x64
-          - kerberos-darwin-arm64
-          - kerberos-win32-x64
-          - kerberos-darwin-x64
-          - kerberos-plugins-linux-x64
-          - kerberos-plugins-darwin-arm64
-          - kerberos-plugins-win32-x64
-          - kerberos-plugins-darwin-x64
+          # - kerberos-linux-x64
+          # - kerberos-darwin-arm64
+          # - kerberos-win32-x64
+          # - kerberos-darwin-x64
+          # - kerberos-plugins-linux-x64
+          # - kerberos-plugins-darwin-arm64
+          # - kerberos-plugins-win32-x64
+          # - kerberos-plugins-darwin-x64
     steps:
       - uses: actions/delete-package-versions@v4
         with:
           owner: hackolade
           package-name: ${{ matrix.packages }}
           package-type: npm
-          min-versions-to-keep: 0
+          min-versions-to-keep: 1
           token: ${{ secrets.GH_PACKAGES_TOKEN }}
 
   cleanup-npm-native-dependencies2:

@@ -12,21 +12,21 @@ jobs:
           - keytar-darwin-arm64
           - keytar-win32-x64
           - mongodb-client-encryption
-          - mongodb-client-encryption-darwin-arm64
-          - mongodb-client-encryption-win32-x64
-          - mongodb-client-encryption-darwin-x64
-          - mongodb-client-encryption-linux-x64
+          # - mongodb-client-encryption-darwin-arm64
+          # - mongodb-client-encryption-win32-x64
+          # - mongodb-client-encryption-darwin-x64
+          # - mongodb-client-encryption-linux-x64
           - watcher
-          - watcher-linux-arm64-glibc
-          - watcher-darwin-arm64
-          - watcher-linux-x64-glibc
-          - watcher-darwin-x64
-          - watcher-win32-x64
+          # - watcher-linux-arm64-glibc
+          # - watcher-darwin-arm64
+          # - watcher-linux-x64-glibc
+          # - watcher-darwin-x64
+          # - watcher-win32-x64
     steps:
       - uses: actions/delete-package-versions@v4
         with:
           owner: hackolade
           package-name: ${{ matrix.packages2 }}
           package-type: npm
-          min-versions-to-keep: 0
+          min-versions-to-keep: 1
           token: ${{ secrets.GH_PACKAGES_TOKEN }}
