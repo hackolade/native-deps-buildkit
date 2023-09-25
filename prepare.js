@@ -5,7 +5,7 @@ import { ROOT_DIR } from '#root';
 import { discoverRegularNativeModules, getElectronAbi } from '#lib/module.js';
 import { installAvailablePrebuilts } from '#lib/install.js';
 import { log } from '#lib/logger.js';
-import { exec, npmCommand } from '#lib/commands.js';
+import { exec, npmCommand, npxCommand } from '#lib/commands.js';
 import {
 	checkPackageVersionExistsFromPath,
 	publishToGitHubPackages,
@@ -13,7 +13,7 @@ import {
 	normalizeNativeModulesUnderHackolade,
 } from '#lib/publish.js';
 
-await exec(npmCommand, [
+await exec(, npmCommand, [
 	'install',
 	'--force',
 	'--no-save',
@@ -25,7 +25,7 @@ await exec(npmCommand, [
 ]);
 
 // run patch package
-await exec(npmCommand, ['run', `patch-package`]);
+await exec(npxCommand, [`patch-package`]);
 
 const electron = await getElectronAbi();
 const installedNativeModules = await discoverRegularNativeModules(join(ROOT_DIR, 'node_modules'));
