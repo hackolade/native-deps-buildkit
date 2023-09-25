@@ -13,7 +13,7 @@ import {
 	normalizeNativeModulesUnderHackolade,
 } from '#lib/publish.js';
 
-await exec(, npmCommand, [
+await exec(npmCommand, [
 	'install',
 	'--force',
 	'--no-save',
