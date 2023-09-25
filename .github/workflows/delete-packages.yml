@@ -32,35 +32,5 @@ jobs:
           owner: hackolade
           package-name: ${{ matrix.packages }}
           package-type: npm
-          min-versions-to-keep: 1
-          token: ${{ secrets.GH_PACKAGES_TOKEN }}
-
-  cleanup-npm-native-dependencies2:
-    runs-on: ubuntu-latest
-    needs: cleanup-npm-native-dependencies
-    strategy:
-      matrix:
-        packages2:
-          - keytar-darwin-x64
-          - keytar-linux-x64
-          - keytar-darwin-arm64
-          - keytar-win32-x64
-          - mongodb-client-encryption
-          - mongodb-client-encryption-darwin-arm64
-          - mongodb-client-encryption-win32-x64
-          - mongodb-client-encryption-darwin-x64
-          - mongodb-client-encryption-linux-x64
-          - watcher
-          - watcher-linux-arm64-glibc
-          - watcher-darwin-arm64
-          - watcher-linux-x64-glibc
-          - watcher-darwin-x64
-          - watcher-win32-x64
-    steps:
-      - uses: actions/delete-package-versions@v4
-        with:
-          owner: hackolade
-          package-name: ${{ matrix.packages2 }}
-          package-type: npm
           min-versions-to-keep: 0
           token: ${{ secrets.GH_PACKAGES_TOKEN }}
