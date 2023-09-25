@@ -90,7 +90,7 @@ index 4bf054f..a4f8801 100755
    }
  }
 diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
-index 0da8ef5..787f9db 100644
+index 0da8ef5..56bc7c9 100644
 --- a/node_modules/couchbase/scripts/prebuilds.js
 +++ b/node_modules/couchbase/scripts/prebuilds.js
 @@ -13,7 +13,7 @@ const openSSLVersions = ['openssl1', 'openssl3']
@@ -102,9 +102,14 @@ index 0da8ef5..787f9db 100644
  const nodeVersion = getNodeVersion()
  const nodeVersionMajor = getNodeMajorVersion(nodeVersion)
  const arch = process.arch
-@@ -203,7 +203,7 @@ function resolvePrebuild(dir, runtimeResolve = true) {
-         platform === 'linux' ? libc : platform
-       }-${arch}-${sslType}`
+@@ -199,11 +199,9 @@ function resolvePrebuild(dir, runtimeResolve = true) {
+       : JSON.parse(fs.readFileSync(path.join(dir, 'package.json'))).name
+     if (packageName !== undefined) {
+       const supportedPackages = getSupportedPlatformPackages(packageName)
+-      const platformPkg = `${packageName}-${
+-        platform === 'linux' ? libc : platform
+-      }-${arch}-${sslType}`
++      const platformPkg = `${packageName}-${platform}-${arch}`;
        if (supportedPackages.includes(platformPkg)) {
 -        const fullPlatformPkgName = `@${packageName}/${platformPkg}`
 +        const fullPlatformPkgName = `@hackolade/${platformPkg}`

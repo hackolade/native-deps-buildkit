@@ -12,7 +12,7 @@ index 09f8425..8bb0f44 100644
  const KerberosServer = kerberos.KerberosServer;
  const defineOperation = require('./util').defineOperation;
 diff --git a/node_modules/kerberos/package.json b/node_modules/kerberos/package.json
-index c6b48a5..20acce8 100644
+index c6b48a5..270916b 100644
 --- a/node_modules/kerberos/package.json
 +++ b/node_modules/kerberos/package.json
 @@ -5,9 +5,6 @@
@@ -39,7 +39,7 @@ index c6b48a5..20acce8 100644
      "chai": "^4.3.7",
      "chai-string": "^1.5.0",
      "chalk": "^4.1.2",
-@@ -45,19 +41,20 @@
+@@ -45,19 +41,19 @@
      "mongodb": "^5.7.0",
      "node-gyp": "^9.4.0",
      "prebuild": "^11.0.4",
@@ -50,7 +50,6 @@ index c6b48a5..20acce8 100644
    },
    "scripts": {
 -    "install": "prebuild-install --runtime napi || node-gyp rebuild",
-+    "install": "prebuild-install --runtime napi",
      "format-cxx": "clang-format -i 'src/**/*'",
      "format-js": "eslint lib test --fix",
      "check:lint": "eslint lib test",
