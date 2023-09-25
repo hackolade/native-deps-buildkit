@@ -12,7 +12,7 @@ index 0ce5bc3..3512b67 100644
  add_subdirectory(deps/couchbase-cxx-client)
  
 diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
-index 324198c..87796e2 100644
+index 324198c..2d0fee9 100644
 --- a/node_modules/couchbase/package.json
 +++ b/node_modules/couchbase/package.json
 @@ -20,7 +20,6 @@
@@ -31,9 +31,11 @@ index 324198c..87796e2 100644
      "eslint": "^8.21.0",
      "eslint-config-prettier": "^8.5.0",
      "eslint-plugin-jsdoc": "^41.1.0",
-@@ -62,9 +62,8 @@
+@@ -60,11 +60,9 @@
+     "native": false
+   },
    "scripts": {
-     "install": "node ./scripts/install.js",
+-    "install": "node ./scripts/install.js",
      "build": "cmake-js build && tsc",
 -    "rebuild": "cmake-js rebuild && tsc",
 +    "rebuild": "cmake-js rebuild",
@@ -42,7 +44,7 @@ index 324198c..87796e2 100644
      "help-prune": "node ./scripts/prune.js",
      "build-docs": "typedoc",
      "test": "ts-mocha test/*.test.*",
-@@ -79,18 +78,11 @@
+@@ -79,18 +77,11 @@
        6
      ]
    },
@@ -88,9 +90,18 @@ index 4bf054f..a4f8801 100755
    }
  }
 diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
-index 0da8ef5..9fc4036 100644
+index 0da8ef5..787f9db 100644
 --- a/node_modules/couchbase/scripts/prebuilds.js
 +++ b/node_modules/couchbase/scripts/prebuilds.js
+@@ -13,7 +13,7 @@ const openSSLVersions = ['openssl1', 'openssl3']
+ const supportedPlatforms = ['darwin', 'linux', 'linuxmusl', 'win32']
+ const supportedArches = ['x64', 'arm64']
+ 
+-const runtime = isElectron() ? 'electron' : 'node'
++const runtime = 'node'
+ const nodeVersion = getNodeVersion()
+ const nodeVersionMajor = getNodeMajorVersion(nodeVersion)
+ const arch = process.arch
 @@ -203,7 +203,7 @@ function resolvePrebuild(dir, runtimeResolve = true) {
          platform === 'linux' ? libc : platform
        }-${arch}-${sslType}`
