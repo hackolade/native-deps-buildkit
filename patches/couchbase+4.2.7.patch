@@ -234,10 +234,10 @@ index 4bf054f..0000000
 -  }
 -}
 diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
-index 0da8ef5..3311f19 100644
+index 0da8ef5..1dceeaf 100644
 --- a/node_modules/couchbase/scripts/prebuilds.js
 +++ b/node_modules/couchbase/scripts/prebuilds.js
-@@ -1,249 +1,10 @@
+@@ -1,249 +1,15 @@
 -const fs = require('fs')
 -const path = require('path')
 -const zlib = require('zlib')
@@ -475,13 +475,17 @@ index 0da8ef5..3311f19 100644
 -  }
 -  if (typeof __webpack_require__ === 'function') {
 -    target.push('webpack=true')
--  }
++function loadPrebuild() {
++  const prebuildToLoad = `@hackolade/couchbase-${os.platform()}-${os.arch()}`;
++  try{
++    return require(prebuildToLoad);
++  }catch(_){
++    console.log('loading couchbase for Openssl 3.x failed, trying for Openssl 1...');
++    return require(prebuildToLoad + '-openssl1');
+   }
 -  throw new Error(
 -    `Could not find native build for ${target.join(', ')} loaded from ${dir}.`
 -  )
-+function loadPrebuild() {
-+  const prebuildToLoad = `@hackolade/couchbase-${os.platform()}-${os.arch()}`;
-+  return require(prebuildToLoad);
  }
  
  module.exports = {
