@@ -46,6 +46,12 @@ const parcelPrebuilds = await prepareParcelWatcherPrebuildsPackages();
 const toPublish = [...parcelPrebuilds, ...customizedNativeModules];
 
 for (const module of installedNativeModules) {
+	// Parcel's watcher is already proving all its NAPI prebuilds as dedicated @parcel/watcher-<platform>-<arch> packages. 
+	// We took inspiration from this approach for this toolkit as the standard for us to distribute prebuilds
+	// Thus this module doesn't need any custom rebuild for Electron
+	if(module.name === '@parcel/watcher' ){
+		continue;
+	}	
 	for (const { targetPlatform, targetArch } of targets) {
 		const installOutput = await installAvailablePrebuilts({
 			module,
@@ -54,7 +60,6 @@ for (const module of installedNativeModules) {
 			electron,
 		});
 
-		log("##########################@ %O", installOutput);
 		if (installOutput.toBuild) {
 			custom.push(installOutput);
 		} else {
