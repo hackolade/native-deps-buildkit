@@ -5,7 +5,8 @@ on:
 
 jobs:
   build-for-linux:
-    runs-on: ubuntu-22.04
+    # Ubuntu 20 only provides openssl at max
+    runs-on: ubuntu-20.04
     env:
       NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
     steps:
