@@ -5,7 +5,7 @@ import { prebuildNativeModule } from '#lib/prebuilds.js';
 import { npxCommand, exec } from '#lib/commands.js';
 import modules from './modulesToBuild.json' assert { type: 'json' };
 import { ROOT_DIR } from '#root';
-import { mkdir, cp, readdir, rm } from 'node:fs/promises';
+import { mkdir, cp, readdir,readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { checkPackageVersionExistsFromPath, publishToGitHubPackages, writePkgTpl } from '#lib/publish.js';
 import winAddon from './winapi-detect-remote-desktop-addon/package.json' assert { type: 'json' };
@@ -44,7 +44,13 @@ if (platform() === 'win32') {
 	modulesToBuild.push(remoteDesktopDetectionAddon);
 }
 
-for (const { module, targetPlatform, targetArch } of modulesToBuild) {
+// Detect Ubuntu version to know if we need to specifically build modules for Openssl 1 like Couchbase
+const ubuntuReleaseFile = await readFile(path.resolve('/etc/os-release'));
+
+const mustBuildForOpenSSL1 = ubuntuReleaseFile.toString('UTF8').split('\n').filter(line => line.includes('VERSION_ID=20.04')).length > 0;
+const modulesToBuildOnlyForOpenSSL1 = modulesToBuild.filter(module => module.name === 'couchbase');
+
+for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modulesToBuildOnlyForOpenSSL1: modulesToBuild) {
 	
 	const prebuildModuleNameForTarget = `${module.name}-${targetPlatform}-${targetArch}`;
 	const nativeModuleScopedPackage = path.join(
@@ -62,6 +68,7 @@ for (const { module, targetPlatform, targetArch } of modulesToBuild) {
 		targetArch,
 		scopedPackagePath: nativeModuleScopedPackage,
 		version: module.version,
+		forOpenSSL1: mustBuildForOpenSSL1,
 	});
 
 	const token = env.NODE_AUTH_TOKEN;
