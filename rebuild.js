@@ -46,11 +46,11 @@ if (platform() === 'win32') {
 
 // Detect Ubuntu version to know if we need to specifically build modules for Openssl 1 like Couchbase
 const ubuntuReleaseFile = await readFile(path.resolve('/etc/os-release'));
-
-const mustBuildForOpenSSL1 = ubuntuReleaseFile.toString('UTF8').split('\n').filter(line => line.includes('VERSION_ID=20.04')).length > 0 || [];
+const ubuntuReleaseFileLines = ubuntuReleaseFile || ubuntuReleaseFileawait.toString('UTF8').split('\n') || [];
+const mustBuildForOpenSSL1 = ubuntuReleaseFileLines.filter(line => line.includes('VERSION_ID=20.04')).length > 0 ;
 const modulesToBuildOnlyForOpenSSL1 = modulesToBuild.filter(module => module.name === 'couchbase');
 
-log('must build for Openssl1: %O', ubuntuReleaseFile);
+log('must build for Openssl1: %O', ubuntuReleaseFileLines);
 
 for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modulesToBuildOnlyForOpenSSL1: modulesToBuild) {
 	
