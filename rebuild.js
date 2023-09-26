@@ -52,7 +52,6 @@ const detectOpenSSLVersion = async () => {
 				const ubuntuReleaseFile = await readFile(path.resolve('/etc/os-release'));
 				const ubuntuReleaseFileContent = ubuntuReleaseFile.toString();
 				const ubuntuReleaseFileLines = ubuntuReleaseFileContent.split('\n') || [];
-				log('must build for Openssl1: %O', ubuntuReleaseFileLines);
 
 				return ubuntuReleaseFileLines.filter(line => line.includes('VERSION_ID=20.04')).length > 0 ;
 		}else{
@@ -62,11 +61,14 @@ const detectOpenSSLVersion = async () => {
 }
 
 const mustBuildForOpenSSL1 = await detectOpenSSLVersion();
+log('--> detect if we must build for Openssl1: %O', mustBuildForOpenSSL1);
+
+
 const modulesToBuildOnlyForOpenSSL1 = modulesToBuild.filter(module => module.name === 'couchbase');
 
 for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modulesToBuildOnlyForOpenSSL1: modulesToBuild) {
-	
-	const prebuildModuleNameForTarget = `${module.name}-${targetPlatform}-${targetArch}`;
+	const opensslSuffix = modulesToBuildOnlyForOpenSSL1? '-openssl1': '';
+	const prebuildModuleNameForTarget = `${module.name}-${targetPlatform}-${targetArch}${opensslSuffix}`;
 	const nativeModuleScopedPackage = path.join(
 		ROOT_DIR,
 		'node_modules',
@@ -82,7 +84,7 @@ for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modu
 		targetArch,
 		scopedPackagePath: nativeModuleScopedPackage,
 		version: module.version,
-		forOpenSSL1: mustBuildForOpenSSL1,
+		forOpenSSL1: modulesToBuildOnlyForOpenSSL1,
 	});
 
 	const token = env.NODE_AUTH_TOKEN;
