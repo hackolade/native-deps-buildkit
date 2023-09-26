@@ -9,6 +9,7 @@ import { mkdir, cp, readdir,readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { checkPackageVersionExistsFromPath, publishToGitHubPackages, writePkgTpl } from '#lib/publish.js';
 import winAddon from './winapi-detect-remote-desktop-addon/package.json' assert { type: 'json' };
+import os from 'node:os';
 
 // run patch package
 await exec(npxCommand, ['patch-package']);
@@ -45,11 +46,22 @@ if (platform() === 'win32') {
 }
 
 // Detect Ubuntu version to know if we need to specifically build modules for Openssl 1 like Couchbase
-const ubuntuReleaseFile = await readFile(path.resolve('/etc/os-release'));
-const ubuntuReleaseFileLines = ubuntuReleaseFile || ubuntuReleaseFile.toString('UTF8').split('\n') || [];
-log('must build for Openssl1: %O', ubuntuReleaseFileLines);
+const detectOpenSSLVersion = async () => {
+	try{
+		if(os.platform() === 'linux'){
+				const ubuntuReleaseFile = await readFile(path.resolve('/etc/os-release'));
+				const ubuntuReleaseFileContent = ubuntuReleaseFile.toString();
+				const ubuntuReleaseFileLines = ubuntuReleaseFileContent.split('\n') || [];
+				log('must build for Openssl1: %O', ubuntuReleaseFileLines);
 
-const mustBuildForOpenSSL1 = ubuntuReleaseFileLines.filter(line => line.includes('VERSION_ID=20.04')).length > 0 ;
+				return ubuntuReleaseFileLines.filter(line => line.includes('VERSION_ID=20.04')).length > 0 ;
+		}else{
+			return false;
+		}
+	}catch(_){return false;}
+}
+
+const mustBuildForOpenSSL1 = await detectOpenSSLVersion();
 const modulesToBuildOnlyForOpenSSL1 = modulesToBuild.filter(module => module.name === 'couchbase');
 
 for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modulesToBuildOnlyForOpenSSL1: modulesToBuild) {
