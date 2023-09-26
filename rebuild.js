@@ -52,8 +52,9 @@ const detectOpenSSLVersion = async () => {
 				const ubuntuReleaseFile = await readFile(path.resolve('/etc/os-release'));
 				const ubuntuReleaseFileContent = ubuntuReleaseFile.toString();
 				const ubuntuReleaseFileLines = ubuntuReleaseFileContent.split('\n') || [];
-				const withOnlyVersionID = ubuntuReleaseFileLines.filter(line => line.includes('VERSION_ID=20.04'));
-				log('ubuntu release file lines %O', withOnlyVersionID);	
+				log('ubuntu release file lines %O', ubuntuReleaseFileLines);	
+				const withOnlyVersionID = ubuntuReleaseFileLines.filter(line => line.includes('VERSION_ID'));
+				log('ubuntu release file lines withOnlyVersionID %O', withOnlyVersionID);	
 				return withOnlyVersionID.length > 0 ;
 		}else{
 			return false;
