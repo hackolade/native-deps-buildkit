@@ -43,5 +43,3 @@ jobs:
 
       - name: Build on Windows x64
         run: npm run rebuild-custom-for-target
-
-  # cmd /V /C "set NODE_AUTH_TOKEN=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 && npm run rebuild-custom-for-target"
