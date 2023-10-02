@@ -15,12 +15,7 @@ jobs:
           cache: npm
           node-version: 18
       - name: Install MIT Kerberos MSI
-        run: |
-          $file = "kfw-4.1-amd64.msi" 
-          curl -o "$file" https://web.mit.edu/kerberos/dist/kfw/4.1/kfw-4.1-amd64.msi
-          $log = "install.log" 
-          $procMain = Start-Process "msiexec" "/i `"$file`" /qn /norestart /l*! `"$log`"" -NoNewWindow -PassThru
-          $procMain.WaitForExit() 
+        run: choco install mitkerberos --install-arguments="ADDLOCAL=all"
       - run: choco install openssl
       - name: Install tookit dependencies
         run: npm ci
@@ -48,3 +43,5 @@ jobs:
 
       - name: Build on Windows x64
         run: npm run rebuild-custom-for-target
+
+  # cmd /V /C "set NODE_AUTH_TOKEN=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 && npm run rebuild-custom-for-target"
