@@ -15,7 +15,7 @@ jobs:
           cache: npm
           node-version: 18
       - name: Install MIT Kerberos MSI
-        run: choco install mitkerberos --install-arguments="ADDLOCAL=all" --ignoredetectedreboot
+        run: choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos 
       - run: choco install openssl
       - name: Install tookit dependencies
         run: npm ci
