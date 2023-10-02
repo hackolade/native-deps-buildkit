@@ -72,7 +72,7 @@ log('--> detect if we must build for Openssl1: %O', mustBuildForOpenSSL1);
 const modulesToBuildOnlyForOpenSSL1 = modulesToBuild.filter(module => module.name === 'couchbase');
 
 for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modulesToBuildOnlyForOpenSSL1: modulesToBuild) {
-	const opensslSuffix = modulesToBuildOnlyForOpenSSL1? '-openssl1': '';
+	const opensslSuffix = mustBuildForOpenSSL1? '-openssl1': '';
 	const prebuildModuleNameForTarget = `${module.name}-${targetPlatform}-${targetArch}${opensslSuffix}`;
 	const nativeModuleScopedPackage = path.join(
 		ROOT_DIR,
@@ -89,7 +89,7 @@ for (const { module, targetPlatform, targetArch } of mustBuildForOpenSSL1 ? modu
 		targetArch,
 		scopedPackagePath: nativeModuleScopedPackage,
 		version: module.version,
-		forOpenSSL1: modulesToBuildOnlyForOpenSSL1,
+		forOpenSSL1: mustBuildForOpenSSL1,
 	});
 
 	const token = env.NODE_AUTH_TOKEN;
