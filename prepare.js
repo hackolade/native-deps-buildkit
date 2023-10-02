@@ -25,7 +25,7 @@ await exec(npmCommand, [
 ]);
 
 // run patch package
-await exec(npxCommand, [`patch-package`]);
+await exec(npxCommand, ['patch-package', '--error-on-war', '--error-on-fail']);
 
 const electron = await getElectronAbi();
 const installedNativeModules = await discoverRegularNativeModules(join(ROOT_DIR, 'node_modules'));
@@ -46,7 +46,7 @@ const parcelPrebuilds = await prepareParcelWatcherPrebuildsPackages();
 const toPublish = [...parcelPrebuilds, ...customizedNativeModules];
 
 for (const module of installedNativeModules) {
-	// Parcel's watcher is already proving all its NAPI prebuilds as dedicated @parcel/watcher-<platform>-<arch> packages. 
+	// Parcel's watcher is already providing all its NAPI prebuilds as dedicated @parcel/watcher-<platform>-<arch> packages. 
 	// We took inspiration from this approach for this toolkit as the standard for us to distribute prebuilds
 	// Thus this module doesn't need any custom rebuild for Electron
 	if(module.name === '@parcel/watcher' ){

@@ -15,32 +15,31 @@ new file mode 100644
 index 0000000..3d89728
 Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe differ
 diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
-index 0891bae..52458cc 100644
+index 0891bae..5b01ace 100644
 --- a/node_modules/desktop-trampoline/index.js
 +++ b/node_modules/desktop-trampoline/index.js
-@@ -1,10 +1,12 @@
+@@ -1,10 +1,11 @@
 -const Path = require('path')
 +const Path = require('path');
 +const os = require('os');
 +
-+const binaries = require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`);
++const getBinariesPath = () => require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`);
  
  function getDesktopTrampolinePath() {
-+  
    return Path.join(
 -    __dirname,
 -    'build',
 -    'Release',
-+    binaries,
++    getBinariesPath(),
      getDesktopTrampolineFilename()
    )
  }
-@@ -16,7 +18,7 @@ function getDesktopTrampolineFilename() {
+@@ -16,7 +17,7 @@ function getDesktopTrampolineFilename() {
  }
  
  function getSSHWrapperPath() {
 -  return Path.join(__dirname, 'build', 'Release', getSSHWrapperFilename())
-+  return Path.join(binaries, getSSHWrapperFilename())
++  return Path.join(getBinariesPath(), getSSHWrapperFilename())
  }
  
  function getSSHWrapperFilename() {
