@@ -39,7 +39,7 @@ index 43c7d9a..f254919 100644
        ]
      }
 diff --git a/node_modules/kerberos-plugins/lib/kerberos.js b/node_modules/kerberos-plugins/lib/kerberos.js
-index 09f8425..15806f6 100644
+index 09f8425..e699e52 100644
 --- a/node_modules/kerberos-plugins/lib/kerberos.js
 +++ b/node_modules/kerberos-plugins/lib/kerberos.js
 @@ -1,6 +1,7 @@
@@ -47,7 +47,7 @@ index 09f8425..15806f6 100644
  
 -const kerberos = require('bindings')('kerberos');
 +const os = require('os');
-+const kerberos = require(`@hackolade/kerberos-plugins-${os.platform()}-${os.arch()}/prebuild.node`);
++const kerberos = require(/* webpackIgnore: true */  `@hackolade/kerberos-plugins-${os.platform()}-${os.arch()}`);
  const KerberosClient = kerberos.KerberosClient;
  const KerberosServer = kerberos.KerberosServer;
  const defineOperation = require('./util').defineOperation;

@@ -1,12 +1,12 @@
 diff --git a/node_modules/os-dns-native/index.js b/node_modules/os-dns-native/index.js
-index cc8ee44..d9687c9 100644
+index cc8ee44..1674a07 100644
 --- a/node_modules/os-dns-native/index.js
 +++ b/node_modules/os-dns-native/index.js
 @@ -1,5 +1,6 @@
  'use strict';
 -const { lookup, constants } = require('bindings')('os_dns_native');
 +const os = require('os');
-+const { lookup, constants } = require(`@hackolade/os-dns-native-${os.platform()}-${os.arch()}`);
++const { lookup, constants } = require(/* webpackIgnore: true */ `@hackolade/os-dns-native-${os.platform()}-${os.arch()}`);
  const { promisify } = require('util');
  const ipv6normalize = require('ipv6-normalize');
  const nodeDns = require('dns');
