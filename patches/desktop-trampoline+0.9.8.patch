@@ -1,12 +1,20 @@
+diff --git a/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe b/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe
+new file mode 100644
+index 0000000..6dc249f
+Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe differ
+diff --git a/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe
+new file mode 100644
+index 0000000..3d89728
+Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe differ
 diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
-index 0891bae..249ff75 100644
+index 0891bae..541c666 100644
 --- a/node_modules/desktop-trampoline/index.js
 +++ b/node_modules/desktop-trampoline/index.js
 @@ -1,12 +1,10 @@
 +const os = require('os');
  const Path = require('path')
  
-+const  prebuildTargetPath =  () => require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`);
++const  prebuildTargetPath =  () => Path.dirname(require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`));
 +
  function getDesktopTrampolinePath() {
 -  return Path.join(
@@ -15,7 +23,7 @@ index 0891bae..249ff75 100644
 -    'Release',
 -    getDesktopTrampolineFilename()
 -  )
-+  return Path.join(prebuildTargetPath(), getDesktopTrampolineFilename());
++  return Path.join( prebuildTargetPath(),getDesktopTrampolineFilename());
  }
  
  function getDesktopTrampolineFilename() {
