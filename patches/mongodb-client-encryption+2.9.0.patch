@@ -2,6 +2,20 @@ diff --git a/node_modules/mongodb-client-encryption/build/Release/mongocrypt.nod
 new file mode 100644
 index 0000000..b3a3aa2
 Binary files /dev/null and b/node_modules/mongodb-client-encryption/build/Release/mongocrypt.node differ
+diff --git a/node_modules/mongodb-client-encryption/lib/autoEncrypter.js b/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
+index f4e3dc0..6a70d90 100644
+--- a/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
++++ b/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
+@@ -1,7 +1,8 @@
+ 'use strict';
+ 
+ module.exports = function (modules) {
+-  const mc = require('bindings')('mongocrypt');
++  const os = require('os');
++  const mc = require(/* webpackIgnore: true */ `@hackolade/mongodb-client-encryption-${os.platform()}-${os.arch()}`);
+   const common = require('./common');
+   const databaseNamespace = common.databaseNamespace;
+   const StateMachine = modules.stateMachine.StateMachine;
 diff --git a/node_modules/mongodb-client-encryption/lib/clientEncryption.js b/node_modules/mongodb-client-encryption/lib/clientEncryption.js
 index 10bc541..c5fab91 100644
 --- a/node_modules/mongodb-client-encryption/lib/clientEncryption.js
