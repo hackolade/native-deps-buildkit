@@ -17,11 +17,7 @@ jobs:
       - name: Install MIT Kerberos MSI
         run: |
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-      - run: |
-          ls "C:\Program Files\MIT\Kerberos\include"
-          ls "D:\Program Files\MIT\Kerberos\include"
-          choco install openssl
+      - run: choco install openssl
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
@@ -47,4 +43,6 @@ jobs:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
 
       - name: Build on Windows x64
-        run: npm run rebuild-custom-for-target
+        run: |
+          ls "C:\Program Files\MIT\Kerberos\include"
+          npm run rebuild-custom-for-target
