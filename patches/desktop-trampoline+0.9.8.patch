@@ -1,97 +1,30 @@
-diff --git a/node_modules/desktop-trampoline/build/Release/desktop-trampoline b/node_modules/desktop-trampoline/build/Release/desktop-trampoline
-new file mode 100755
-index 0000000..a349686
-Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/desktop-trampoline differ
-diff --git a/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe b/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe
-new file mode 100644
-index 0000000..6dc249f
-Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe differ
-diff --git a/node_modules/desktop-trampoline/build/Release/ssh-wrapper b/node_modules/desktop-trampoline/build/Release/ssh-wrapper
-new file mode 100755
-index 0000000..3fd2c72
-Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/ssh-wrapper differ
-diff --git a/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe
-new file mode 100644
-index 0000000..3d89728
-Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe differ
 diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
-index 0891bae..5b01ace 100644
+index 0891bae..249ff75 100644
 --- a/node_modules/desktop-trampoline/index.js
 +++ b/node_modules/desktop-trampoline/index.js
-@@ -1,10 +1,11 @@
--const Path = require('path')
-+const Path = require('path');
+@@ -1,12 +1,10 @@
 +const os = require('os');
-+
-+const getBinariesPath = () => require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`);
+ const Path = require('path')
  
++const  prebuildTargetPath =  () => require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`);
++
  function getDesktopTrampolinePath() {
-   return Path.join(
+-  return Path.join(
 -    __dirname,
 -    'build',
 -    'Release',
-+    getBinariesPath(),
-     getDesktopTrampolineFilename()
-   )
+-    getDesktopTrampolineFilename()
+-  )
++  return Path.join(prebuildTargetPath(), getDesktopTrampolineFilename());
  }
-@@ -16,7 +17,7 @@ function getDesktopTrampolineFilename() {
+ 
+ function getDesktopTrampolineFilename() {
+@@ -16,7 +14,7 @@ function getDesktopTrampolineFilename() {
  }
  
  function getSSHWrapperPath() {
 -  return Path.join(__dirname, 'build', 'Release', getSSHWrapperFilename())
-+  return Path.join(getBinariesPath(), getSSHWrapperFilename())
++  return Path.join(prebuildTargetPath(), getSSHWrapperFilename());
  }
  
  function getSSHWrapperFilename() {
-diff --git a/node_modules/desktop-trampoline/package.json b/node_modules/desktop-trampoline/package.json
-index 0cc0262..5518113 100644
---- a/node_modules/desktop-trampoline/package.json
-+++ b/node_modules/desktop-trampoline/package.json
-@@ -11,13 +11,14 @@
-   "types": "./index.d.ts",
-   "scripts": {
-     "build": "node-gyp rebuild",
--    "install": "prebuild-install || node-gyp rebuild",
-+    "install": "prebuild-install",
-     "test": "jest",
-     "lint": "prettier -c **/*.js **/*.md",
-     "lint:fix": "prettier --write **/*.js **/*.md",
-     "prebuild-napi-x64": "prebuild -t 3 -r napi -a x64 --strip --include-regex \"(desktop-trampoline|ssh-wrapper)(\\.exe)?$\"",
-     "prebuild-napi-ia32": "prebuild -t 3 -r napi -a ia32 --strip --include-regex \"(desktop-trampoline|ssh-wrapper)(\\.exe)?$\"",
-     "prebuild-napi-arm64": "prebuild -t 3 -r napi -a arm64 --strip --include-regex \"(desktop-trampoline|ssh-wrapper)(\\.exe)?$\"",
-+    "prebuild-napi-arm": "prebuild -t 3 -r napi -a arm --strip --include-regex \"(desktop-trampoline|ssh-wrapper)(\\.exe)?$\"",
-     "prebuild-all": "yarn prebuild-napi-x64 && yarn prebuild-napi-ia32 && yarn prebuild-napi-arm64",
-     "upload": "node ./script/upload.js"
-   },
-@@ -30,13 +31,13 @@
-   },
-   "homepage": "https://github.com/desktop/desktop-trampoline#readme",
-   "dependencies": {
--    "node-addon-api": "^3.1.0",
--    "prebuild-install": "^6.0.0"
-+    "node-addon-api": "^3.1.0"
-   },
-   "devDependencies": {
-     "jest": "^26.4.2",
--    "node-gyp": "^7.1.0",
--    "prebuild": "https://github.com/sergiou87/prebuild#strip-multiple-files",
-+    "node-gyp": "9.4.0",
-+    "prebuild": "11.0.4",
-+    "prebuild-install": "^7.1.1",
-     "prettier": "^2.1.2",
-     "split2": "^3.2.2"
-   },
-@@ -48,5 +49,12 @@
-   "config": {
-     "runtime": "napi",
-     "target": 3
--  }
-+  },
-+  "files": [
-+    "index.js",
-+    "index.d.ts",
-+    "package.json",
-+    "README.md",
-+    "LICENSE"
-+  ]
- }
