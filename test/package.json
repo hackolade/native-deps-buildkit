@@ -1,0 +1,26 @@
+{
+    "name": "test",
+    "description": "test our custom native modules",
+    "devDpendencies": {
+        "@babel/register": "^7.22.15",
+        "chai": "^4.3.10",
+        "lodash": "^4.17.21",
+        "mocha": "^10.2.0",
+        "split2": "^4.2.0"
+    },
+    "dependencies": {
+        "@hackolade/couchbase": "^22.4.0",
+        "@hackolade/desktop-trampoline": "^22.2.0",
+        "@hackolade/kerberos": "^22.2.0",
+        "@hackolade/kerberos-plugins": "^22.1.0",
+        "@hackolade/keytar": "^22.7.0",
+        "@hackolade/krb5": "^22.0.0",
+        "@hackolade/mongodb-client-encryption": "^22.2.0",
+        "@hackolade/os-dns-native": "^22.1.0",
+        "@hackolade/watcher": "^22.2.0"
+    },
+    "scripts": {
+        "test": "node install-before-test-run.js && cross-env NODE_ENV=test ELECTRON_RUN_AS_NODE=true electron ../node_modules/mocha/bin/mocha ./load.spec.js --exit"
+    },
+    "type": "module"
+}

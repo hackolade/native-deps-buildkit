@@ -2,7 +2,10 @@
 	"name": "custom-native-deps-prebuilds",
 	"version": "1.0.0",
 	"description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
-	"main": "index.js",
+	"main": "prepare.js",
+	"workspaces": [
+		"test"
+	],
 	"scripts": {
 		"prepare": "cross-env DEBUG=prebuilds* node prepare.js",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
@@ -21,19 +24,23 @@
 	"devDependencies": {
 		"@electron/rebuild": "^3.3.0",
 		"@octokit/rest": "^20.0.1",
+		"chai": "^4.3.10",
 		"cross-env": "^7.0.3",
 		"debug": "^4.3.4",
 		"electron": "^22.3.23",
 		"eslint": "^8.49.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.28.1",
+		"lodash": "^4.17.21",
+		"mocha": "^10.2.0",
 		"mongodb": "^5.8.0",
 		"node-abi": "^3.47.0",
 		"node-gyp": "9.4.0",
 		"patch-package": "^8.0.0",
 		"prebuild-install": "^7.1.1",
 		"prettier": "^3.0.3",
-		"semver": "^7.5.4"
+		"semver": "^7.5.4",
+		"split2": "^4.2.0"
 	},
 	"dependencies": {
 		"@parcel/watcher": "2.3.0",
