@@ -15,7 +15,9 @@ jobs:
           cache: npm
           node-version: 18
       - name: Install MIT Kerberos MSI
-        run: choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos 
+        run: |
+          choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
       - run: choco install openssl
       - name: Install tookit dependencies
         run: npm ci
