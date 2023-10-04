@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import  { expect } from 'chai';
+import os from 'node:os';
 
 describe('custom native modules', () => {
 	it('kerberos should be imported', async function () {
@@ -57,6 +58,15 @@ describe('custom native modules', () => {
 
 		expect(Boolean(krb5), 'imported as falsy value').to.be.equal(true);
 	});
+
+	if(os.platform() === 'win32'){
+		it('winapi addon should be imported', async function () {
+			this.timeout(10000);
+			const winApi = await import('@hackolade/winapi-detect-remote-desktop-addon-win32-x64');
+	
+			expect(Boolean(winApi.isCurrentSessionRemoteable), 'imported as falsy value').to.be.equal(true);
+		});
+	}
 });
 
 describe('desktop trampoline', async function () {

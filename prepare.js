@@ -68,7 +68,7 @@ for (const module of installedNativeModules) {
 	}
 }
 
-// write to file as input for other platforms
+// write to file 	as input for other platforms
 await writeFile(resolve(ROOT_DIR, 'modulesToBuild.json'), JSON.stringify(custom));
 
 log('publishing packages to internal GitHub registry of Hackolade organization...');
