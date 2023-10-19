@@ -19,7 +19,24 @@ const log = LOGGER.extend('rebuild');
 // run patch package
 await runPatchPackage();
 
-const modulesToBuild = modules.filter(({to_build}) => to_build);
+const relocateWorkdir = (workdir) => {
+    // Base dir might have changed between runs
+    const reg = new RegExp('.+/native-deps-buildkit/node_modules', 'gi')
+    return workdir.replaceAll(reg, `${ROOT_DIR}/node_modules`)   
+};
+
+const modulesToBuild = modules.filter(({to_build}) => to_build).map(module =>{
+    const {moduleBaseDir, rescopedModuleBaseDir, prebuildsAsNpmDependencies} = module;
+    module.moduleBaseDir = relocateWorkdir(moduleBaseDir);
+    module.rescopedModuleBaseDir = relocateWorkdir(rescopedModuleBaseDir);
+
+    module.prebuildsAsNpmDependencies = prebuildsAsNpmDependencies.map(dep => {
+        const {moduleBaseDir, rescopedModuleBaseDir} = dep;
+        dep.moduleBaseDir = relocateWorkdir(moduleBaseDir);
+        dep.rescopedModuleBaseDir = relocateWorkdir(rescopedModuleBaseDir);
+    });
+    return module;
+});
 
 log("MODULES: %O", modulesToBuild);
 
