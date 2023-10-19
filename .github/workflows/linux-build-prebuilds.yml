@@ -7,7 +7,7 @@ jobs:
   build-for-linux:
     runs-on: ubuntu-22.04
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -41,4 +41,8 @@ jobs:
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
       - name: Build native modules on Linux x64
-        run: npm run rebuild-custom-for-target
+        run: npm run rebuild-for-target
+      - name: Test native modules on Linux x64
+        run: |
+          node ./node_modules/electron/install.js
+          npm run -w test test

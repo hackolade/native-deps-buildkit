@@ -9,7 +9,7 @@ jobs:
     env:
       LDFLAGS: -L/usr/local/opt/openssl@3/lib -L/usr/local/opt/krb5/lib
       CPPFLAGS: -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include
-      NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -42,4 +42,8 @@ jobs:
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
       - name: Build native modules on Mac OS x64
-        run: npm run rebuild-custom-for-target
+        run: npm run rebuild-for-target
+      - name: Test native modules on Linux x64
+        run: |
+          node ./node_modules/electron/install.js
+          npm run -w test test
