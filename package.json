@@ -57,7 +57,7 @@
 		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
 		"nativeModules": {
 			"@parcel/watcher": {
-				"version": "22.2.0",
+				"version": "22.2.1",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
