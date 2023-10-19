@@ -40,9 +40,10 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
+      - run: npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_REGISTRY_TOKEN }}
       - name: Build native modules on Linux x64
         run: |
-          npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_REGISTRY_TOKEN }}
+          npm config list
           npm run rebuild-for-target
       - name: Test native modules on Linux x64
         run: |
