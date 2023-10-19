@@ -36,26 +36,29 @@ index 4929c54..5f63c02 100644
    const { ignore, ...rest } = opts;
  
 diff --git a/node_modules/@parcel/watcher/package.json b/node_modules/@parcel/watcher/package.json
-index 0ab049f..00cbc8e 100644
+index 0ab049f..af86876 100644
 --- a/node_modules/@parcel/watcher/package.json
 +++ b/node_modules/@parcel/watcher/package.json
-@@ -63,19 +63,5 @@
-     "napi_versions": [
-       3
-     ]
+@@ -59,11 +59,6 @@
+     "prebuildify": "^5.0.1",
+     "prettier": "^2.3.2"
+   },
+-  "binary": {
+-    "napi_versions": [
+-      3
+-    ]
 -  },
--  "optionalDependencies": {
--    "@parcel/watcher-darwin-x64": "2.3.0",
--    "@parcel/watcher-darwin-arm64": "2.3.0",
--    "@parcel/watcher-win32-x64": "2.3.0",
--    "@parcel/watcher-win32-arm64": "2.3.0",
--    "@parcel/watcher-win32-ia32": "2.3.0",
--    "@parcel/watcher-linux-x64-glibc": "2.3.0",
--    "@parcel/watcher-linux-x64-musl": "2.3.0",
--    "@parcel/watcher-linux-arm64-glibc": "2.3.0",
--    "@parcel/watcher-linux-arm64-musl": "2.3.0",
--    "@parcel/watcher-linux-arm-glibc": "2.3.0",
--    "@parcel/watcher-android-arm64": "2.3.0",
--    "@parcel/watcher-freebsd-x64": "2.3.0"
+   "optionalDependencies": {
+     "@parcel/watcher-darwin-x64": "2.3.0",
+     "@parcel/watcher-darwin-arm64": "2.3.0",
+@@ -77,5 +72,10 @@
+     "@parcel/watcher-linux-arm-glibc": "2.3.0",
+     "@parcel/watcher-android-arm64": "2.3.0",
+     "@parcel/watcher-freebsd-x64": "2.3.0"
++  },
++  "binary": {
++    "napi_versions": [
++      3
++    ]
    }
  }

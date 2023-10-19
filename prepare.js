@@ -1,103 +1,26 @@
-import { join, resolve } from 'node:path';
-import { env } from 'node:process';
-import { writeFile } from 'node:fs/promises';
+import { getNativeModulesMetadata } from './lib/build-metadata.js';
+import { installAllPrebuildsProvidedAsNPMDependencies, installPrebuiltsForTargets, runPatchPackage } from './lib/install.js';
+import {rescopeOfficialPrebuildsFromPackage} from './lib/pack.js';
+import {publishToNPM} from './lib/publish.js';
+import {writeFile} from 'node:fs/promises';
 import { ROOT_DIR } from '#root';
-import { discoverRegularNativeModules, getElectronAbi } from '#lib/module.js';
-import { installAvailablePrebuilts } from '#lib/install.js';
-import { log } from '#lib/logger.js';
-import { exec, npmCommand, npxCommand } from '#lib/commands.js';
-import {
-	checkPackageVersionExistsFromPath,
-	publishToGitHubPackages,
-	prepareParcelWatcherPrebuildsPackages,
-	normalizeNativeModulesUnderHackolade,
-} from '#lib/publish.js';
+import { resolve } from 'node:path';
 
-await exec(npmCommand, [
-	'install',
-	'--force',
-	'--no-save',
-	'@parcel/watcher-darwin-arm64@2.3.0',
-	'@parcel/watcher-darwin-x64@2.3.0',
-	'@parcel/watcher-linux-arm64-glibc@2.3.0',
-	'@parcel/watcher-linux-x64-glibc@2.3.0',
-	'@parcel/watcher-win32-x64@2.3.0',
-]);
+const modulesBuildMetadata = await getNativeModulesMetadata();
 
-// run patch package
-await exec(npxCommand, ['patch-package', '--error-on-war', '--error-on-fail']);
+await installAllPrebuildsProvidedAsNPMDependencies(modulesBuildMetadata);
 
-const electron = await getElectronAbi();
-const installedNativeModules = await discoverRegularNativeModules(join(ROOT_DIR, 'node_modules'));
+await runPatchPackage();
 
-log('discovered native modules: %O', installedNativeModules);
-
-const targets = [
-	{ targetPlatform: 'darwin', targetArch: 'arm64' },
-	{ targetPlatform: 'darwin', targetArch: 'x64' },
-	{ targetPlatform: 'linux', targetArch: 'x64' },
-	{ targetPlatform: 'win32', targetArch: 'x64' },
-];
-
-const custom = [];
-const customizedNativeModules = await normalizeNativeModulesUnderHackolade(installedNativeModules);
-const parcelPrebuilds = await prepareParcelWatcherPrebuildsPackages();
-
-const toPublish = [...parcelPrebuilds, ...customizedNativeModules];
-
-for (const module of installedNativeModules) {
-	// Parcel's watcher is already providing all its NAPI prebuilds as dedicated @parcel/watcher-<platform>-<arch> packages. 
-	// We took inspiration from this approach for this toolkit as the standard for us to distribute prebuilds
-	// Thus this module doesn't need any custom rebuild for Electron
-	if(module.name === '@parcel/watcher' ){
-		continue;
-	}	
-	for (const { targetPlatform, targetArch } of targets) {
-		const installOutput = await installAvailablePrebuilts({
-			module,
-			targetPlatform,
-			targetArch,
-			electron,
-		});
-
-		if (installOutput.toBuild) {
-			custom.push(installOutput);
-		} else {
-			toPublish.push(installOutput.scopedPackagePath);
-		}
-	}
+for (const moduleMeta of modulesBuildMetadata.filter(({prebuilds_as_npm_packages}) => !prebuilds_as_npm_packages)) {
+    await installPrebuiltsForTargets(moduleMeta);
 }
+
+const moduleToPublish = await rescopeOfficialPrebuildsFromPackage({buildMetadata: modulesBuildMetadata});
 
 // write to file 	as input for other platforms
-await writeFile(resolve(ROOT_DIR, 'modulesToBuild.json'), JSON.stringify(custom));
+await writeFile(resolve(ROOT_DIR, 'modulesToBuild.json'), JSON.stringify(modulesBuildMetadata));
 
-log('publishing packages to internal GitHub registry of Hackolade organization...');
-
-const filterOutPackagesWithVersionAlreadyPublished = await Promise.all(
-	toPublish.map(async packagePath => {
-		const token = env.NODE_AUTH_TOKEN;
-		return await checkPackageVersionExistsFromPath({token, packagePath});
-	})
-);
-
-
-const finalPackageListToPublish = filterOutPackagesWithVersionAlreadyPublished.filter(({name,  version, isPackageVersionAlreadyPublished}) => {
-	
-	if(isPackageVersionAlreadyPublished){
-		const githubPackageVersionsURL = `https://github.com/orgs/hackolade/packages/npm/${name}/versions`;
-		const deletePackageCurlCmd = `curl -L -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <token>" "https://api.github.com/orgs/hackolade/packages/npm/${name}"`;
-		log('--> skip publish package %o with version %o is already published to GitHub packages', name, version );
-		log('--> check %o to delete the version %o', githubPackageVersionsURL, version );
-		log('--> or use the following command with your Personal Access Token to delete the version %o', deletePackageCurlCmd );
-	}
-	return !isPackageVersionAlreadyPublished;
-})
-
-for (const {packagePath} of finalPackageListToPublish) {
-	await publishToGitHubPackages(packagePath);
-	log('---> %o published', packagePath);
+for(const moduleToPublishBaseDir of moduleToPublish){
+    await publishToNPM(moduleToPublishBaseDir);
 }
-
-// then trigger other jobs for each platform and upload artifacts
-//https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
-// This is done as GitHub actions steps

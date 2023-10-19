@@ -1,11 +1,3 @@
-diff --git a/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe b/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe
-new file mode 100644
-index 0000000..6dc249f
-Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/desktop-trampoline.exe differ
-diff --git a/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe
-new file mode 100644
-index 0000000..3d89728
-Binary files /dev/null and b/node_modules/desktop-trampoline/build/Release/ssh-wrapper.exe differ
 diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
 index 0891bae..541c666 100644
 --- a/node_modules/desktop-trampoline/index.js
@@ -36,3 +28,40 @@ index 0891bae..541c666 100644
  }
  
  function getSSHWrapperFilename() {
+diff --git a/node_modules/desktop-trampoline/package.json b/node_modules/desktop-trampoline/package.json
+index 0cc0262..83efb47 100644
+--- a/node_modules/desktop-trampoline/package.json
++++ b/node_modules/desktop-trampoline/package.json
+@@ -11,7 +11,7 @@
+   "types": "./index.d.ts",
+   "scripts": {
+     "build": "node-gyp rebuild",
+-    "install": "prebuild-install || node-gyp rebuild",
++    "install": "prebuild-install",
+     "test": "jest",
+     "lint": "prettier -c **/*.js **/*.md",
+     "lint:fix": "prettier --write **/*.js **/*.md",
+@@ -30,8 +30,7 @@
+   },
+   "homepage": "https://github.com/desktop/desktop-trampoline#readme",
+   "dependencies": {
+-    "node-addon-api": "^3.1.0",
+-    "prebuild-install": "^6.0.0"
++    "node-addon-api": "^3.1.0"
+   },
+   "devDependencies": {
+     "jest": "^26.4.2",
+@@ -48,5 +47,12 @@
+   "config": {
+     "runtime": "napi",
+     "target": 3
+-  }
++  },
++  "files": [
++    "index.js",
++    "index.d.ts",
++    "package.json",
++    "README.md",
++    "LICENSE"
++  ]
+ }

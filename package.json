@@ -7,9 +7,9 @@
 		"test"
 	],
 	"scripts": {
-		"prepare": "cross-env DEBUG=prebuilds* node prepare.js",
+		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node prepare.js",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-		"rebuild-custom-for-target": "cross-env DEBUG=prebuilds* node --trace-uncaught rebuild.js"
+		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node --trace-uncaught rebuild.js"
 	},
 	"repository": {
 		"type": "git",
@@ -44,124 +44,84 @@
 	},
 	"dependencies": {
 		"@parcel/watcher": "2.3.0",
-		"couchbase": "4.2.7",
+		"couchbase": "4.2.4",
 		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
 		"kerberos": "2.0.3",
 		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
 		"keytar": "7.9.0",
-		"krb5": "git+https://github.com/hackolade/node-krb5.git",
+		"krb5": "0.5.4",
 		"mongodb-client-encryption": "2.9.0",
 		"os-dns-native": "1.2.0"
 	},
 	"buildMetadata": {
-		"watcher": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.2.0",
-			"napi": true,
-			"shared_openssl1": false,
-			"official_prebuilds_provided": true,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_prebuildified": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"couchbase": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.4.0",
-			"napi": true,
-			"shared_openssl1": true,
-			"official_prebuilds_provided": true,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_prebuildified": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"desktop-trampoline": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.2.0",
-			"napi": false,
-			"shared_openssl1": false,
-			"official_prebuilds_provided": true,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_prebuildified": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"kerberos": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.2.0",
-			"napi": true,
-			"shared_openssl1": false,
-			"official_prebuilds_provided": true,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_prebuildified": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"kerberos-plugins": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.1.0",
-			"napi": true,
-			"shared_openssl1": true,
-			"official_prebuilds_provided": true,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_prebuildified": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"keytar": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.7.0",
-			"napi": true,
-			"shared_openssl1": false,
-			"official_prebuilds_provided": true,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_prebuildified": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"mongodb-client-encryption": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.2.0",
-			"prebuilds_prebuildified": false,
-			"napi": true,
-			"shared_openssl1": false,
-			"official_prebuilds_provided": false,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"krb5": {
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.0.0",
-			"prebuilds_prebuildified": false,
-			"napi": true,
-			"shared_openssl1": true,
-			"official_prebuilds_provided": false,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
-		},
-		"os-dns-native": {
-			"direct_dependency": false,
-			"version_format": "<electron major version>.<package major>.<arbitrary patch>",
-			"version": "22.1.0",
-			"prebuilds_prebuildified": false,
-			"napi": false,
-			"shared_openssl1": true,
-			"official_prebuilds_provided": false,
-			"official_prebuilds_for_all_targets": false,
-			"official_prebuilds_work_with_electron": false,
-			"prebuilds_as_npm_packages": false,
-			"prebuilds_in_build_release": false
+		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
+		"nativeModules": {
+			"@parcel/watcher": {
+				"version": "22.2.0",
+				"napi": true,
+				"prebuild_install": false,
+				"prebuilds_as_npm_packages": true,
+				"prebuilds_scope": "@parcel",
+				"to_build": false
+			},
+			"couchbase": {
+				"version": "22.4.0",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"desktop-trampoline": {
+				"version": "22.2.0",
+				"napi": false,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false,
+				"prebuildPackageMainEntry": "desktop-trampoline",
+				"prebuildPackageFiles": ["desktop-trampoline", "ssh-wrapper"]
+			},
+			"kerberos": {
+				"version": "22.2.0",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"kerberos-plugins": {
+				"version": "22.1.0",
+				"napi": false,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": true
+			},
+			"keytar": {
+				"version": "22.7.0",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"krb5": {
+				"version": "22.0.0",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": true
+			},
+			"mongodb-client-encryption": {
+				"version": "22.2.0",
+				"prebuild_install": true,
+				"napi": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"os-dns-native": {
+				"version": "22.1.0",
+				"napi": true,
+				"prebuild_install": false,
+				"prebuilds_as_npm_packages": false,
+				"to_build": true
+			}
 		}
 	},
 	"type": "module",

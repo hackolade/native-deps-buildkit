@@ -1,1 +1,2 @@
-module.exports = require('bindings')('winApiHandler');
+const os = require('node:os');
+module.exports = require('winApiHandler');

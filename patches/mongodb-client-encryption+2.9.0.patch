@@ -1,7 +1,3 @@
-diff --git a/node_modules/mongodb-client-encryption/build/Release/mongocrypt.node b/node_modules/mongodb-client-encryption/build/Release/mongocrypt.node
-new file mode 100644
-index 0000000..b3a3aa2
-Binary files /dev/null and b/node_modules/mongodb-client-encryption/build/Release/mongocrypt.node differ
 diff --git a/node_modules/mongodb-client-encryption/lib/autoEncrypter.js b/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
 index f4e3dc0..6a70d90 100644
 --- a/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
@@ -31,10 +27,18 @@ index 10bc541..c5fab91 100644
    const databaseNamespace = common.databaseNamespace;
    const collectionNamespace = common.collectionNamespace;
 diff --git a/node_modules/mongodb-client-encryption/package.json b/node_modules/mongodb-client-encryption/package.json
-index ce65e9f..5f92618 100644
+index ce65e9f..d007e3d 100644
 --- a/node_modules/mongodb-client-encryption/package.json
 +++ b/node_modules/mongodb-client-encryption/package.json
-@@ -16,7 +16,7 @@
+@@ -9,14 +9,13 @@
+     "CHANGELOG.md",
+     "lib",
+     "src",
+-    "index.d.ts",
+-    "binding.gyp"
++    "index.d.ts"
+   ],
+   "directories": {
      "lib": "lib"
    },
    "scripts": {
@@ -43,7 +47,7 @@ index ce65e9f..5f92618 100644
      "check:lint": "eslint lib test && tsd",
      "docs": "jsdoc2md --template etc/README.hbs --plugin dmd-clear --files 'lib/**/*.js' > README.md",
      "test": "mocha test",
-@@ -34,9 +34,7 @@
+@@ -34,9 +33,7 @@
    "license": "Apache-2.0",
    "gypfile": true,
    "dependencies": {
@@ -53,7 +57,7 @@ index ce65e9f..5f92618 100644
      "socks": "^2.7.1"
    },
    "devDependencies": {
-@@ -55,6 +53,7 @@
+@@ -55,6 +52,7 @@
      "mongodb": "^5.3.0",
      "node-gyp": "^9.3.1",
      "prebuild": "^11.0.4",
