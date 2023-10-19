@@ -26,6 +26,7 @@ const modulesToBuild = modules.filter(({to_build}) => to_build).map(module =>{
         const {moduleBaseDir, rescopedModuleBaseDir} = dep;
         dep.moduleBaseDir = relocateWorkdir(moduleBaseDir);
         dep.rescopedModuleBaseDir = relocateWorkdir(rescopedModuleBaseDir);
+        return dep;
     });
     return module;
 });
