@@ -78,7 +78,10 @@
 				"prebuilds_as_npm_packages": false,
 				"to_build": false,
 				"prebuildPackageMainEntry": "desktop-trampoline",
-				"prebuildPackageFiles": ["desktop-trampoline", "ssh-wrapper"]
+				"prebuildPackageFiles": [
+					"desktop-trampoline",
+					"ssh-wrapper"
+				]
 			},
 			"kerberos": {
 				"version": "22.2.0",
