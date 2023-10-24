@@ -9,8 +9,8 @@
         "split2": "^4.2.0"
     },
     "scripts": {
-        "test-natives": "cross-env NODE_ENV=test ELECTRON_RUN_AS_NODE=true electron ../node_modules/mocha/bin/mocha ./load-upstream-native.spec.js --exit",
-        "test": "node install-before-test-run.js && cross-env NODE_ENV=test ELECTRON_RUN_AS_NODE=true electron ../node_modules/mocha/bin/mocha ./load.spec.js --exit"
+        "test-natives": "cross-env NODE_ENV=test electron ../node_modules/mocha/bin/mocha ./load-upstream-native.spec.js --exit",
+        "test": "node install-before-test-run.js && cross-env NODE_ENV=test && cross-env DEBUG=buildkit* electron ../node_modules/mocha/bin/mocha ./load.spec.js --exit"
     },
     "type": "module"
 }
