@@ -43,7 +43,3 @@ jobs:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
       - name: Build native modules on Mac OS x64
         run: npm run rebuild-for-target
-      - name: Test native modules on Linux x64
-        run: |
-          node ./node_modules/electron/install.js
-          npm run -w test test

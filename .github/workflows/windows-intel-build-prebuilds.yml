@@ -43,6 +43,4 @@ jobs:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
 
       - name: Build on Windows x64
-        run: |
-          ls "C:\Program Files\MIT\Kerberos\include"
-          npm run rebuild-custom-for-target
+        run: npm run rebuild-for-target

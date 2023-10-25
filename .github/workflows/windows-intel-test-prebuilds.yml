@@ -1,0 +1,24 @@
+name: Prebuild for Windows x64
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows-intel:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+      - name: Install MIT Kerberos MSI
+        run: |
+          choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
+      - run: choco install openssl
+      - name: Install tookit dependencies
+        run: npm ci
+      - name: Ensure Electron is installed
+        run: node ./node_modules/electron/install.js
+      - name: Build on Windows x64
+        run: npm run -w test test

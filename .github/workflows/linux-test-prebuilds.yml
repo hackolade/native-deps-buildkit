@@ -1,0 +1,23 @@
+name: Test Prebuilds for Linux x64
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-for-linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install krb5
+        run: sudo apt-get install -y libkrb5-dev
+      - name: Install toolkit
+        run: npm ci
+      - name: Build native modules on Linux x64
+        run: npm run rebuild-for-target
+      - name: Test native modules on Linux x64
+        run: |
+          node ./node_modules/electron/install.js
+          npm run -w test test

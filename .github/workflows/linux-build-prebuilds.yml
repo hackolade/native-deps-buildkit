@@ -6,8 +6,6 @@ on:
 jobs:
   build-for-linux:
     runs-on: ubuntu-22.04
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -15,8 +13,6 @@ jobs:
           node-version: 18
       - name: Install krb5
         run: sudo apt-get install -y libkrb5-dev
-      - name: Ensure couchbase content is clean
-        run: rm -rf ./node_modules/couchbase/build
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env
@@ -28,7 +24,7 @@ jobs:
           # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
           # Required, if the artifact is from a different repo
           # Required, if the repo is private a Personal Access Token with `repo` scope is needed or GitHub token in a job where the permissions `action` scope set to `read`
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{secrets.GITHUB_TOKEN}}
           # Optional, workflow file name or ID
           # If not specified, will be inferred from run_id (if run_id is specified), or will be the current workflow
           workflow: discover-and-prepare-upstream-native-modules.yml
@@ -42,7 +38,3 @@ jobs:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
       - name: Build native modules on Linux x64
         run: npm run rebuild-for-target
-      - name: Test native modules on Linux x64
-        run: |
-          node ./node_modules/electron/install.js
-          npm run -w test test
