@@ -7,10 +7,11 @@ jobs:
   test-for-linux:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          cache: npm
+          node-version: 20
       - name: Install krb5
         run: sudo apt-get install -y libkrb5-dev xvfb
       - name: Install toolkit
