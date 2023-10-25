@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-for-linux:
+  test-for-linux:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -15,8 +15,27 @@ jobs:
         run: sudo apt-get install -y libkrb5-dev
       - name: Install toolkit
         run: npm ci
-      - name: Build native modules on Linux x64
-        run: npm run rebuild-for-target
+      - name: Set Electron Major version in env
+        run: echo "ELECTRON_MAJOR_VERSION=$(node get-electron-major-version.js)" >> $GITHUB_ENV
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
+          # Required, if the artifact is from a different repo
+          # Required, if the repo is private a Personal Access Token with `repo` scope is needed or GitHub token in a job where the permissions `action` scope set to `read`
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          # Optional, workflow file name or ID
+          # If not specified, will be inferred from run_id (if run_id is specified), or will be the current workflow
+          workflow: discover-and-prepare-upstream-native-modules.yml
+          # Optional, the status or conclusion of a completed workflow to search for
+          # Can be one of a workflow conclusion:
+          #   "failure", "success", "neutral", "cancelled", "skipped", "timed_out", "action_required"
+          # Or a workflow status:
+          #   "completed", "in_progress", "queued"
+          # Use the empty string ("") to ignore status or conclusion in the search
+          workflow_conclusion: success
+          name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
       - name: Test native modules on Linux x64
         run: |
           node ./node_modules/electron/install.js
