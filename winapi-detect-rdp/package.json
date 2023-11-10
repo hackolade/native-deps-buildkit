@@ -1,9 +1,8 @@
 {
-	"name": "winapi-detect-remote-desktop-addon",
+	"name": "@hackolade/winapi-detect-rdp",
 	"version": "1.0.0",
 	"description": "Node.js WinAPI Addon for Remote Desktop detection",
-	"main": "index.js",
-	"private": true,
+	"main": "prebuild.node",
 	"dependencies": {
 		"node-addon-api": "^1.0.0"
 	},
@@ -12,6 +11,6 @@
 	},
 	"gypfile": true,
 	"files": [
-		"index.js"
+		"prebuild.node"
 	]
 }
