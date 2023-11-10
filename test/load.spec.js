@@ -21,7 +21,42 @@ describe('custom native modules', () => {
 		this.timeout(10000);
 		const couchbase = await import('@hackolade/couchbase');
 
+		// For a secure cluster connection, use `couchbases://<your-cluster-ip>` instead.
+		const clusterConnStr = 'couchbase://localhost'
+		const username = 'Administrator'
+		const password = 'password'
+		const bucketName = 'travel-sample'
+
+	
+		const cluster = await couchbase.connect(clusterConnStr, {
+			username: username,
+			password: password,
+		});
+
+		const bucket = cluster.bucket(bucketName)
+
+		// Get a reference to the default collection, required only for older Couchbase server versions
+		const defaultCollection = bucket.defaultCollection()
+
+		const collection = bucket.scope('tenant_agent_00').collection('users')
+
+		const user = {
+			type: 'user',
+			name: 'Michael',
+			email: 'michael123@test.com',
+			interests: ['Swimming', 'Rowing'],
+		}
+
+		// Create and store a document
+		await collection.upsert('michael123', user);
+
+		// Load the Document and print it
+		// Prints Content and Metadata of the stored Document
+		const getResult = await collection.get('michael123');
+
+
 		expect(Boolean(couchbase), 'imported as falsy value').to.be.equal(true);
+		expect(Boolean(getResult), 'executed as falsy value').to.be.equal(true);
 	});
 
 	it('mongodb-client-encryption should be imported', async function () {
