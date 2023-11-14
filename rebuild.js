@@ -1,10 +1,9 @@
-import { LOGGER } from '#lib/logger.js';
 import { build } from '#lib/build.js';
 import modules from './modulesToBuild.json' assert { type: 'json' };
-import {rescopeOfficialPrebuildsFromPackage} from './lib/pack.js';
+import { LOGGER } from '#lib/logger.js';
 import { ROOT_DIR } from '#root';
 import { runPatchPackage } from './lib/install.js';
-import {publishToNPM} from './lib/publish.js';
+import { publishToNPM } from './lib/publish.js';
 
 const log = LOGGER.extend('rebuild');
 
@@ -31,14 +30,18 @@ const modulesToBuild = modules.filter(({to_build}) => to_build).map(module =>{
     return module;
 });
 
-log("MODULES: %O", modulesToBuild);
 
-for(const mod of modulesToBuild){
-	await build(mod);
+const moduleToPublish = await Promise.all(
+    modulesToBuild.map(async module => await build(module))
+);
+
+const toPublish = moduleToPublish.flat();
+if(toPublish.length > 0){
+    log('module prebuilds to publish to NPM registry: %O', toPublish);
+    for(const moduleToPublishBaseDir of toPublish){
+        await publishToNPM(moduleToPublishBaseDir);
+    }
 }
-
-const moduleToPublish = await rescopeOfficialPrebuildsFromPackage({buildMetadata: modulesToBuild, rescopeOnlyPrebuilds: true});
-
-for(const moduleToPublishBaseDir of moduleToPublish){
-    await publishToNPM(moduleToPublishBaseDir);
+else{
+    log('no module prebuilds to publish to NPM registry!');
 }
