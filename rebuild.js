@@ -30,12 +30,17 @@ const modulesToBuild = modules.filter(({to_build}) => to_build).map(module =>{
     return module;
 });
 
+log('Building modules: %O', modulesToBuild);
+const modulesToPublish = [];
 
-const moduleToPublish = await Promise.all(
-    modulesToBuild.map(async module => await build(module))
-);
+for( const module of modulesToBuild){
+    const [moduleToPublish] = await build(module);
+    modulesToPublish.push(moduleToPublish);
+}
 
-const toPublish = moduleToPublish.flat();
+log('module prebuilds to publish to NPM registry: %O', modulesToPublish);
+
+const toPublish = modulesToPublish.flat();
 if(toPublish.length > 0){
     log('module prebuilds to publish to NPM registry: %O', toPublish);
     for(const moduleToPublishBaseDir of toPublish){
