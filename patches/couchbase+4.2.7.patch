@@ -10679,7 +10679,7 @@ index 0000000..2e538d3
 +  }
 +}
 diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
-index 324198c..1c70136 100644
+index 324198c..44d2924 100644
 --- a/node_modules/couchbase/package.json
 +++ b/node_modules/couchbase/package.json
 @@ -60,11 +60,9 @@
@@ -10687,8 +10687,10 @@ index 324198c..1c70136 100644
    },
    "scripts": {
 -    "install": "node ./scripts/install.js",
-     "build": "cmake-js build && tsc",
-     "rebuild": "cmake-js rebuild && tsc",
+-    "build": "cmake-js build && tsc",
+-    "rebuild": "cmake-js rebuild && tsc",
++    "build": "cmake-js build",
++    "rebuild": "cmake-js rebuild",
      "prebuild": "prebuild --backend cmake-js --verbose --strip",
 -    "prepare": "tsc",
      "help-prune": "node ./scripts/prune.js",
