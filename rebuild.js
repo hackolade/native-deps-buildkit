@@ -3,7 +3,6 @@ import modules from './modulesToBuild.json' assert { type: 'json' };
 import { LOGGER } from '#lib/logger.js';
 import { ROOT_DIR } from '#root';
 import { runPatchPackage } from './lib/install.js';
-import { publishToNPM } from './lib/publish.js';
 
 const log = LOGGER.extend('rebuild');
 
@@ -30,23 +29,6 @@ const modulesToBuild = modules.filter(({to_build}) => to_build).map(module =>{
     return module;
 });
 
-log('Building modules: %O', modulesToBuild);
-const modulesToPublish = [];
-
 for( const module of modulesToBuild){
-    const [moduleToPublish] = await build(module);
-    modulesToPublish.push(moduleToPublish);
-}
-
-log('module prebuilds to publish to NPM registry: %O', modulesToPublish);
-
-const toPublish = modulesToPublish.flat();
-if(toPublish.length > 0){
-    log('module prebuilds to publish to NPM registry: %O', toPublish);
-    for(const moduleToPublishBaseDir of toPublish){
-        await publishToNPM(moduleToPublishBaseDir);
-    }
-}
-else{
-    log('no module prebuilds to publish to NPM registry!');
+    await build(module);
 }

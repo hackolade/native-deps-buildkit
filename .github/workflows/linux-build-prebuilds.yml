@@ -16,6 +16,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libkrb5-dev
+      - name: install python distutils
+        run: python3 -m pip install packaging
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env
