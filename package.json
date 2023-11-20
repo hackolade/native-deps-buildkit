@@ -21,6 +21,11 @@
 	"homepage": "https://github.com/hackolade/custom-native-deps-prebuilds#readme",
 	"author": "Hackolade",
 	"license": "MIT",
+	"overrides": {
+		"@electron/rebuild": {
+			"node-gyp": "10.0.1"
+		}
+	},
 	"devDependencies": {
 		"@electron/rebuild": "^3.3.0",
 		"chai": "^4.3.10",
