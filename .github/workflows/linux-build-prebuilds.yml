@@ -13,7 +13,9 @@ jobs:
           cache: npm
           node-version: 20
       - name: Install krb5
-        run: sudo apt-get install -y libkrb5-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libkrb5-dev
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env
