@@ -23,7 +23,7 @@
 	"license": "MIT",
 	"overrides": {
 		"@electron/rebuild": {
-			"node-gyp": "10.0.1"
+			"node-gyp": "^10.0.1"
 		}
 	},
 	"devDependencies": {
