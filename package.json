@@ -102,7 +102,7 @@
 				"to_build": false
 			},
 			"krb5": {
-				"version": "27.0.0",
+				"version": "27.0.1",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
