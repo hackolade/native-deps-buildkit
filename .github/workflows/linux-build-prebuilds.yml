@@ -6,12 +6,14 @@ on:
 jobs:
   build-for-linux:
     runs-on: ubuntu-22.04
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20
+          node-version: 18
       - name: Install krb5
         run: |
           sudo apt-get update
