@@ -46,7 +46,7 @@
 		"kerberos": "2.0.3",
 		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
 		"keytar": "7.9.0",
-		"krb5": "0.5.4",
+		"krb5": "0.5.5",
 		"mongodb-client-encryption": "2.9.0",
 		"os-dns-native": "1.2.0"
 	},
