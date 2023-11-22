@@ -7,25 +7,32 @@ jobs:
     strategy:
       matrix:
         packages:
-          # - desktop-trampoline-darwin-arm64
-          # - desktop-trampoline-win32-x64
-          # - desktop-trampoline-darwin-x64
-          # - desktop-trampoline-linux-x64
-          - kerberos
-          - kerberos-plugins
-          - node-krb5
           - couchbase
+          - couchbase-linux-x64
+          - couchbase-darwin-arm64
+          - couchbase-win32-x64
+          - couchbase-darwin-x64
+          - kerberos
+          - kerberos-linux-x64
+          - kerberos-darwin-arm64
+          - kerberos-win32-x64
+          - kerberos-darwin-x64
+          - node-krb5
           - os-dns-native
-          - keytar
+          - os-dns-native-linux-x64
+          - os-dns-native-darwin-arm64
+          - os-dns-native-win32-x64
+          - os-dns-native-darwin-x64
           - desktop-trampoline
-          # - kerberos-linux-x64
-          # - kerberos-darwin-arm64
-          # - kerberos-win32-x64
-          # - kerberos-darwin-x64
-          # - kerberos-plugins-linux-x64
-          # - kerberos-plugins-darwin-arm64
-          # - kerberos-plugins-win32-x64
-          # - kerberos-plugins-darwin-x64
+          - desktop-trampoline-darwin-arm64
+          - desktop-trampoline-win32-x64
+          - desktop-trampoline-darwin-x64
+          - desktop-trampoline-linux-x64
+          - kerberos-plugins
+          - kerberos-plugins-linux-x64
+          - kerberos-plugins-darwin-arm64
+          - kerberos-plugins-win32-x64
+          - kerberos-plugins-darwin-x64
     steps:
       - uses: actions/delete-package-versions@v4
         with:
