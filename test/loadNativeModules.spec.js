@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import  { expect } from 'chai';
+import { expect } from 'chai';
 import os from 'node:os';
 
 describe('custom native modules', async function () {
@@ -9,7 +9,7 @@ describe('custom native modules', async function () {
 		// We force the connect attempt to make sure the sdk is properly loaded
 		const couchbase = await import('@hackolade/couchbase');
 
-		const {UnambiguousTimeoutError} = couchbase;
+		const { UnambiguousTimeoutError } = couchbase;
 
 		expect(Boolean(couchbase), 'imported as falsy value').to.be.equal(true);
 
@@ -17,7 +17,7 @@ describe('custom native modules', async function () {
 		const username = 'Administrator';
 		const password = 'password';
 
-		try{
+		try {
 			await couchbase.connect(clusterConnStr, {
 				username: username,
 				password: password,
@@ -25,11 +25,10 @@ describe('custom native modules', async function () {
 					connectTimeout: 1,
 					bootstrapTimeout: 1,
 					kvTimeout: 1,
-					resolveTimeout: 1
-				}
+					resolveTimeout: 1,
+				},
 			});
-
-		}catch(connectionError){
+		} catch (connectionError) {
 			expect(connectionError).to.be.instanceOf(UnambiguousTimeoutError);
 			expect(connectionError.message).to.eql('unambiguous timeout');
 		}
@@ -84,11 +83,11 @@ describe('custom native modules', async function () {
 		expect(Boolean(watcher), 'imported as falsy value').to.be.equal(true);
 	});
 
-	if(os.platform() === 'win32'){
+	if (os.platform() === 'win32') {
 		it('winapi addon should be imported', async function () {
 			this.timeout(10000);
 			const winApi = await import('@hackolade/winapi-detect-remote-desktop-addon-win32-x64');
-	
+
 			expect(Boolean(winApi.isCurrentSessionRemoteable), 'imported as falsy value').to.be.equal(true);
 		});
 	}
