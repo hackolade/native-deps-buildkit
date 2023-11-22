@@ -19,26 +19,37 @@ describe('custom native modules', () => {
 
 	it('couchbase should be imported', async function () {
 		this.timeout(10000);
+
+		// We force the connect attempt to make sure the sdk is properly loaded
 		const couchbase = await import('@hackolade/couchbase');
 
-		// For a secure cluster connection, use `couchbases://<your-cluster-ip>` instead.
+		const {UnambiguousTimeoutError} = couchbase;
+
+		expect(Boolean(couchbase), 'imported as falsy value').to.be.equal(true);
+
 		const clusterConnStr = 'couchbase://localhost';
 		const username = 'Administrator';
 		const password = 'password';
-		const bucketName = 'travel-sample';
 
 		try{
-		const cluster = await couchbase.connect(clusterConnStr, {
-			username: username,
-			password: password,
-		});
+			await couchbase.connect(clusterConnStr, {
+				username: username,
+				password: password,
+				timeouts: {
+					connectTimeout: 1,
+					bootstrapTimeout: 1,
+					kvTimeout: 1,
+					resolveTimeout: 1
+				}
+			});
 
-		const bucket = cluster.bucket(bucketName);
+		
 
-		expect(Boolean(couchbase), 'imported as falsy value').to.be.equal(true);
-		expect(Boolean(bucket), 'executed as falsy value').to.be.equal(false);
-		}catch(e){
-			console.error(">>>>>>>>>>>>>>>>>>>", e);
+		}catch(connectionError){
+
+			console.error(connectionError);
+			expect(connectionError).to.be.instanceOf(UnambiguousTimeoutError);
+			expect(connectionError.message).to.eql('unambiguous timeout');
 		}
 	});
 
