@@ -9,7 +9,7 @@
 	"scripts": {
 		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/prepare.js",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node --trace-uncaught ./bin/rebuild.js"
+		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/rebuild.js"
 	},
 	"repository": {
 		"type": "git",
