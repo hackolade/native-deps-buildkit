@@ -2,14 +2,12 @@
     "name": "test",
     "description": "test our custom native modules",
     "devDpendencies": {
-        "@babel/register": "^7.22.15",
         "chai": "^4.3.10",
         "lodash": "^4.17.21",
         "mocha": "^10.2.0",
         "split2": "^4.2.0"
     },
     "scripts": {
-        "test-natives": "cross-env NODE_ENV=test electron ../node_modules/mocha/bin/mocha ./load-upstream-native.spec.js --exit",
         "test": "node install-before-test-run.js && cross-env NODE_ENV=test && cross-env DEBUG=buildkit* electron ../node_modules/mocha/bin/mocha ./load.spec.js --exit"
     },
     "type": "module"

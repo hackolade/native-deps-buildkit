@@ -40,7 +40,7 @@ index 0ce5bc3..8858bd2 100644
  
  project (couchbase_impl)
 diff --git a/node_modules/couchbase/dist/binding.js b/node_modules/couchbase/dist/binding.js
-index aa0b112..bb849a8 100644
+index aa0b112..d501b58 100644
 --- a/node_modules/couchbase/dist/binding.js
 +++ b/node_modules/couchbase/dist/binding.js
 @@ -155,5 +155,5 @@ var CppTxnExternalException;
@@ -48,10 +48,10 @@ index aa0b112..bb849a8 100644
  // Load it with require
  // eslint-disable-next-line @typescript-eslint/no-var-requires
 -const binding = require('../scripts/prebuilds').loadPrebuild(path_1.default.resolve(__dirname, '..'));
-+const binding = require('@couchbase/couchbase-win32-x64-openssl3');
++const binding = require('../scripts/prebuilds').loadPrebuild();
  exports.default = binding;
 diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
-index 324198c..83881b9 100644
+index 324198c..99bd75e 100644
 --- a/node_modules/couchbase/package.json
 +++ b/node_modules/couchbase/package.json
 @@ -20,7 +20,6 @@
@@ -91,8 +91,8 @@ index 324198c..83881b9 100644
 -  }
 +  },
 +  "files": [
-+    "dist/**",
-+    "scripts/prebuild.js"
++    "dist/*.js",
++    "scripts/prebuilds.js"
 +  ]
  }
 \ No newline at end of file
