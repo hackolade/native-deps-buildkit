@@ -86,7 +86,7 @@ describe('custom native modules', async function () {
 	if (os.platform() === 'win32') {
 		it('winapi addon should be imported', async function () {
 			this.timeout(10000);
-			const winApi = await import('@hackolade/winapi-detect-remote-desktop-addon-win32-x64');
+			const winApi = await import('@hackolade/winapi-detect-rdp');
 
 			expect(Boolean(winApi.isCurrentSessionRemoteable), 'imported as falsy value').to.be.equal(true);
 		});

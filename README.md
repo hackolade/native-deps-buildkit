@@ -1,3 +1,7 @@
-# custom-native-deps-prebuilds
+# native-deps-buildkit
 
-Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies
+This repository defines a toolkit for generating, publishing and testing custom prebuilds (of native NodeJS extensions) for our Electron application Studio and plugins native dependencies.
+
+## Published NPM packages 
+
+Our re-published custom prebuilds and upstream packages can be found [here on NPM registry](https://www.npmjs.com/search?q=@hackolade).
