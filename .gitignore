@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 modulesToBuild.json
+
+.DS_Store

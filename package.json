@@ -65,8 +65,9 @@
 				"version": "27.4.7",
 				"napi": true,
 				"prebuild_install": false,
-				"prebuilds_as_npm_packages": false,
-				"to_build": true
+				"prebuilds_as_npm_packages": true,
+				"prebuilds_scope": "@couchbase",
+				"to_build": false
 			},
 			"desktop-trampoline": {
 				"version": "27.2.0",
