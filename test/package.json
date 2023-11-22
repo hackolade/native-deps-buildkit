@@ -2,9 +2,7 @@
     "name": "test",
     "description": "test our custom native modules",
     "devDpendencies": {
-        "chai": "^4.3.10",
         "lodash": "^4.17.21",
-        "mocha": "^10.2.0",
         "split2": "^4.2.0"
     },
     "scripts": {

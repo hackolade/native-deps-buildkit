@@ -8,6 +8,11 @@ import { platform } from 'node:os';
 const deps = pkg.map(({rescopedModuleName, version}) => `${rescopedModuleName}@${version}`);
 
 const windowsSpecificDep = platform() === "wind32"? [ "@hackolade/winapi-detect-rdp@1.0.0" ]: [];
+
+await exec({
+    command: 'node',
+    parameters: ['../node_modules/electron/install.js']});
+
 await exec({
     command: npmCommand, parameters: ['install','--save', 'false', '-w', 'test', ...deps, ...windowsSpecificDep]
 });
