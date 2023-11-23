@@ -1,5 +1,5 @@
 {
-	"name": "custom-native-deps-prebuilds",
+	"name": "native-deps-buildkit",
 	"version": "1.0.0",
 	"description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
 	"main": "prepare.js",
@@ -13,14 +13,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hackolade/custom-native-deps-prebuilds.git"
+		"url": "git+https://github.com/hackolade/native-deps-buildkit.git"
 	},
 	"bugs": {
-		"url": "https://github.com/hackolade/custom-native-deps-prebuilds/issues"
+		"url": "https://github.com/hackolade/native-deps-buildkit/issues"
 	},
-	"homepage": "https://github.com/hackolade/custom-native-deps-prebuilds#readme",
+	"homepage": "https://github.com/hackolade/native-deps-buildkit#readme",
 	"author": "Hackolade",
-	"license": "MIT",
 	"devDependencies": {
 		"@electron/rebuild": "^3.3.0",
 		"chai": "^4.3.10",
