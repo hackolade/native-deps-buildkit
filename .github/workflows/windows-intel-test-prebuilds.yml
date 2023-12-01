@@ -19,7 +19,7 @@ jobs:
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
-        run: echo "ELECTRON_MAJOR_VERSION=$(node get-electron-major-version.js)" >> $env:GITHUB_ENV
+        run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $env:GITHUB_ENV
       - name: Download artifact
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
@@ -39,7 +39,5 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-      - name: Ensure Electron is installed
-        run: node ./node_modules/electron/install.js
       - name: Build on Windows x64
         run: npm run -w test test

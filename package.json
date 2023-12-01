@@ -1,5 +1,5 @@
 {
-	"name": "custom-native-deps-prebuilds",
+	"name": "native-deps-buildkit",
 	"version": "1.0.0",
 	"description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
 	"main": "prepare.js",
@@ -7,35 +7,31 @@
 		"test"
 	],
 	"scripts": {
-		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node prepare.js",
+		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/prepare.js",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node --trace-uncaught rebuild.js"
+		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/rebuild.js"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hackolade/custom-native-deps-prebuilds.git"
+		"url": "git+https://github.com/hackolade/native-deps-buildkit.git"
 	},
 	"bugs": {
-		"url": "https://github.com/hackolade/custom-native-deps-prebuilds/issues"
+		"url": "https://github.com/hackolade/native-deps-buildkit/issues"
 	},
-	"homepage": "https://github.com/hackolade/custom-native-deps-prebuilds#readme",
+	"homepage": "https://github.com/hackolade/native-deps-buildkit#readme",
 	"author": "Hackolade",
-	"license": "MIT",
 	"devDependencies": {
 		"@electron/rebuild": "^3.3.0",
-		"@octokit/rest": "^20.0.1",
 		"chai": "^4.3.10",
 		"cross-env": "^7.0.3",
 		"debug": "^4.3.4",
-		"electron": "^22.3.23",
+		"electron": "^27.1.0",
 		"eslint": "^8.49.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.28.1",
 		"lodash": "^4.17.21",
 		"mocha": "^10.2.0",
 		"mongodb": "^5.8.0",
-		"node-abi": "^3.47.0",
-		"node-gyp": "9.4.0",
 		"patch-package": "^8.0.0",
 		"prebuild-install": "^7.1.1",
 		"prettier": "^3.0.3",
@@ -44,12 +40,12 @@
 	},
 	"dependencies": {
 		"@parcel/watcher": "2.3.0",
-		"couchbase": "4.2.7",
+		"couchbase": "4.2.8",
 		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
 		"kerberos": "2.0.3",
 		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
 		"keytar": "7.9.0",
-		"krb5": "0.5.4",
+		"krb5": "0.5.5",
 		"mongodb-client-encryption": "2.9.0",
 		"os-dns-native": "1.2.0"
 	},
@@ -57,7 +53,7 @@
 		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
 		"nativeModules": {
 			"@parcel/watcher": {
-				"version": "22.2.1",
+				"version": "27.2.0",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -65,14 +61,15 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "22.4.5",
+				"version": "27.4.7",
 				"napi": true,
 				"prebuild_install": false,
-				"prebuilds_as_npm_packages": false,
-				"to_build": true
+				"prebuilds_as_npm_packages": true,
+				"prebuilds_scope": "@couchbase",
+				"to_build": false
 			},
 			"desktop-trampoline": {
-				"version": "22.2.0",
+				"version": "27.2.0",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -84,42 +81,42 @@
 				]
 			},
 			"kerberos": {
-				"version": "22.2.0",
+				"version": "27.2.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "22.1.0",
+				"version": "27.1.0",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": true
 			},
 			"keytar": {
-				"version": "22.7.0",
+				"version": "27.7.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"krb5": {
-				"version": "22.0.0",
+				"version": "27.0.2",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": true
 			},
 			"mongodb-client-encryption": {
-				"version": "22.2.0",
+				"version": "27.2.0",
 				"prebuild_install": true,
 				"napi": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"os-dns-native": {
-				"version": "22.1.0",
+				"version": "27.1.0",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": false,

@@ -16,7 +16,7 @@ jobs:
           node-version: 20
       - run: npm install
       - name: Set Electron Major version in env
-        run: echo "ELECTRON_MAJOR_VERSION=$(node get-electron-major-version.js)" >> $GITHUB_ENV
+        run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $GITHUB_ENV
       - run: npm run prepare
       - name: Upload list of modules to build
         uses: actions/upload-artifact@v3
