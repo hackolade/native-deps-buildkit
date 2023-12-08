@@ -1,0 +1,124 @@
+diff --git a/node_modules/kerberos-plugins/binding.gyp b/node_modules/kerberos-plugins/binding.gyp
+index 43c7d9a..f254919 100644
+--- a/node_modules/kerberos-plugins/binding.gyp
++++ b/node_modules/kerberos-plugins/binding.gyp
+@@ -6,6 +6,18 @@
+       'sources': [
+         'src/kerberos.cc'
+       ],
++      'xcode_settings': {
++        'MACOSX_DEPLOYMENT_TARGET': '10.12',
++        'OTHER_CFLAGS': [
++          "-std=c++17",
++          "-stdlib=libc++"
++        ],
++      },
++      'msvs_settings': {
++        'VCCLCompilerTool': {
++          'AdditionalOptions': [ '-std:c++17', ],
++        },
++      },
+       'conditions': [
+         ['OS=="mac" or OS=="linux"', {
+           'sources': [
+@@ -32,16 +44,6 @@
+               'Shlwapi.lib'
+             ]
+           }
+-        }],
+-        ['OS=="mac"', {
+-          'cflags!': [ '-fno-exceptions' ],
+-          'cflags_cc!': [ '-fno-exceptions' ],
+-          'xcode_settings': {
+-            'GCC_ENABLE_CPP_RTTI': 'YES',
+-            'OTHER_CPLUSPLUSFLAGS' : [ '-std=c++11', '-stdlib=libc++' ],
+-            'OTHER_LDFLAGS': [ '-stdlib=libc++' ],
+-            'MACOSX_DEPLOYMENT_TARGET': "10.7"
+-          }
+         }]
+       ]
+     }
+diff --git a/node_modules/kerberos-plugins/lib/kerberos.js b/node_modules/kerberos-plugins/lib/kerberos.js
+index 09f8425..e699e52 100644
+--- a/node_modules/kerberos-plugins/lib/kerberos.js
++++ b/node_modules/kerberos-plugins/lib/kerberos.js
+@@ -1,6 +1,7 @@
+ 'use strict';
+ 
+-const kerberos = require('bindings')('kerberos');
++const os = require('os');
++const kerberos = require(/* webpackIgnore: true */  `@hackolade/kerberos-plugins-${os.platform()}-${os.arch()}`);
+ const KerberosClient = kerberos.KerberosClient;
+ const KerberosServer = kerberos.KerberosServer;
+ const defineOperation = require('./util').defineOperation;
+diff --git a/node_modules/kerberos-plugins/package.json b/node_modules/kerberos-plugins/package.json
+index 2606f18..5b36981 100644
+--- a/node_modules/kerberos-plugins/package.json
++++ b/node_modules/kerberos-plugins/package.json
+@@ -1,11 +1,11 @@
+ {
+-  "name": "kerberos",
++  "name": "kerberos-plugins",
+   "version": "1.1.3",
+   "description": "Kerberos library for Node.js",
+   "main": "index.js",
+   "repository": {
+     "type": "git",
+-    "url": "https://github.com/mongodb-js/kerberos.git"
++    "url": "https://github.com/hackolade/kerberos.git"
+   },
+   "keywords": [
+     "kerberos",
+@@ -13,11 +13,10 @@
+     "authentication"
+   ],
+   "dependencies": {
+-    "bindings": "^1.5.0",
+-    "nan": "^2.14.0",
+-    "prebuild-install": "^5.3.0"
++    "nan": "^2.14.0"
+   },
+   "devDependencies": {
++    "bindings": "^1.5.0",
+     "chai": "^4.2.0",
+     "chai-string": "^1.5.0",
+     "clang-format": "^1.2.4",
+@@ -27,27 +26,34 @@
+     "jsdoc-to-markdown": "^4.0.1",
+     "mocha": "^5.2.0",
+     "mongodb": "^3.2.5",
+-    "prebuild": "^7.6.2",
++    "prebuild": "12.0.0",
+     "prebuild-ci": "^2.2.3",
++    "prebuild-install": "^7.1.1",
+     "prettier": "^1.17.1",
+     "request": "^2.88.0",
+     "segfault-handler": "^1.2.0",
+     "standard-version": "^4.4.0"
+   },
+   "scripts": {
+-    "install": "prebuild-install || node-gyp rebuild",
+     "format-cxx": "git-clang-format",
+     "format-js": "prettier --print-width 100 --tab-width 2 --single-quote --write index.js 'test/**/*.js' 'lib/**/*.js'",
+     "lint": "eslint index.js lib test",
+     "precommit": "check-clang-format",
+     "test": "mocha ./test && prebuild-ci",
+     "docs": "jsdoc2md --template etc/README.hbs --plugin dmd-clear --files lib/kerberos.js > README.md",
+-    "rebuild": "prebuild --compile",
++    "rebuild": "electron-rebuild -w .",
+     "prebuild": "prebuild --all --strip --verbose",
+     "release": "standard-version -i HISTORY.md"
+   },
+   "author": "Matt Broadstone <mbroadst@gmail.com>",
+   "license": "Apache-2.0",
+   "readmeFilename": "README.md",
+-  "gitHead": "035be2e4619d7f3d7ea5103da1f60a6045ef8d7c"
++  "gitHead": "035be2e4619d7f3d7ea5103da1f60a6045ef8d7c",
++  "files": [
++    "index.js",
++    "package.json",
++    "README.md",
++    "LICENSE",
++    "lib"
++  ]
+ }

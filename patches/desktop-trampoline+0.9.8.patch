@@ -1,0 +1,67 @@
+diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
+index 0891bae..541c666 100644
+--- a/node_modules/desktop-trampoline/index.js
++++ b/node_modules/desktop-trampoline/index.js
+@@ -1,12 +1,10 @@
++const os = require('os');
+ const Path = require('path')
+ 
++const  prebuildTargetPath =  () => Path.dirname(require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`));
++
+ function getDesktopTrampolinePath() {
+-  return Path.join(
+-    __dirname,
+-    'build',
+-    'Release',
+-    getDesktopTrampolineFilename()
+-  )
++  return Path.join( prebuildTargetPath(),getDesktopTrampolineFilename());
+ }
+ 
+ function getDesktopTrampolineFilename() {
+@@ -16,7 +14,7 @@ function getDesktopTrampolineFilename() {
+ }
+ 
+ function getSSHWrapperPath() {
+-  return Path.join(__dirname, 'build', 'Release', getSSHWrapperFilename())
++  return Path.join(prebuildTargetPath(), getSSHWrapperFilename());
+ }
+ 
+ function getSSHWrapperFilename() {
+diff --git a/node_modules/desktop-trampoline/package.json b/node_modules/desktop-trampoline/package.json
+index 0cc0262..83efb47 100644
+--- a/node_modules/desktop-trampoline/package.json
++++ b/node_modules/desktop-trampoline/package.json
+@@ -11,7 +11,7 @@
+   "types": "./index.d.ts",
+   "scripts": {
+     "build": "node-gyp rebuild",
+-    "install": "prebuild-install || node-gyp rebuild",
++    "install": "prebuild-install",
+     "test": "jest",
+     "lint": "prettier -c **/*.js **/*.md",
+     "lint:fix": "prettier --write **/*.js **/*.md",
+@@ -30,8 +30,7 @@
+   },
+   "homepage": "https://github.com/desktop/desktop-trampoline#readme",
+   "dependencies": {
+-    "node-addon-api": "^3.1.0",
+-    "prebuild-install": "^6.0.0"
++    "node-addon-api": "^3.1.0"
+   },
+   "devDependencies": {
+     "jest": "^26.4.2",
+@@ -48,5 +47,12 @@
+   "config": {
+     "runtime": "napi",
+     "target": 3
+-  }
++  },
++  "files": [
++    "index.js",
++    "index.d.ts",
++    "package.json",
++    "README.md",
++    "LICENSE"
++  ]
+ }

@@ -1,0 +1,8 @@
+{
+    "name": "test",
+    "description": "test our custom native modules",
+    "scripts": {
+        "test": "node install-before-test-run.js && cross-env NODE_ENV=test && cross-env DEBUG=buildkit* electron ../node_modules/mocha/bin/mocha ./*.spec.js --exit"
+    },
+    "type": "module"
+}

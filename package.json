@@ -1,0 +1,132 @@
+{
+	"name": "native-deps-buildkit",
+	"version": "1.0.0",
+	"description": "Toolkit for generating and publishing custom prebuilds for our Studio and plugins native dependencies",
+	"main": "prepare.js",
+	"workspaces": [
+		"test"
+	],
+	"scripts": {
+		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/prepare.js",
+		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
+		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/rebuild.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hackolade/native-deps-buildkit.git"
+	},
+	"bugs": {
+		"url": "https://github.com/hackolade/native-deps-buildkit/issues"
+	},
+	"homepage": "https://github.com/hackolade/native-deps-buildkit#readme",
+	"author": "Hackolade",
+	"devDependencies": {
+		"@electron/rebuild": "^3.3.0",
+		"chai": "^4.3.10",
+		"cross-env": "^7.0.3",
+		"debug": "^4.3.4",
+		"electron": "^27.1.0",
+		"eslint": "^8.49.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.28.1",
+		"lodash": "^4.17.21",
+		"mocha": "^10.2.0",
+		"mongodb": "^5.8.0",
+		"patch-package": "^8.0.0",
+		"prebuild-install": "^7.1.1",
+		"prettier": "^3.0.3",
+		"semver": "^7.5.4",
+		"split2": "^4.2.0"
+	},
+	"dependencies": {
+		"@parcel/watcher": "2.3.0",
+		"couchbase": "4.2.8",
+		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
+		"kerberos": "2.0.3",
+		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
+		"keytar": "7.9.0",
+		"krb5": "0.5.5",
+		"mongodb-client-encryption": "2.9.0",
+		"os-dns-native": "1.2.0"
+	},
+	"buildMetadata": {
+		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
+		"nativeModules": {
+			"@parcel/watcher": {
+				"version": "27.2.0",
+				"napi": true,
+				"prebuild_install": false,
+				"prebuilds_as_npm_packages": true,
+				"prebuilds_scope": "@parcel",
+				"to_build": false
+			},
+			"couchbase": {
+				"version": "27.4.7",
+				"napi": true,
+				"prebuild_install": false,
+				"prebuilds_as_npm_packages": true,
+				"prebuilds_scope": "@couchbase",
+				"to_build": false
+			},
+			"desktop-trampoline": {
+				"version": "27.2.0",
+				"napi": false,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false,
+				"prebuildPackageMainEntry": "desktop-trampoline",
+				"prebuildPackageFiles": [
+					"desktop-trampoline",
+					"ssh-wrapper"
+				]
+			},
+			"kerberos": {
+				"version": "27.2.0",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"kerberos-plugins": {
+				"version": "27.1.0",
+				"napi": false,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": true
+			},
+			"keytar": {
+				"version": "27.7.0",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"krb5": {
+				"version": "27.0.2",
+				"napi": true,
+				"prebuild_install": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": true
+			},
+			"mongodb-client-encryption": {
+				"version": "27.2.0",
+				"prebuild_install": true,
+				"napi": true,
+				"prebuilds_as_npm_packages": false,
+				"to_build": false
+			},
+			"os-dns-native": {
+				"version": "27.1.0",
+				"napi": true,
+				"prebuild_install": false,
+				"prebuilds_as_npm_packages": false,
+				"to_build": true
+			}
+		}
+	},
+	"type": "module",
+	"imports": {
+		"#lib/*.js": "./lib/*.js",
+		"#root": "./root.js"
+	}
+}

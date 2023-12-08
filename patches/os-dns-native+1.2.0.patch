@@ -1,0 +1,48 @@
+diff --git a/node_modules/os-dns-native/index.js b/node_modules/os-dns-native/index.js
+index cc8ee44..1674a07 100644
+--- a/node_modules/os-dns-native/index.js
++++ b/node_modules/os-dns-native/index.js
+@@ -1,5 +1,6 @@
+ 'use strict';
+-const { lookup, constants } = require('bindings')('os_dns_native');
++const os = require('os');
++const { lookup, constants } = require(/* webpackIgnore: true */ `@hackolade/os-dns-native-${os.platform()}-${os.arch()}`);
+ const { promisify } = require('util');
+ const ipv6normalize = require('ipv6-normalize');
+ const nodeDns = require('dns');
+diff --git a/node_modules/os-dns-native/package.json b/node_modules/os-dns-native/package.json
+index 80b9caa..6bb06f5 100644
+--- a/node_modules/os-dns-native/package.json
++++ b/node_modules/os-dns-native/package.json
+@@ -6,14 +6,13 @@
+   "scripts": {
+     "pretest": "npm run build",
+     "test": "mocha",
+-    "install": "node-gyp rebuild",
++    "rebuild": "electron-rebuild -w .",
+     "prepack": "npm run build",
+     "build": "gen-esm-wrapper . ./.esm-wrapper.mjs"
+   },
+   "author": "Anna Henningsen <anna@addaleax.net>",
+   "gypfile": true,
+   "dependencies": {
+-    "bindings": "^1.5.0",
+     "debug": "^4.3.3",
+     "ipv6-normalize": "^1.0.1",
+     "node-addon-api": "^4.3.0"
+@@ -31,14 +30,13 @@
+   "bugs": "https://github.com/mongodb-js/os-dns-native/issues",
+   "typings": "index.d.ts",
+   "files": [
+-    "binding.cc",
+-    "binding.gyp",
+     "index.d.ts",
+     "index.js",
+     "LICENSE",
+     ".esm-wrapper.mjs"
+   ],
+   "devDependencies": {
++    "bindings": "^1.5.0",
+     "gen-esm-wrapper": "^1.1.1",
+     "mocha": "^8.3.1"
+   }

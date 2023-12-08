@@ -1,0 +1,64 @@
+diff --git a/node_modules/@parcel/watcher/index.js b/node_modules/@parcel/watcher/index.js
+index 4929c54..5f63c02 100644
+--- a/node_modules/@parcel/watcher/index.js
++++ b/node_modules/@parcel/watcher/index.js
+@@ -1,6 +1,6 @@
+ const {createWrapper} = require('./wrapper');
+ 
+-let name = `@parcel/watcher-${process.platform}-${process.arch}`;
++let name = `@hackolade/watcher-${process.platform}-${process.arch}`;
+ if (process.platform === 'linux') {
+   const { MUSL, family } = require('detect-libc');
+   if (family === MUSL) {
+@@ -12,19 +12,14 @@ if (process.platform === 'linux') {
+ 
+ let binding;
+ try {
+-  binding = require(name);
++  binding = require(/* webpackIgnore: true */ name);
+ } catch (err) {
+-  try {
+-    binding = require('./build/Release/watcher.node');
+-  } catch (err) {
+-    try {
+-      binding = require('./build/Debug/watcher.node');
+-    } catch (err) {
+-      throw new Error(`No prebuild or local build of @parcel/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case, please report an issue to https://github.com/parcel-bundler/watcher.`);
+-    }
+-  }
++  console.error('failed to load @parcel/watcher prebuild');
++  console.error(err);
++  throw new Error(`No prebuild or local build of @parcel/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case, please report an issue to https://github.com/parcel-bundler/watcher.`);
+ }
+ 
++
+ function normalizeOptions(dir, opts = {}) {
+   const { ignore, ...rest } = opts;
+ 
+diff --git a/node_modules/@parcel/watcher/package.json b/node_modules/@parcel/watcher/package.json
+index 0ab049f..af86876 100644
+--- a/node_modules/@parcel/watcher/package.json
++++ b/node_modules/@parcel/watcher/package.json
+@@ -59,11 +59,6 @@
+     "prebuildify": "^5.0.1",
+     "prettier": "^2.3.2"
+   },
+-  "binary": {
+-    "napi_versions": [
+-      3
+-    ]
+-  },
+   "optionalDependencies": {
+     "@parcel/watcher-darwin-x64": "2.3.0",
+     "@parcel/watcher-darwin-arm64": "2.3.0",
+@@ -77,5 +72,10 @@
+     "@parcel/watcher-linux-arm-glibc": "2.3.0",
+     "@parcel/watcher-android-arm64": "2.3.0",
+     "@parcel/watcher-freebsd-x64": "2.3.0"
++  },
++  "binary": {
++    "napi_versions": [
++      3
++    ]
+   }
+ }
