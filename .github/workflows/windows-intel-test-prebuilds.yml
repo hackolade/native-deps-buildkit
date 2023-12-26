@@ -15,7 +15,6 @@ jobs:
       - name: Install MIT Kerberos MSI
         run: |
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
-      - run: choco install openssl
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
