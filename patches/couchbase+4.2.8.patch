@@ -115,7 +115,7 @@ index 67a1cbd..fac7566 100644
  }
 \ No newline at end of file
 diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
-index 401866e..21c9f21 100644
+index 401866e..5d330ef 100644
 --- a/node_modules/couchbase/scripts/prebuilds.js
 +++ b/node_modules/couchbase/scripts/prebuilds.js
 @@ -1,4 +1,5 @@
@@ -129,7 +129,7 @@ index 401866e..21c9f21 100644
  
  function loadPrebuild(dir) {
 -  return runtimeRequire(resolvePrebuild(dir))
-+  return require(`@hackolade/couchbase-${os.platform()}-${os.arch()}-napi`);
++  return require(/* webpackIgnore: true */ `@hackolade/couchbase-${os.platform()}-${os.arch()}-napi`);
  }
  
  function matchBuild(name) {
