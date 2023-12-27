@@ -87,7 +87,7 @@
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "28.1.0",
+				"version": "28.1.1",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -101,7 +101,7 @@
 				"to_build": false
 			},
 			"krb5": {
-				"version": "28.0.0",
+				"version": "28.0.1",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
