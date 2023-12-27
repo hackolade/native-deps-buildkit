@@ -25,7 +25,7 @@
 		"chai": "^4.3.10",
 		"cross-env": "^7.0.3",
 		"debug": "^4.3.4",
-		"electron": "^27.1.0",
+		"electron": "^27.2.0",
 		"eslint": "^8.49.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.28.1",
@@ -88,7 +88,7 @@
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "27.1.0",
+				"version": "27.1.1",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -102,7 +102,7 @@
 				"to_build": false
 			},
 			"krb5": {
-				"version": "27.0.2",
+				"version": "27.0.3",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -114,13 +114,6 @@
 				"napi": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
-			},
-			"os-dns-native": {
-				"version": "27.1.0",
-				"napi": true,
-				"prebuild_install": false,
-				"prebuilds_as_npm_packages": false,
-				"to_build": true
 			}
 		}
 	},
