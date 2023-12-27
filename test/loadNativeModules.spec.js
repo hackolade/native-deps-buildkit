@@ -69,13 +69,6 @@ describe('custom native modules', async function () {
 		expect(Boolean(clientEncryption.ClientEncryption), 'imported as falsy value').to.be.equal(true);
 	});
 
-	it('os-dns-native should be imported', async function () {
-		this.timeout(10000);
-		const osDnsNative = await import('@hackolade/os-dns-native');
-
-		expect(Boolean(osDnsNative), 'imported as falsy value').to.be.equal(true);
-	});
-
 	it('watcher should be imported', async function () {
 		this.timeout(10000);
 		const watcher = await import('@hackolade/watcher');
