@@ -1,5 +1,5 @@
 diff --git a/node_modules/krb5/lib/index.js b/node_modules/krb5/lib/index.js
-index b6ee541..eac6edf 100644
+index b6ee541..cf87696 100644
 --- a/node_modules/krb5/lib/index.js
 +++ b/node_modules/krb5/lib/index.js
 @@ -1,7 +1,9 @@
@@ -9,12 +9,12 @@ index b6ee541..eac6edf 100644
 -k = require('../build/Release/krb5');
 +var os = require('os');
 +
-+k = require(`@hackolade/krb5-${os.platform()}-${os.arch()}`);
++k = require(/* webpackIgnore: true */ `@hackolade/krb5-${os.platform()}-${os.arch()}`);
  
  fs = require('fs');
  
 diff --git a/node_modules/krb5/package.json b/node_modules/krb5/package.json
-index 4a2a6b2..c2739e4 100644
+index 4a2a6b2..a8ea035 100644
 --- a/node_modules/krb5/package.json
 +++ b/node_modules/krb5/package.json
 @@ -4,7 +4,6 @@
@@ -38,6 +38,6 @@ index 4a2a6b2..c2739e4 100644
 -  }
 +  },
 +  "files": [
-+    "lib"
++    "lib/index.js"
 +  ]
  }
