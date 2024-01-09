@@ -1,11 +1,11 @@
-name: Prebuild for Mac x64
+name: Prebuild for Mac arm64
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-mac-intel:
-    runs-on: macos-latest
+  build-mac-arm64:
+    runs-on: macos-latest-xlarge
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
