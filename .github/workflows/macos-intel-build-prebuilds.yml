@@ -7,8 +7,8 @@ jobs:
   build-mac-intel:
     runs-on: macos-latest
     env:
-      LDFLAGS: -L/usr/local/opt/openssl@3/lib -L/usr/local/opt/krb5/lib
-      CPPFLAGS: -I/usr/local/opt/openssl@3/include -I/usr/local/opt/krb5/include
+      LDFLAGS: -L/usr/local/opt/krb5/lib
+      CPPFLAGS: -I/usr/local/opt/krb5/include
       NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4

@@ -102,11 +102,23 @@
 				"to_build": false
 			},
 			"krb5": {
-				"version": "27.0.3",
+				"version": "27.0.5",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
-				"to_build": true
+				"to_build": true,
+				"build_command_env": {
+					"darwin": {
+						"x64": {
+							"CPPFLAGS": "-I/usr/local/opt/krb5/include",
+							"LDFLAGS": "-L/usr/local/opt/krb5/lib"
+						},
+						"arm64": {
+							"CPPFLAGS": "-I/opt/homebrew/opt/krb5/include",
+							"LDFLAGS": "-L/opt/homebrew/opt/krb5/lib"
+						}
+					}
+				}
 			},
 			"mongodb-client-encryption": {
 				"version": "27.2.0",
