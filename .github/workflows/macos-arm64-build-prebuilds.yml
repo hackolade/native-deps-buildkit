@@ -1,19 +1,21 @@
-name: Test Prebuilds for Linux x64
+name: Prebuild for Mac arm64
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-for-linux:
-    runs-on: ubuntu-20.04
+  build-mac-arm64:
+    runs-on: macos-latest-xlarge
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20
-      - name: Install krb5
-        run: sudo apt-get install -y libkrb5-dev xvfb
+          node-version: 18
+      - name: install python setuptools for workaround https://github.com/nodejs/node-gyp/issues/2869
+        run: pip install setuptools
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env
@@ -37,5 +39,5 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-      - name: Test native modules on Linux x64
-        run: xvfb-run npm run -w test test
+      - name: Build native modules on Mac OS x64
+        run: npm run rebuild-for-target
