@@ -19,6 +19,7 @@ jobs:
         run: |
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
           cat C:\ProgramData\chocolatey\logs\chocolatey.log
+          "C:\Program Files\MIT\Kerberos\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
@@ -44,6 +45,4 @@ jobs:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
 
       - name: Build on Windows x64
-        run: |
-          echo "C:\\Program Files\\MIT\\Kerberos\\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          npm run rebuild-for-target
+        run: npm run rebuild-for-target
