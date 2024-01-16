@@ -18,6 +18,7 @@ jobs:
       - name: Install MIT Kerberos MSI
         run: |
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
+          cat C:\ProgramData\chocolatey\logs\chocolatey.log
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
