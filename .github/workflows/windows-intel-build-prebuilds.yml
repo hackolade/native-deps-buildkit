@@ -15,15 +15,13 @@ jobs:
         with:
           cache: npm
           node-version: 20
-      - name: Install MIT Kerberos MSI
+      - name: Install MIT Kerberos
+        run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
+      - name: Get MIT Kerberos path
         run: |
-          choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
-          ls 'C:\Program Files\MIT\Kerberos\include'
-          rm 'C:\Program Files\MIT\Kerberos\include\krb5.h'
-          cp 'C:\Program Files\MIT\Kerberos\include\krb5\krb5.h' 'C:\Program Files\MIT\Kerberos\include\krb5.h'
-      - name: Add MIT Kerberos to Path
-        run: |
-          "C:\Program Files\MIT\Kerberos\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
+          Write-Host "::set-output name=KRB_PATH::$krb_path"
+        id: mit_kerberos
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
@@ -47,6 +45,7 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-
       - name: Build on Windows x64
         run: npm run rebuild-for-target
+        env:
+          GYP_DEFINES: KRB_PATH='${{ steps.mit_kerberos.outputs.KRB_PATH }}'
