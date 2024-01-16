@@ -18,10 +18,11 @@ jobs:
       - name: Install MIT Kerberos MSI
         run: |
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
-          ls 'C:\Program Files\MIT\Kerberos'
+          ls 'C:\Program Files\MIT\Kerberos\include'
       - name: Add MIT Kerberos to Path
         run: |
-          "C:\Program Files\MIT\Kerberos\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+          "{path}" | Out-File -FilePath $env:GITHUB_PATH -Append
+          "$env:C:\\Program Files\\MIT\\Kerberos\\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
