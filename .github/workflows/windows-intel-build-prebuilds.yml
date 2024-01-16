@@ -18,7 +18,7 @@ jobs:
       - name: Install MIT Kerberos MSI
         run: |
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
-          cat C:\ProgramData\chocolatey\logs\chocolatey.log
+          ls 'C:\Program Files\MIT\Kerberos'
       - name: Add MIT Kerberos to Path
         run: |
           "C:\Program Files\MIT\Kerberos\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
