@@ -20,7 +20,6 @@ jobs:
           choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
           Import-Module "$env:ChocolateyInstall/helpers/chocolateyInstaller.psm1"
           refreshenv
-      - run: choco install openssl
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
