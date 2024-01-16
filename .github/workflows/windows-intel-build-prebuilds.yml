@@ -6,9 +6,6 @@ on:
 jobs:
   build-windows-intel:
     runs-on: windows-latest
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -48,4 +45,5 @@ jobs:
       - name: Build on Windows x64
         run: npm run rebuild-for-target
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GYP_DEFINES: KRB_PATH='${{ steps.mit_kerberos.outputs.KRB_PATH }}'
