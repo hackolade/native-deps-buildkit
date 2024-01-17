@@ -17,7 +17,7 @@ jobs:
       - name: Get MIT Kerberos path
         run: |
           $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
-          Write-Host "::set-output name=KRB_PATH::$krb_path"
+          echo "GYP_DEFINES=KRB_PATH='$krb_path'" >> $env:GITHUB_ENV
         id: mit_kerberos
       - name: Install tookit dependencies
         run: npm ci
@@ -46,4 +46,4 @@ jobs:
         run: npm run rebuild-for-target
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
-          GYP_DEFINES: KRB_PATH='${{ steps.mit_kerberos.outputs.KRB_PATH }}'
+          # GYP_DEFINES: KRB_PATH='${{ steps.mit_kerberos.outputs.KRB_PATH }}'
