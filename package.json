@@ -40,7 +40,7 @@
 	},
 	"dependencies": {
 		"@parcel/watcher": "2.3.0",
-		"couchbase": "4.2.8",
+		"couchbase": "4.2.9",
 		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
 		"kerberos": "2.0.3",
 		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
@@ -60,7 +60,7 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "28.4.0",
+				"version": "28.4.1",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
