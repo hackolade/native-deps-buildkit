@@ -6,18 +6,19 @@ on:
 jobs:
   build-windows-intel:
     runs-on: windows-latest
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           cache: npm
           node-version: 20
-      - name: Install MIT Kerberos MSI
+      - name: Install MIT Kerberos
+        run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
+      - name: Get MIT Kerberos path
         run: |
-          choco install --install-arguments="ADDLOCAL=all" --ignoredetectedreboot  --ignorepackagecodes --confirm mitkerberos
-      - run: choco install openssl
+          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
+          echo "GYP_DEFINES=KRB_PATH='$krb_path'" >> $env:GITHUB_ENV
+        id: mit_kerberos
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
@@ -41,6 +42,7 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-
       - name: Build on Windows x64
         run: npm run rebuild-for-target
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}

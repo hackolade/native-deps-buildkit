@@ -21,20 +21,20 @@
 	"homepage": "https://github.com/hackolade/native-deps-buildkit#readme",
 	"author": "Hackolade",
 	"devDependencies": {
-		"@electron/rebuild": "^3.3.0",
+		"@electron/rebuild": "^3.4.1",
 		"chai": "^4.3.10",
 		"cross-env": "^7.0.3",
 		"debug": "^4.3.4",
-		"electron": "^27.2.0",
-		"eslint": "^8.49.0",
+		"electron": "^28.1.3",
+		"eslint": "^8.56.0",
 		"eslint-config-airbnb-base": "^15.0.0",
-		"eslint-plugin-import": "^2.28.1",
+		"eslint-plugin-import": "^2.29.1",
 		"lodash": "^4.17.21",
 		"mocha": "^10.2.0",
 		"mongodb": "^5.8.0",
 		"patch-package": "^8.0.0",
 		"prebuild-install": "^7.1.1",
-		"prettier": "^3.0.3",
+		"prettier": "^3.1.1",
 		"semver": "^7.5.4",
 		"split2": "^4.2.0"
 	},
@@ -46,14 +46,13 @@
 		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
 		"keytar": "7.9.0",
 		"krb5": "0.5.5",
-		"mongodb-client-encryption": "2.9.0",
-		"os-dns-native": "1.2.0"
+		"mongodb-client-encryption": "2.9.0"
 	},
 	"buildMetadata": {
 		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
 		"nativeModules": {
 			"@parcel/watcher": {
-				"version": "27.2.0",
+				"version": "28.2.1",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -61,7 +60,7 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "27.4.7",
+				"version": "28.4.0",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -69,7 +68,7 @@
 				"to_build": false
 			},
 			"desktop-trampoline": {
-				"version": "27.2.0",
+				"version": "28.2.0",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -81,28 +80,28 @@
 				]
 			},
 			"kerberos": {
-				"version": "27.2.0",
+				"version": "28.2.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "27.1.1",
+				"version": "28.1.1",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": true
 			},
 			"keytar": {
-				"version": "27.7.0",
+				"version": "28.7.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"krb5": {
-				"version": "27.0.5",
+				"version": "28.0.4",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -121,7 +120,7 @@
 				}
 			},
 			"mongodb-client-encryption": {
-				"version": "27.2.0",
+				"version": "28.2.0",
 				"prebuild_install": true,
 				"napi": true,
 				"prebuilds_as_npm_packages": false,
