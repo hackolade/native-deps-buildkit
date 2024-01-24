@@ -1,37 +1,52 @@
 diff --git a/node_modules/couchbase/dist/binding.js b/node_modules/couchbase/dist/binding.js
-index b5d4a9c..f7948b2 100644
+index b5d4a9c..a45dcd1 100644
 --- a/node_modules/couchbase/dist/binding.js
 +++ b/node_modules/couchbase/dist/binding.js
-@@ -160,5 +160,5 @@ const binding = process.env.CN_PREBUILD_PATH_OVERRIDE
-     ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-         require(process.env.CN_PREBUILD_PATH_OVERRIDE)
-     : // eslint-disable-next-line @typescript-eslint/no-var-requires
+@@ -153,12 +153,8 @@ var CppTxnFailureType;
+ var CppTxnExternalException;
+ (function (CppTxnExternalException) {
+ })(CppTxnExternalException || (exports.CppTxnExternalException = CppTxnExternalException = {}));
+-// CN_PREBUILD_PATH_OVERRIDE is meant to help for webpack scenarios.  Webpack's EnvironmentPlugin
+-// can be used to set the path of the desired prebuild which will allow the node-loader package
+-// to pull in the corresponding prebuild.
+-const binding = process.env.CN_PREBUILD_PATH_OVERRIDE
+-    ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+-        require(process.env.CN_PREBUILD_PATH_OVERRIDE)
+-    : // eslint-disable-next-line @typescript-eslint/no-var-requires
 -        require('../scripts/prebuilds').loadPrebuild(path_1.default.resolve(__dirname, '..'));
-+        require('../scripts/prebuilds').loadPrebuild();
++
++const os = require('os');
++const binding = require(/* webpackIgnore: true */ `@hackolade/couchbase-${os.platform()}-${os.arch()}-napi`);
++
  exports.default = binding;
 diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
-index 67a1cbd..fac7566 100644
+index 8936c27..ca02bba 100644
 --- a/node_modules/couchbase/package.json
 +++ b/node_modules/couchbase/package.json
-@@ -61,9 +61,8 @@
-   "scripts": {
-     "install": "node ./scripts/install.js",
+@@ -20,7 +20,6 @@
+   "license": "Apache-2.0",
+   "name": "couchbase",
+   "dependencies": {
+-    "cmake-js": "^7.2.1",
+     "node-addon-api": "^7.0.0"
+   },
+   "devDependencies": {
+@@ -63,7 +62,6 @@
      "build": "cmake-js build && tsc",
--    "rebuild": "cmake-js rebuild && tsc",
-+    "rebuild": "node ./scripts/buildPrebuild.js",
+     "rebuild": "cmake-js rebuild && tsc",
      "prebuild": "node ./scripts/buildPrebuild.js",
 -    "prepare": "tsc",
      "help-prune": "node ./scripts/prune.js",
      "build-docs": "typedoc",
      "test": "ts-mocha test/*.test.*",
-@@ -81,86 +80,14 @@
+@@ -81,86 +79,13 @@
    "optionalDependencies": {
-     "@couchbase/couchbase-darwin-arm64-napi": "4.2.8",
-     "@couchbase/couchbase-darwin-x64-napi": "4.2.8",
--    "@couchbase/couchbase-linux-arm64-napi": "4.2.8",
--    "@couchbase/couchbase-linuxmusl-x64-napi": "4.2.8",
-     "@couchbase/couchbase-linux-x64-napi": "4.2.8",
-     "@couchbase/couchbase-win32-x64-napi": "4.2.8"
+     "@couchbase/couchbase-darwin-arm64-napi": "4.2.9",
+     "@couchbase/couchbase-darwin-x64-napi": "4.2.9",
+-    "@couchbase/couchbase-linux-arm64-napi": "4.2.9",
+-    "@couchbase/couchbase-linuxmusl-x64-napi": "4.2.9",
+     "@couchbase/couchbase-linux-x64-napi": "4.2.9",
+     "@couchbase/couchbase-win32-x64-napi": "4.2.9"
    },
    "files": [
      "LICENSE",
@@ -109,39 +124,7 @@ index 67a1cbd..fac7566 100644
 -    "deps/couchbase-cxx-cache/spdlog/*/spdlog/include/**/*",
 -    "deps/couchbase-cxx-cache/spdlog/*/spdlog/src/**/*",
 -    "deps/couchbase-cxx-cache/mozilla-ca-bundle.*"
-+    "scripts/prebuilds.js",
 +    "dist/*.{t,j}s"
    ]
  }
 \ No newline at end of file
-diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
-index 401866e..5d330ef 100644
---- a/node_modules/couchbase/scripts/prebuilds.js
-+++ b/node_modules/couchbase/scripts/prebuilds.js
-@@ -1,4 +1,5 @@
- const fs = require('fs')
-+const os = require('os')
- const path = require('path')
- var proc = require('child_process')
- 
-@@ -328,7 +329,7 @@ function isElectron() {
- }
- 
- function loadPrebuild(dir) {
--  return runtimeRequire(resolvePrebuild(dir))
-+  return require(/* webpackIgnore: true */ `@hackolade/couchbase-${os.platform()}-${os.arch()}-napi`);
- }
- 
- function matchBuild(name) {
-@@ -459,11 +460,5 @@ function resolvePrebuild(
- }
- 
- module.exports = {
--  ENV_TRUE,
--  buildBinary,
--  configureBinary,
--  getPrebuildsInfo,
-   loadPrebuild,
--  resolveLocalPrebuild,
--  resolvePrebuild,
- }
