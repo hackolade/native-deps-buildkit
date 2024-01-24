@@ -60,7 +60,7 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "28.4.1",
+				"version": "28.4.2",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
