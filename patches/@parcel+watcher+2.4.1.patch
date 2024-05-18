@@ -1,0 +1,134 @@
+diff --git a/node_modules/@parcel/watcher/index.js b/node_modules/@parcel/watcher/index.js
+index 8afb2b1..c808fc3 100644
+--- a/node_modules/@parcel/watcher/index.js
++++ b/node_modules/@parcel/watcher/index.js
+@@ -1,6 +1,6 @@
+ const {createWrapper} = require('./wrapper');
+ 
+-let name = `@parcel/watcher-${process.platform}-${process.arch}`;
++let name = `@hackolade/watcher-${process.platform}-${process.arch}`;
+ if (process.platform === 'linux') {
+   const { MUSL, family } = require('detect-libc');
+   if (family === MUSL) {
+@@ -12,26 +12,11 @@ if (process.platform === 'linux') {
+ 
+ let binding;
+ try {
+-  binding = require(name);
++  binding = require(/* webpackIgnore: true */ name);
+ } catch (err) {
+-  handleError(err);
+-  try {
+-    binding = require('./build/Release/watcher.node');
+-  } catch (err) {
+-    handleError(err);
+-    try {
+-      binding = require('./build/Debug/watcher.node');
+-    } catch (err) {
+-      handleError(err);
+-      throw new Error(`No prebuild or local build of @parcel/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case, please report an issue to https://github.com/parcel-bundler/watcher.`);
+-    }
+-  }
+-}
+-
+-function handleError(err) {
+-  if (err?.code !== 'MODULE_NOT_FOUND') {
+-    throw err;
+-  }
++  console.error('failed to load @parcel/watcher prebuild');
++  console.error(err);
++  throw new Error(`No prebuild or local build of @parcel/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case, please report an issue to https://github.com/parcel-bundler/watcher.`);
+ }
+ 
+ const wrapper = createWrapper(binding);
+diff --git a/node_modules/@parcel/watcher/index.js.flow b/node_modules/@parcel/watcher/index.js.flow
+deleted file mode 100644
+index d75da93..0000000
+--- a/node_modules/@parcel/watcher/index.js.flow
++++ /dev/null
+@@ -1,48 +0,0 @@
+-// @flow
+-declare type FilePath = string;
+-declare type GlobPattern = string;
+-
+-export type BackendType = 
+-  | 'fs-events'
+-  | 'watchman'
+-  | 'inotify'
+-  | 'windows'
+-  | 'brute-force';
+-export type EventType = 'create' | 'update' | 'delete';
+-export interface Options {
+-  ignore?: Array<FilePath | GlobPattern>,
+-  backend?: BackendType
+-}
+-export type SubscribeCallback = (
+-  err: ?Error,
+-  events: Array<Event>
+-) => mixed;
+-export interface AsyncSubscription {
+-  unsubscribe(): Promise<void>
+-}
+-export interface Event {
+-  path: FilePath,
+-  type: EventType
+-}
+-declare module.exports: {
+-  getEventsSince(
+-    dir: FilePath,
+-    snapshot: FilePath,
+-    opts?: Options
+-  ): Promise<Array<Event>>,
+-  subscribe(
+-    dir: FilePath,
+-    fn: SubscribeCallback,
+-    opts?: Options
+-  ): Promise<AsyncSubscription>,
+-  unsubscribe(
+-    dir: FilePath,
+-    fn: SubscribeCallback,
+-    opts?: Options
+-  ): Promise<void>,
+-  writeSnapshot(
+-    dir: FilePath,
+-    snapshot: FilePath,
+-    opts?: Options
+-  ): Promise<FilePath>
+-}
+\ No newline at end of file
+diff --git a/node_modules/@parcel/watcher/package.json b/node_modules/@parcel/watcher/package.json
+index 6b2c950..12e4e18 100644
+--- a/node_modules/@parcel/watcher/package.json
++++ b/node_modules/@parcel/watcher/package.json
+@@ -18,7 +18,6 @@
+   },
+   "files": [
+     "index.js",
+-    "index.js.flow",
+     "index.d.ts",
+     "wrapper.js",
+     "package.json",
+@@ -46,7 +45,6 @@
+     ]
+   },
+   "dependencies": {
+-    "detect-libc": "^1.0.3",
+     "is-glob": "^4.0.3",
+     "micromatch": "^4.0.5",
+     "node-addon-api": "^7.0.0"
+@@ -70,14 +68,6 @@
+     "@parcel/watcher-darwin-x64": "2.4.1",
+     "@parcel/watcher-darwin-arm64": "2.4.1",
+     "@parcel/watcher-win32-x64": "2.4.1",
+-    "@parcel/watcher-win32-arm64": "2.4.1",
+-    "@parcel/watcher-win32-ia32": "2.4.1",
+-    "@parcel/watcher-linux-x64-glibc": "2.4.1",
+-    "@parcel/watcher-linux-x64-musl": "2.4.1",
+-    "@parcel/watcher-linux-arm64-glibc": "2.4.1",
+-    "@parcel/watcher-linux-arm64-musl": "2.4.1",
+-    "@parcel/watcher-linux-arm-glibc": "2.4.1",
+-    "@parcel/watcher-android-arm64": "2.4.1",
+-    "@parcel/watcher-freebsd-x64": "2.4.1"
++    "@parcel/watcher-linux-x64-glibc": "2.4.1"
+   }
+ }

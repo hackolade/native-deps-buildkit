@@ -1,19 +1,27 @@
 diff --git a/node_modules/couchbase/dist/binding.js b/node_modules/couchbase/dist/binding.js
-index b5d4a9c..f7948b2 100644
+index bd33783..a5deb92 100644
 --- a/node_modules/couchbase/dist/binding.js
 +++ b/node_modules/couchbase/dist/binding.js
-@@ -160,5 +160,5 @@ const binding = process.env.CN_PREBUILD_PATH_OVERRIDE
+@@ -163,5 +163,5 @@ const binding = process.env.CN_PREBUILD_PATH_OVERRIDE
      ? // eslint-disable-next-line @typescript-eslint/no-var-requires
          require(process.env.CN_PREBUILD_PATH_OVERRIDE)
      : // eslint-disable-next-line @typescript-eslint/no-var-requires
 -        require('../scripts/prebuilds').loadPrebuild(path_1.default.resolve(__dirname, '..'));
-+        require('../scripts/prebuilds').loadPrebuild();
++    require('../scripts/prebuilds').loadPrebuild();
  exports.default = binding;
 diff --git a/node_modules/couchbase/package.json b/node_modules/couchbase/package.json
-index 67a1cbd..fac7566 100644
+index 3fa23e5..f090ba0 100644
 --- a/node_modules/couchbase/package.json
 +++ b/node_modules/couchbase/package.json
-@@ -61,9 +61,8 @@
+@@ -20,7 +20,6 @@
+   "license": "Apache-2.0",
+   "name": "couchbase",
+   "dependencies": {
+-    "cmake-js": "^7.2.1",
+     "node-addon-api": "^7.0.0"
+   },
+   "devDependencies": {
+@@ -61,9 +60,8 @@
    "scripts": {
      "install": "node ./scripts/install.js",
      "build": "cmake-js build && tsc",
@@ -24,21 +32,21 @@ index 67a1cbd..fac7566 100644
      "help-prune": "node ./scripts/prune.js",
      "build-docs": "typedoc",
      "test": "ts-mocha test/*.test.*",
-@@ -81,86 +80,14 @@
+@@ -81,86 +79,13 @@
    "optionalDependencies": {
-     "@couchbase/couchbase-darwin-arm64-napi": "4.2.8",
-     "@couchbase/couchbase-darwin-x64-napi": "4.2.8",
--    "@couchbase/couchbase-linux-arm64-napi": "4.2.8",
--    "@couchbase/couchbase-linuxmusl-x64-napi": "4.2.8",
-     "@couchbase/couchbase-linux-x64-napi": "4.2.8",
-     "@couchbase/couchbase-win32-x64-napi": "4.2.8"
+     "@couchbase/couchbase-darwin-arm64-napi": "4.3.1",
+     "@couchbase/couchbase-darwin-x64-napi": "4.3.1",
+-    "@couchbase/couchbase-linux-arm64-napi": "4.3.1",
+-    "@couchbase/couchbase-linuxmusl-x64-napi": "4.3.1",
+     "@couchbase/couchbase-linux-x64-napi": "4.3.1",
+     "@couchbase/couchbase-win32-x64-napi": "4.3.1"
    },
    "files": [
      "LICENSE",
 -    "CMakeLists.txt",
--    "CONTRIBUTING.md",
+     "CONTRIBUTING.md",
      "package.json",
-     "README.md",
+-    "README.md",
 -    "couchbase-sdk-nodejs-black-duck-manifest.yaml",
 -    "scripts/*.js",
 -    "src/*.{c,h}pp",
@@ -69,9 +77,9 @@ index 67a1cbd..fac7566 100644
 -    "deps/couchbase-cxx-cache/boringssl/*/boringssl/**/CMakeLists.txt",
 -    "deps/couchbase-cxx-cache/boringssl/*/boringssl/LICENSE",
 -    "deps/couchbase-cxx-cache/fmt/*/fmt/CMakeLists.txt",
--    "deps/couchbase-cxx-cache/fmt/*/fmt/ChangeLog.rst",
--    "deps/couchbase-cxx-cache/fmt/*/fmt/LICENSE.rst",
--    "deps/couchbase-cxx-cache/fmt/*/fmt/README.rst",
+-    "deps/couchbase-cxx-cache/fmt/*/fmt/ChangeLog.md",
+-    "deps/couchbase-cxx-cache/fmt/*/fmt/LICENSE",
+-    "deps/couchbase-cxx-cache/fmt/*/fmt/README.md",
 -    "deps/couchbase-cxx-cache/fmt/*/fmt/include/**/*",
 -    "deps/couchbase-cxx-cache/fmt/*/fmt/src/**/*",
 -    "deps/couchbase-cxx-cache/fmt/*/fmt/support/cmake/**/*",
@@ -109,13 +117,12 @@ index 67a1cbd..fac7566 100644
 -    "deps/couchbase-cxx-cache/spdlog/*/spdlog/include/**/*",
 -    "deps/couchbase-cxx-cache/spdlog/*/spdlog/src/**/*",
 -    "deps/couchbase-cxx-cache/mozilla-ca-bundle.*"
-+    "scripts/prebuilds.js",
-+    "dist/*.{t,j}s"
++    "README.md"
    ]
  }
 \ No newline at end of file
 diff --git a/node_modules/couchbase/scripts/prebuilds.js b/node_modules/couchbase/scripts/prebuilds.js
-index 401866e..5d330ef 100644
+index 401866e..179b690 100644
 --- a/node_modules/couchbase/scripts/prebuilds.js
 +++ b/node_modules/couchbase/scripts/prebuilds.js
 @@ -1,4 +1,5 @@
@@ -133,15 +140,3 @@ index 401866e..5d330ef 100644
  }
  
  function matchBuild(name) {
-@@ -459,11 +460,5 @@ function resolvePrebuild(
- }
- 
- module.exports = {
--  ENV_TRUE,
--  buildBinary,
--  configureBinary,
--  getPrebuildsInfo,
-   loadPrebuild,
--  resolveLocalPrebuild,
--  resolvePrebuild,
- }
