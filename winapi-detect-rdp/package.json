@@ -3,7 +3,7 @@
 	"version": "1.1.0",
 	"description": "Node.js WinAPI Addon for Remote Desktop detection",
 	"main": "index.js",
-	"dependencies": {
+	"devDependencies": {
 		"node-addon-api": "^1.0.0"
 	},
 	"scripts": {

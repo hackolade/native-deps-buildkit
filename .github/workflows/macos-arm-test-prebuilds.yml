@@ -35,5 +35,5 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-      - name: Test native modules on Mac Intel x64
+      - name: Test native modules on Linux x64
         run: npm run -w test test
