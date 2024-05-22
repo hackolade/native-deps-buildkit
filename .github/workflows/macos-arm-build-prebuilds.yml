@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-mac-intel:
+  build-mac-arm:
     runs-on: macos-14
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
@@ -39,5 +39,5 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-      - name: Build native modules on Mac OS x64
+      - name: Build native modules on Mac OS arm64
         run: npm run rebuild-for-target
