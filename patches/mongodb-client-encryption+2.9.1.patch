@@ -27,7 +27,7 @@ index 10bc541..c5fab91 100644
    const databaseNamespace = common.databaseNamespace;
    const collectionNamespace = common.collectionNamespace;
 diff --git a/node_modules/mongodb-client-encryption/package.json b/node_modules/mongodb-client-encryption/package.json
-index ce65e9f..d007e3d 100644
+index e5f5a34..9b48b6d 100644
 --- a/node_modules/mongodb-client-encryption/package.json
 +++ b/node_modules/mongodb-client-encryption/package.json
 @@ -9,14 +9,13 @@

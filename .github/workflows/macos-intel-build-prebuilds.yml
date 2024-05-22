@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-mac-intel:
-    runs-on: macos-latest
+    runs-on: macos-13
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
@@ -15,7 +15,7 @@ jobs:
           cache: npm
           node-version: 18
       - name: install python setuptools for workaround https://github.com/nodejs/node-gyp/issues/2869
-        run: pip install setuptools
+        run: brew install python-setuptools
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env

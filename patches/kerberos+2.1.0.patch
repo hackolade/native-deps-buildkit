@@ -12,7 +12,7 @@ index 09f8425..4245ecf 100644
  const KerberosServer = kerberos.KerberosServer;
  const defineOperation = require('./util').defineOperation;
 diff --git a/node_modules/kerberos/package.json b/node_modules/kerberos/package.json
-index c6b48a5..20acce8 100644
+index f4923f6..17548eb 100644
 --- a/node_modules/kerberos/package.json
 +++ b/node_modules/kerberos/package.json
 @@ -5,9 +5,6 @@
