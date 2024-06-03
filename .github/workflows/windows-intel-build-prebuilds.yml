@@ -11,14 +11,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 18
-      - name: Install MIT Kerberos
-        run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
-      - name: Get MIT Kerberos path
-        run: |
-          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
-          echo "GYP_DEFINES=KRB_PATH='$krb_path'" >> $env:GITHUB_ENV
-        id: mit_kerberos
+          node-version: 22
+      # - name: Install MIT Kerberos
+      #   run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
+      # - name: Get MIT Kerberos path
+      #   run: |
+      #     $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
+      #     echo "GYP_DEFINES=KRB_PATH='$krb_path'" >> $env:GITHUB_ENV
+      #   id: mit_kerberos
       - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
