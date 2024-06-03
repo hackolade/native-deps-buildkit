@@ -16,4 +16,5 @@ await exec({
 await exec({
 	command: npmCommand,
 	parameters: ['install', '--save', 'false', '-w', 'test', ...deps, ...windowsSpecificDep],
+	options: {shell: true}
 });
