@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20
+          node-version: 18
       - name: Install MIT Kerberos
         run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
       - name: Get MIT Kerberos path
