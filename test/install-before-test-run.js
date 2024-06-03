@@ -11,6 +11,7 @@ const windowsSpecificDep = platform() === 'win32' ? ['@hackolade/winapi-detect-r
 await exec({
 	command: 'node',
 	parameters: ['../node_modules/electron/install.js'],
+	options: {shell: true}
 });
 
 await exec({
