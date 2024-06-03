@@ -20,6 +20,10 @@ jobs:
       #     echo "GYP_DEFINES=KRB_PATH='$krb_path'" >> $env:GITHUB_ENV
       #   id: mit_kerberos
       - name: Install tookit dependencies
+        run: |
+          npm.cmd --version
+          npx.cmd --version
+      - name: Install tookit dependencies
         run: npm ci
       - name: Set Electron Major version in env
         run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $env:GITHUB_ENV
