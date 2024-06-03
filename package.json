@@ -8,6 +8,7 @@
 	],
 	"scripts": {
 		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/prepare.js",
+		"patch": "./node_modules/.bin/patch-package",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
 		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/rebuild.js"
 	},
