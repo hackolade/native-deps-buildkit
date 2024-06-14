@@ -26,8 +26,10 @@
 		"chai": "5.1.1",
 		"cross-env": "7.0.3",
 		"debug": "4.3.4",
-		"electron": "30.0.6",
+		"electron": "31.0.1",
 		"eslint": "9.3.0",
+		"libnpmpack": "7.0.3",
+		"libnpmpublish": "9.0.9",
 		"lodash": "4.17.21",
 		"mocha": "10.4.0",
 		"patch-package": "^8.0.0",
@@ -44,8 +46,6 @@
 		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
 		"keytar": "7.9.0",
 		"krb5": "0.5.5",
-		"libnpmpack": "7.0.3",
-		"libnpmpublish": "9.0.9",
 		"mongodb-client-encryption": "2.9.1"
 	},
 	"peerDependencies": {
@@ -55,7 +55,7 @@
 		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
 		"nativeModules": {
 			"@parcel/watcher": {
-				"version": "30.2.0",
+				"version": "31.2.0",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -63,7 +63,7 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "30.4.0",
+				"version": "31.4.0",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -71,7 +71,7 @@
 				"to_build": false
 			},
 			"desktop-trampoline": {
-				"version": "30.2.0",
+				"version": "31.2.0",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -83,28 +83,28 @@
 				]
 			},
 			"kerberos": {
-				"version": "30.2.0",
+				"version": "31.2.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "30.1.2",
+				"version": "31.1.0",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": true
 			},
 			"keytar": {
-				"version": "30.7.0",
+				"version": "31.7.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"krb5": {
-				"version": "30.0.1",
+				"version": "31.0.0",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -123,7 +123,7 @@
 				}
 			},
 			"mongodb-client-encryption": {
-				"version": "30.2.0",
+				"version": "31.2.0",
 				"prebuild_install": true,
 				"napi": true,
 				"prebuilds_as_npm_packages": false,

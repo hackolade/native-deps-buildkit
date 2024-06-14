@@ -2,6 +2,11 @@ name: Prebuild for Mac x64
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Discover native modules and publish upstream
+    types:
+      - completed
 
 jobs:
   build-mac-intel:
@@ -10,6 +15,8 @@ jobs:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
       - uses: actions/setup-node@v4
         with:
           cache: npm
