@@ -2,12 +2,19 @@ name: Prebuild for Windows x64
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Discover native modules and publish upstream
+    types:
+      - completed
 
 jobs:
   build-windows-intel:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
       - uses: actions/setup-node@v4
         with:
           cache: npm
