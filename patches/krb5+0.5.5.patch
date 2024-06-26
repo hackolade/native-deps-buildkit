@@ -1,3 +1,19 @@
+diff --git a/node_modules/krb5/.npmignore b/node_modules/krb5/.npmignore
+new file mode 100644
+index 0000000..e844366
+--- /dev/null
++++ b/node_modules/krb5/.npmignore
+@@ -0,0 +1,9 @@
++.github/
++docker/
++samples/
++src/
++test/
++vagrant/
++binding.gyp
++install_krb5_zos.sh
++install_krb5.sh
+\ No newline at end of file
 diff --git a/node_modules/krb5/README.md b/node_modules/krb5/README.md
 index fc4014a..c162d92 100644
 --- a/node_modules/krb5/README.md

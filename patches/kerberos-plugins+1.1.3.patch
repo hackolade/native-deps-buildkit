@@ -1,11 +1,11 @@
 diff --git a/node_modules/kerberos-plugins/.npmignore b/node_modules/kerberos-plugins/.npmignore
 new file mode 100644
-index 0000000..130ddb3
+index 0000000..32caacd
 --- /dev/null
 +++ b/node_modules/kerberos-plugins/.npmignore
 @@ -0,0 +1,6 @@
-+etc
-+src
++etc/
++src/
 +.clang-format
 +.eslintrc
 +appveyor.yml

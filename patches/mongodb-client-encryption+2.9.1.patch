@@ -1,12 +1,12 @@
 diff --git a/node_modules/mongodb-client-encryption/.npmignore b/node_modules/mongodb-client-encryption/.npmignore
 new file mode 100644
-index 0000000..6dc8851
+index 0000000..7e36591
 --- /dev/null
 +++ b/node_modules/mongodb-client-encryption/.npmignore
 @@ -0,0 +1,3 @@
-+build
-+prebuilds
-+src
++build/
++prebuilds/
++src/
 diff --git a/node_modules/mongodb-client-encryption/README.md b/node_modules/mongodb-client-encryption/README.md
 index ab27f0e..007f6a2 100644
 --- a/node_modules/mongodb-client-encryption/README.md

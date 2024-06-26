@@ -1,13 +1,14 @@
 diff --git a/node_modules/kerberos/.npmignore b/node_modules/kerberos/.npmignore
 new file mode 100644
-index 0000000..6a6f99b
+index 0000000..14e8972
 --- /dev/null
 +++ b/node_modules/kerberos/.npmignore
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,5 @@
 +HISTORY.md
-+prebuilds
-+build
-+src
++prebuilds/
++build/
++src/
++binding.gyp
 diff --git a/node_modules/kerberos/README.md b/node_modules/kerberos/README.md
 index 20b6884..efcae67 100644
 --- a/node_modules/kerberos/README.md
