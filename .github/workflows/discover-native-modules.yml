@@ -19,8 +19,9 @@ jobs:
         run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $GITHUB_ENV
       - run: npm run prepare
       - name: Upload list of modules to build
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
           path: modulesToBuild.json
+          overwrite: true
       - run: cat modulesToBuild.json
