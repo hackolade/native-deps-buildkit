@@ -6,7 +6,7 @@ on:
     workflows:
       - Discover native modules for studio
     types:
-      - completed
+      - 
 
 jobs:
   build-for-linux:
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20
+          node-version: 22
       - name: Install krb5
         run: |
           sudo apt-get update
