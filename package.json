@@ -137,5 +137,8 @@
 	"imports": {
 		"#lib/*.js": "./lib/*.js",
 		"#root": "./root.js"
+	},
+	"engines": {
+		"node": "^22"
 	}
 }
