@@ -18,14 +18,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20
+          node-version: 22
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env
         run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $GITHUB_ENV
       - name: Download artifact
         id: download-artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
           # Required, if the artifact is from a different repo

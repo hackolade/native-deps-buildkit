@@ -13,13 +13,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20
+          node-version: 22
       - run: npm install
       - name: Set Electron Major version in env
         run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $GITHUB_ENV
       - run: npm run prepare
       - name: Upload list of modules to build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
           path: modulesToBuild.json
+      - run: cat modulesToBuild.json
