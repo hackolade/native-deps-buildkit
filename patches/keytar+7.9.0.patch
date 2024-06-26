@@ -1,3 +1,13 @@
+diff --git a/node_modules/keytar/.npmignore b/node_modules/keytar/.npmignore
+new file mode 100644
+index 0000000..53310db
+--- /dev/null
++++ b/node_modules/keytar/.npmignore
+@@ -0,0 +1,3 @@
++build
++prebuilds
++src
+\ No newline at end of file
 diff --git a/node_modules/keytar/README.md b/node_modules/keytar/README.md
 index 91141b7..a1cf812 100644
 --- a/node_modules/keytar/README.md

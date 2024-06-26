@@ -1,3 +1,15 @@
+diff --git a/node_modules/kerberos-plugins/.npmignore b/node_modules/kerberos-plugins/.npmignore
+new file mode 100644
+index 0000000..130ddb3
+--- /dev/null
++++ b/node_modules/kerberos-plugins/.npmignore
+@@ -0,0 +1,6 @@
++etc
++src
++.clang-format
++.eslintrc
++appveyor.yml
++.travis.yml
 diff --git a/node_modules/kerberos-plugins/README.md b/node_modules/kerberos-plugins/README.md
 index ca2e365..01fe213 100644
 --- a/node_modules/kerberos-plugins/README.md

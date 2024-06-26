@@ -1,3 +1,13 @@
+diff --git a/node_modules/desktop-trampoline/.npmignore b/node_modules/desktop-trampoline/.npmignore
+index 1d0d2df..3ed1771 100644
+--- a/node_modules/desktop-trampoline/.npmignore
++++ b/node_modules/desktop-trampoline/.npmignore
+@@ -17,3 +17,5 @@ jest.json
+ .github
+ src
+ dist/test
++prebuilds/
++include/
 diff --git a/node_modules/desktop-trampoline/README.md b/node_modules/desktop-trampoline/README.md
 index f01f067..146f825 100644
 --- a/node_modules/desktop-trampoline/README.md
