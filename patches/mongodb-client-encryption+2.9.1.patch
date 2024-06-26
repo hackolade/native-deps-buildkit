@@ -1,3 +1,18 @@
+diff --git a/node_modules/mongodb-client-encryption/README.md b/node_modules/mongodb-client-encryption/README.md
+index ab27f0e..007f6a2 100644
+--- a/node_modules/mongodb-client-encryption/README.md
++++ b/node_modules/mongodb-client-encryption/README.md
+@@ -1,3 +1,10 @@
++# Repackaged version of mongodb-client-encryption
++
++This is a convenience package that will install all prebuilds for all supported platforms, to the contrary to the upstream package that constraint the installation only to the runtime platform (os/cpu).
++This typically enable cross building an Electron application.
++
++The package is cleaned up to only embbed the necessary.
++
+ MongoDB Client Encryption
+ =========================
+ 
 diff --git a/node_modules/mongodb-client-encryption/lib/autoEncrypter.js b/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
 index f4e3dc0..6a70d90 100644
 --- a/node_modules/mongodb-client-encryption/lib/autoEncrypter.js
@@ -65,3 +80,19 @@ index e5f5a34..9b48b6d 100644
      "prettier": "^2.8.8",
      "sinon": "^15.0.4",
      "sinon-chai": "^3.7.0",
+diff --git a/node_modules/mongodb-client-encryption/prebuilds/darwin-arm64/mongocrypt.node b/node_modules/mongodb-client-encryption/prebuilds/darwin-arm64/mongocrypt.node
+new file mode 100755
+index 0000000..f09b75f
+Binary files /dev/null and b/node_modules/mongodb-client-encryption/prebuilds/darwin-arm64/mongocrypt.node differ
+diff --git a/node_modules/mongodb-client-encryption/prebuilds/darwin-x64/mongocrypt.node b/node_modules/mongodb-client-encryption/prebuilds/darwin-x64/mongocrypt.node
+new file mode 100755
+index 0000000..04ea074
+Binary files /dev/null and b/node_modules/mongodb-client-encryption/prebuilds/darwin-x64/mongocrypt.node differ
+diff --git a/node_modules/mongodb-client-encryption/prebuilds/linux-x64/mongocrypt.node b/node_modules/mongodb-client-encryption/prebuilds/linux-x64/mongocrypt.node
+new file mode 100755
+index 0000000..9a2d3be
+Binary files /dev/null and b/node_modules/mongodb-client-encryption/prebuilds/linux-x64/mongocrypt.node differ
+diff --git a/node_modules/mongodb-client-encryption/prebuilds/win32-x64/mongocrypt.node b/node_modules/mongodb-client-encryption/prebuilds/win32-x64/mongocrypt.node
+new file mode 100644
+index 0000000..a407635
+Binary files /dev/null and b/node_modules/mongodb-client-encryption/prebuilds/win32-x64/mongocrypt.node differ

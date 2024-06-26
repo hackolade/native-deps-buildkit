@@ -1,3 +1,18 @@
+diff --git a/node_modules/keytar/README.md b/node_modules/keytar/README.md
+index 91141b7..a1cf812 100644
+--- a/node_modules/keytar/README.md
++++ b/node_modules/keytar/README.md
+@@ -1,3 +1,10 @@
++# Repackaged version of Keytar
++
++This is a convenience package that will install all prebuilds for all supported platforms, to the contrary to the upstream package that constraint the installation only to the runtime platform (os/cpu).
++This typically enable cross building an Electron application.
++
++The package is cleaned up to only embbed the necessary.
++
+ # keytar - Node module to manage system keychain
+ 
+ [![Travis Build Status](https://travis-ci.org/atom/node-keytar.svg?branch=master)](https://travis-ci.org/atom/node-keytar)
 diff --git a/node_modules/keytar/lib/keytar.js b/node_modules/keytar/lib/keytar.js
 index 027456c..db3510d 100644
 --- a/node_modules/keytar/lib/keytar.js
@@ -43,3 +58,19 @@ index 12cbafc..f2bfad3 100644
    },
    "binary": {
      "napi_versions": [
+diff --git a/node_modules/keytar/prebuilds/darwin-arm64/keytar.node b/node_modules/keytar/prebuilds/darwin-arm64/keytar.node
+new file mode 100755
+index 0000000..9e93e78
+Binary files /dev/null and b/node_modules/keytar/prebuilds/darwin-arm64/keytar.node differ
+diff --git a/node_modules/keytar/prebuilds/darwin-x64/keytar.node b/node_modules/keytar/prebuilds/darwin-x64/keytar.node
+new file mode 100755
+index 0000000..af33936
+Binary files /dev/null and b/node_modules/keytar/prebuilds/darwin-x64/keytar.node differ
+diff --git a/node_modules/keytar/prebuilds/linux-x64/keytar.node b/node_modules/keytar/prebuilds/linux-x64/keytar.node
+new file mode 100755
+index 0000000..ba7176e
+Binary files /dev/null and b/node_modules/keytar/prebuilds/linux-x64/keytar.node differ
+diff --git a/node_modules/keytar/prebuilds/win32-x64/keytar.node b/node_modules/keytar/prebuilds/win32-x64/keytar.node
+new file mode 100644
+index 0000000..41f700f
+Binary files /dev/null and b/node_modules/keytar/prebuilds/win32-x64/keytar.node differ

@@ -4,8 +4,8 @@ import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import { publishToNPM } from '../lib/publish.js';
 
-const deps = pkg.map(({ rescopedModuleName, version }) => {
-	return { [rescopedModuleName] : version };
+const deps = pkg.map(({ name, rescopedModuleName, version }) => {
+	return { [name]: `npm:${rescopedModuleName}@${version}`;
 });
 
 const windowsSpecificDep = [{'@hackolade/winapi-detect-rdp': '1.1.0'}];
