@@ -14,7 +14,4 @@ const { default: studioNativesPkg } = await import('../studio-natives-modules/pa
 studioNativesPkg.dependencies = [...deps, ...windowsSpecificDep];
 
 await writeFile(resolve('./studio-natives-modules/package.json'), JSON.stringify(studioNativesPkg));
-
-const modulePath = resolve('./studio-natives-modules');
-console.log(">>>>>>>>>>><", modulePath);
-// await publishToNPM(resolve('../studio-natives-modules'));
+await publishToNPM(resolve('./studio-natives-modules'));
