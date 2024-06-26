@@ -1,17 +1,17 @@
-import pkg from '../modulesToBuild.json' assert { type: 'json' };
+import pkg from '../modulesToBuild.json' with { type: 'json' };
 import { platform } from 'node:os';
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import { publishToNPM } from '../lib/publish.js';
 
 const deps = pkg.map(({ rescopedModuleName, version }) => {
-	return { rescopedModuleName, version };
+	return { [rescopedModuleName] : version };
 });
 
 const windowsSpecificDep = [{'@hackolade/winapi-detect-rdp': '1.1.0'}];
 
 const { default: studioNativesPkg } = await import('../studio-natives-modules/package.json', {
-	assert: { type: 'json' },
+	with: { type: 'json' },
 });
 studioNativesPkg.dependencies = [...deps, ...windowsSpecificDep].reduce((acc, dep) => {return {...dep, ...acc}}, {});
 
