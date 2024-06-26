@@ -10,7 +10,9 @@
 		"prepare": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/prepare.js",
 		"patch": "./node_modules/.bin/patch-package",
 		"patch-package": "./node_modules/.bin/patch-package --exclude 'nothing'",
-		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/rebuild.js"
+		"rebuild-for-target": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/rebuild.js",
+		"test": "npm run -w test test",
+		"publish-studio-natives": "cross-env DEBUG=buildkit* DEBUG_DEPTH=5 node ./bin/publish-studio-natives.js"
 	},
 	"repository": {
 		"type": "git",
@@ -26,7 +28,7 @@
 		"chai": "5.1.1",
 		"cross-env": "7.0.3",
 		"debug": "4.3.4",
-		"electron": "31.0.1",
+		"electron": "31.1.0",
 		"eslint": "9.3.0",
 		"libnpmpack": "7.0.3",
 		"libnpmpublish": "9.0.9",

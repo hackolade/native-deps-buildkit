@@ -1,7 +1,7 @@
 import { npmCommand } from '../lib/commands.js';
 import { exec } from '../lib/exec.js';
 
-import pkg from '../modulesToBuild.json' with { type: 'json' };
+import pkg from '../modulesToBuild.json' assert { type: 'json' };
 import { platform } from 'node:os';
 
 const deps = pkg.map(({ rescopedModuleName, version }) => `${rescopedModuleName}@${version}`);

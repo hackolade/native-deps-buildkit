@@ -1,39 +1,21 @@
-name: Prebuild for Windows x64
+name: Publish the studio-natives-modules package to npm
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Discover native modules and publish upstream
-    types:
-      - completed
 
 jobs:
-  build-windows-intel:
-    runs-on: windows-latest
+  publish-studio-native-modules:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 22
-      - name: Install MIT Kerberos
-        run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
-      - name: Get MIT Kerberos path
-        run: |
-          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
-          echo "GYP_DEFINES=KRB_PATH='$krb_path'" >> $env:GITHUB_ENV
-        id: mit_kerberos
-      - name: Install tookit dependencies
-        run: |
-          npm.cmd --version
-          npx.cmd --version
-      - name: Install tookit dependencies
+          node-version: 20
+      - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env
-        run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $env:GITHUB_ENV
+        run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $GITHUB_ENV
       - name: Download artifact
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
@@ -53,7 +35,5 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
-      - name: Build on Windows x64
-        run: npm run rebuild-for-target
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+      - name: Publish npm package
+        run: npm run publish-studio-natives
