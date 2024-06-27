@@ -12,13 +12,12 @@ import { resolve } from 'node:path';
 
 const modulesBuildMetadata = await getNativeModulesMetadata();
 
+await runPatchPackage();
 await installAllPrebuildsProvidedAsNPMDependencies(modulesBuildMetadata);
 
 for (const moduleMeta of modulesBuildMetadata.filter(({ prebuilds_as_npm_packages }) => !prebuilds_as_npm_packages)) {
 	await installPrebuiltsForTargets(moduleMeta);
 }
-
-await runPatchPackage();
 
 const moduleToPublish = await rescopeOfficialPrebuildsFromPackage({ buildMetadata: modulesBuildMetadata });
 
