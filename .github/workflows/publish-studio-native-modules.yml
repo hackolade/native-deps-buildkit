@@ -42,5 +42,6 @@ jobs:
           # Use the empty string ("") to ignore status or conclusion in the search
           workflow_conclusion: success
           name: modulesToBuildForElectron-${{ env.ELECTRON_MAJOR_VERSION }}
+      - run: cat modulesToBuild.json
       - name: Publish npm package
         run: npm run publish-studio-natives
