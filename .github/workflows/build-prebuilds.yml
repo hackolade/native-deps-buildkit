@@ -6,7 +6,7 @@ on:
     workflows:
       - Discover native modules for studio
     types:
-      - 
+      - completed
 
 jobs:
   build-for-linux:
