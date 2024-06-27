@@ -51,27 +51,32 @@ index 10bc541..c5fab91 100644
    const databaseNamespace = common.databaseNamespace;
    const collectionNamespace = common.collectionNamespace;
 diff --git a/node_modules/mongodb-client-encryption/package.json b/node_modules/mongodb-client-encryption/package.json
-index e5f5a34..9b48b6d 100644
+index e5f5a34..a626a89 100644
 --- a/node_modules/mongodb-client-encryption/package.json
 +++ b/node_modules/mongodb-client-encryption/package.json
-@@ -9,14 +9,13 @@
+@@ -8,19 +8,13 @@
+     "README.md",
      "CHANGELOG.md",
      "lib",
-     "src",
+-    "src",
 -    "index.d.ts",
 -    "binding.gyp"
 +    "index.d.ts"
    ],
-   "directories": {
-     "lib": "lib"
-   },
+-  "directories": {
+-    "lib": "lib"
+-  },
    "scripts": {
 -    "install": "prebuild-install --runtime napi --tag-prefix node-v || node-gyp rebuild",
 +    "install": "prebuild-install --runtime napi --tag-prefix node-v",
      "check:lint": "eslint lib test && tsd",
      "docs": "jsdoc2md --template etc/README.hbs --plugin dmd-clear --files 'lib/**/*.js' > README.md",
      "test": "mocha test",
-@@ -34,9 +33,7 @@
+-    "rebuild": "prebuild --compile",
+     "release": "standard-version --tag-prefix node-v --path bindings/node",
+     "prebuild": "prebuild --runtime napi --strip --verbose --tag-prefix node-v --all"
+   },
+@@ -34,9 +28,7 @@
    "license": "Apache-2.0",
    "gypfile": true,
    "dependencies": {
@@ -81,7 +86,7 @@ index e5f5a34..9b48b6d 100644
      "socks": "^2.7.1"
    },
    "devDependencies": {
-@@ -55,6 +52,7 @@
+@@ -55,6 +47,7 @@
      "mongodb": "^5.3.0",
      "node-gyp": "^9.3.1",
      "prebuild": "^11.0.4",
