@@ -32,7 +32,7 @@
 		"eslint": "9.3.0",
 		"libnpmpack": "7.0.3",
 		"libnpmpublish": "9.0.9",
-		"lodash": "4.17.21",
+		"lodash": "4.18.21",
 		"mocha": "10.4.0",
 		"patch-package": "^8.0.0",
 		"prebuild-install": "7.1.2",
@@ -57,7 +57,7 @@
 		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
 		"nativeModules": {
 			"@parcel/watcher": {
-				"version": "31.2.17",
+				"version": "31.2.18",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -65,7 +65,7 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "31.4.17",
+				"version": "31.4.18",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -73,7 +73,7 @@
 				"to_build": false
 			},
 			"desktop-trampoline": {
-				"version": "31.2.17",
+				"version": "31.2.18",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -85,28 +85,28 @@
 				]
 			},
 			"kerberos": {
-				"version": "31.2.17",
+				"version": "31.2.18",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "31.1.17",
+				"version": "31.1.18",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": true
 			},
 			"keytar": {
-				"version": "31.8.17",
+				"version": "31.8.18",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"krb5": {
-				"version": "31.0.17",
+				"version": "31.0.18",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -125,7 +125,7 @@
 				}
 			},
 			"mongodb-client-encryption": {
-				"version": "31.2.17",
+				"version": "31.2.18",
 				"prebuild_install": true,
 				"napi": true,
 				"prebuilds_as_npm_packages": false,
