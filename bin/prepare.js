@@ -11,9 +11,8 @@ import { ROOT_DIR } from '#root';
 import { resolve } from 'node:path';
 
 const modulesBuildMetadata = await getNativeModulesMetadata();
-
-await runPatchPackage();
 await installAllPrebuildsProvidedAsNPMDependencies(modulesBuildMetadata);
+await runPatchPackage();
 
 for (const moduleMeta of modulesBuildMetadata.filter(({ prebuilds_as_npm_packages }) => !prebuilds_as_npm_packages)) {
 	await installPrebuiltsForTargets(moduleMeta);
