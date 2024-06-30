@@ -1,35 +1,5 @@
-diff --git a/node_modules/desktop-trampoline/.npmignore b/node_modules/desktop-trampoline/.npmignore
-index 1d0d2df..c8af340 100644
---- a/node_modules/desktop-trampoline/.npmignore
-+++ b/node_modules/desktop-trampoline/.npmignore
-@@ -15,5 +15,8 @@ build
- jest.json
- .node-version
- .github
--src
--dist/test
-+src/
-+dist/test/
-+prebuilds/
-+include/
-+binding.gyp
-diff --git a/node_modules/desktop-trampoline/README.md b/node_modules/desktop-trampoline/README.md
-index f01f067..146f825 100644
---- a/node_modules/desktop-trampoline/README.md
-+++ b/node_modules/desktop-trampoline/README.md
-@@ -1,3 +1,10 @@
-+# Repackaged version of Desktop Trampoline
-+
-+This is a convenience package that will install all prebuilds for all supported platforms, to the contrary to the upstream package that constraint the installation only to the runtime platform (os/cpu).
-+This typically enable cross building an Electron application.
-+
-+The package is cleaned up to only embbed the necessary.
-+
- # Desktop Trampoline
- 
- A cross-platform no-dependency C executable trampoline which lets GitHub Desktop
 diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
-index 0891bae..541c666 100644
+index 0891bae..9d1b5a7 100644
 --- a/node_modules/desktop-trampoline/index.js
 +++ b/node_modules/desktop-trampoline/index.js
 @@ -1,12 +1,10 @@
@@ -58,44 +28,6 @@ index 0891bae..541c666 100644
  }
  
  function getSSHWrapperFilename() {
-diff --git a/node_modules/desktop-trampoline/package.json b/node_modules/desktop-trampoline/package.json
-index 0cc0262..c9cb79b 100644
---- a/node_modules/desktop-trampoline/package.json
-+++ b/node_modules/desktop-trampoline/package.json
-@@ -10,8 +10,7 @@
-   },
-   "types": "./index.d.ts",
-   "scripts": {
--    "build": "node-gyp rebuild",
--    "install": "prebuild-install || node-gyp rebuild",
-+    "install": "prebuild-install",
-     "test": "jest",
-     "lint": "prettier -c **/*.js **/*.md",
-     "lint:fix": "prettier --write **/*.js **/*.md",
-@@ -30,8 +29,7 @@
-   },
-   "homepage": "https://github.com/desktop/desktop-trampoline#readme",
-   "dependencies": {
--    "node-addon-api": "^3.1.0",
--    "prebuild-install": "^6.0.0"
-+    "node-addon-api": "^3.1.0"
-   },
-   "devDependencies": {
-     "jest": "^26.4.2",
-@@ -48,5 +46,12 @@
-   "config": {
-     "runtime": "napi",
-     "target": 3
--  }
-+  },
-+  "files": [
-+    "index.js",
-+    "index.d.ts",
-+    "package.json",
-+    "README.md",
-+    "LICENSE"
-+  ]
- }
 diff --git a/node_modules/desktop-trampoline/prebuilds/darwin-arm64/desktop-trampoline b/node_modules/desktop-trampoline/prebuilds/darwin-arm64/desktop-trampoline
 new file mode 100755
 index 0000000..c7e3356

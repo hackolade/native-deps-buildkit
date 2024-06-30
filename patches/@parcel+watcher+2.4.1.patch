@@ -14,23 +14,26 @@ index d212b93..1ff29bb 100644
  
  A native C++ Node module for querying and subscribing to filesystem events. Used by [Parcel 2](https://github.com/parcel-bundler/parcel).
 diff --git a/node_modules/@parcel/watcher/index.js b/node_modules/@parcel/watcher/index.js
-index 8afb2b1..c808fc3 100644
+index 8afb2b1..bacda8f 100644
 --- a/node_modules/@parcel/watcher/index.js
 +++ b/node_modules/@parcel/watcher/index.js
-@@ -1,6 +1,6 @@
+@@ -1,37 +1,12 @@
  const {createWrapper} = require('./wrapper');
  
 -let name = `@parcel/watcher-${process.platform}-${process.arch}`;
-+let name = `@hackolade/watcher-${process.platform}-${process.arch}`;
- if (process.platform === 'linux') {
-   const { MUSL, family } = require('detect-libc');
-   if (family === MUSL) {
-@@ -12,26 +12,11 @@ if (process.platform === 'linux') {
- 
+-if (process.platform === 'linux') {
+-  const { MUSL, family } = require('detect-libc');
+-  if (family === MUSL) {
+-    name += '-musl';
+-  } else {
+-    name += '-glibc';
+-  }
+-}
+-
  let binding;
  try {
 -  binding = require(name);
-+  binding = require(/* webpackIgnore: true */ name);
++  binding = require(/* webpackIgnore: true */ `@hackolade/watcher-${process.platform}-${process.arch}`);
  } catch (err) {
 -  handleError(err);
 -  try {
@@ -50,9 +53,9 @@ index 8afb2b1..c808fc3 100644
 -  if (err?.code !== 'MODULE_NOT_FOUND') {
 -    throw err;
 -  }
-+  console.error('failed to load @parcel/watcher prebuild');
++  console.error('failed to load @hackolade/watcher prebuild');
 +  console.error(err);
-+  throw new Error(`No prebuild or local build of @parcel/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case, please report an issue to https://github.com/parcel-bundler/watcher.`);
++  throw new Error(`No prebuild or local build of @hackolade/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case, please report an issue to https://github.com/parcel-bundler/watcher.`);
  }
  
  const wrapper = createWrapper(binding);
