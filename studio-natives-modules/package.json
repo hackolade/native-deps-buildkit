@@ -1,5 +1,13 @@
 {
-    "name":"@hackolade/studio-native-modules",
-    "version": "31.0.16",
-    "description": "A virtual package referencing all of the Studio native modules for a specific Electron version"
+	"name": "@hackolade/studio-native-modules",
+	"version": "31.0.16",
+	"description": "A virtual package referencing all of the Studio native modules for a specific Electron version",
+	"keywords": [
+		"hackolade",
+		"studio",
+		"data modeling",
+		"cross building",
+		"electron"
+	],
+	"homepage": "https://studio.hackolade.com"
 }
