@@ -2,11 +2,11 @@ name: Test Prebuilds for all platforms
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Build custom native modules for studio
-    types:
-      - completed
+  # workflow_run:
+  #   workflows:
+  #     - Build custom native modules for studio
+  #   types:
+  #     - completed
 
 jobs:
   test-for-linux:

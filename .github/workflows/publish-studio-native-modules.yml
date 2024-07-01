@@ -2,11 +2,11 @@ name: Publish the studio-natives-modules package to npm
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Test Prebuilds for all platforms
-    types:
-      - completed
+  # workflow_run:
+  #   workflows:
+  #     - Test Prebuilds for all platforms
+  #   types:
+  #     - completed
 
 jobs:
   publish-studio-native-modules:
