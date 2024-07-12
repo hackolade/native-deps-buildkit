@@ -57,7 +57,7 @@
 		"version_format": "<electron major version>.<package major>.<arbitrary patch>",
 		"nativeModules": {
 			"@parcel/watcher": {
-				"version": "31.2.24",
+				"version": "31.2.25",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -65,7 +65,7 @@
 				"to_build": false
 			},
 			"couchbase": {
-				"version": "31.4.24",
+				"version": "31.4.25",
 				"napi": true,
 				"prebuild_install": false,
 				"prebuilds_as_npm_packages": true,
@@ -73,7 +73,7 @@
 				"to_build": false
 			},
 			"desktop-trampoline": {
-				"version": "31.2.24",
+				"version": "31.2.25",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -85,28 +85,28 @@
 				]
 			},
 			"kerberos": {
-				"version": "31.2.24",
+				"version": "31.2.25",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"kerberos-plugins": {
-				"version": "31.1.24",
+				"version": "31.1.25",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": true
 			},
 			"keytar": {
-				"version": "31.8.24",
+				"version": "31.8.25",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
 			},
 			"krb5": {
-				"version": "31.0.24",
+				"version": "31.0.25",
 				"napi": true,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
@@ -125,7 +125,7 @@
 				}
 			},
 			"mongodb-client-encryption": {
-				"version": "31.2.24",
+				"version": "31.2.25",
 				"prebuild_install": true,
 				"napi": true,
 				"prebuilds_as_npm_packages": false,
