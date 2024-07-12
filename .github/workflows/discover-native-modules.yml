@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 22
+          node-version: 20
       - run: npm ci
       - name: Set Electron Major version in env
         run: echo "ELECTRON_MAJOR_VERSION=$(node ./bin/get-electron-major-version.js)" >> $GITHUB_ENV
