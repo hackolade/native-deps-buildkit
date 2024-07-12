@@ -7,7 +7,7 @@ const deps = pkg.map(({ name, rescopedModuleName, version }) => {
 	return { [name]: `npm:${rescopedModuleName}@${version}`};
 });
 
-const windowsSpecificDep = [{'@hackolade/winapi-detect-rdp': '1.2.0'}];
+const windowsSpecificDep = [{'@hackolade/winapi-detect-rdp': '1.3.0'}];
 
 const { default: studioNativesPkg } = await import('../studio-natives-modules/package.json', {
 	assert: { type: 'json' },
