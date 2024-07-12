@@ -132,3 +132,6 @@ dist
 modulesToBuild.json
 
 .DS_Store
+
+winapi-detect-rdp/bin
+winapi-detect-rdp/build
