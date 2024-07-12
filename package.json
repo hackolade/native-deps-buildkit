@@ -41,7 +41,7 @@
 		"split2": "4.2.0"
 	},
 	"dependencies": {
-		"@parcel/watcher": "github:parcel-bundler/watcher#master",
+		"@parcel/watcher": "2.4.1",
 		"couchbase": "4.4.0",
 		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
 		"kerberos": "2.1.0",
