@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 22
+          node-version: 20
       - name: Install toolkit
         run: npm ci
       - name: Set Electron Major version in env

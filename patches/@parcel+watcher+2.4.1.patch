@@ -15,10 +15,10 @@ index d212b93..b412767 100644
  
  A native C++ Node module for querying and subscribing to filesystem events. Used by [Parcel 2](https://github.com/parcel-bundler/parcel).
 diff --git a/node_modules/@parcel/watcher/index.js b/node_modules/@parcel/watcher/index.js
-index 8afb2b1..e3e91cf 100644
+index 8afb2b1..e572272 100644
 --- a/node_modules/@parcel/watcher/index.js
 +++ b/node_modules/@parcel/watcher/index.js
-@@ -1,37 +1,12 @@
+@@ -1,37 +1,13 @@
  const {createWrapper} = require('./wrapper');
  
 -let name = `@parcel/watcher-${process.platform}-${process.arch}`;
@@ -31,10 +31,11 @@ index 8afb2b1..e3e91cf 100644
 -  }
 -}
 -
++const name = `@hackolade/watcher-${process.platform}-${process.arch}`;
  let binding;
  try {
 -  binding = require(name);
-+  binding = require(/* webpackIgnore: true */  `@parcel/watcher-${process.platform}-${process.arch}`);
++  binding = require(/* webpackIgnore: true */  name);
  } catch (err) {
 -  handleError(err);
 -  try {
@@ -56,7 +57,7 @@ index 8afb2b1..e3e91cf 100644
 -  }
 +  console.error('failed to load @hackolade/watcher prebuild');
 +  console.error(err);
-+  throw new Error(`No prebuild or local build of @hackolade/watcher found. Tried ${name}. Please ensure it is installed (don't use --no-optional when installing with npm). Otherwise it is possible we don't support your platform yet. If this is the case.`);
++  throw new Error(`No prebuild or local build of @hackolade/watcher found. Tried ${name}. Please ensure it is installed. Otherwise it is possible we don't support your platform yet. If this is the case.`);
  }
  
  const wrapper = createWrapper(binding);

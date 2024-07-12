@@ -1,5 +1,5 @@
 import { build } from '#lib/build.js';
-import modules from '../modulesToBuild.json' with { type: 'json' };
+import modules from '../modulesToBuild.json' assert { type: 'json' };
 import { LOGGER } from '#lib/logger.js';
 import { ROOT_DIR } from '#root';
 import { runPatchPackage } from '../lib/install.js';

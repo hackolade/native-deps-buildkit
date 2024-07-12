@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 22
+          node-version: 20
       - name: Install krb5
         run: |
           sudo apt-get update
@@ -64,7 +64,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 18
+          node-version: 20
       - name: install python setuptools for workaround https://github.com/nodejs/node-gyp/issues/2869
         run: brew install python-setuptools
       - name: Install toolkit
@@ -104,7 +104,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 18
+          node-version: 20
       - name: install python setuptools for workaround https://github.com/nodejs/node-gyp/issues/2869
         run: pip install setuptools
       - name: Install toolkit
@@ -141,7 +141,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 22
+          node-version: 20
       - name: Install MIT Kerberos
         run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all --ignore-package-exit-codes
       - name: Get MIT Kerberos path
