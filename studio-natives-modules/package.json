@@ -1,6 +1,6 @@
 {
 	"name": "@hackolade/studio-native-modules",
-	"version": "32.0.1",
+	"version": "32.0.2",
 	"description": "A virtual package referencing all of the Studio native modules for a specific Electron version",
 	"keywords": [
 		"hackolade",
