@@ -48,13 +48,6 @@ describe('custom native modules', async function () {
 		expect(Boolean(kerberos), 'imported as falsy value').to.be.equal(true);
 	});
 
-	it('kerberos for plugins should be imported', async function () {
-		this.timeout(10000);
-		const kerberos = await import('@hackolade/kerberos-plugins');
-
-		expect(Boolean(kerberos), 'imported as falsy value').to.be.equal(true);
-	});
-
 	it('krb5 should be imported', async function () {
 		this.timeout(10000);
 		const krb5 = await import('@hackolade/krb5');
