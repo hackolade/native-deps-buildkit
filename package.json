@@ -45,7 +45,6 @@
 		"couchbase": "4.4.0",
 		"desktop-trampoline": "https://github.com/desktop/desktop-trampoline/archive/refs/tags/v0.9.8.tar.gz",
 		"kerberos": "2.1.0",
-		"kerberos-plugins": "git+https://github.com/hackolade/kerberos.git",
 		"keytar": "7.9.0",
 		"krb5": "0.5.5",
 		"mongodb-client-encryption": "2.9.1"
@@ -90,13 +89,6 @@
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false
-			},
-			"kerberos-plugins": {
-				"version": "32.1.2",
-				"napi": false,
-				"prebuild_install": true,
-				"prebuilds_as_npm_packages": false,
-				"to_build": true
 			},
 			"keytar": {
 				"version": "32.8.2",
