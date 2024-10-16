@@ -18,7 +18,7 @@ index e084154..c11096f 100644
  intercede in order to provide Git with any additional info it needs (like
  credentials through `GIT_ASKPASS` or `SSH_ASKPASS`).
 diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
-index be164b0..fd9c4e3 100644
+index be164b0..3f1a0b7 100644
 --- a/node_modules/desktop-trampoline/index.js
 +++ b/node_modules/desktop-trampoline/index.js
 @@ -1,41 +1,39 @@
@@ -35,7 +35,7 @@ index be164b0..fd9c4e3 100644
 -    __dirname,
 -    'build',
 -    'Release',
-+  return Ppath.join(prebuildTargetPath(),
++  return path.join(prebuildTargetPath(),
      getDesktopAskpassTrampolineFilename()
 -  )
 +  );
