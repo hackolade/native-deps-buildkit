@@ -2,11 +2,6 @@ name: Build custom native modules for studio
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Discover native modules for studio
-    types:
-      - completed
 
 jobs:
   build-for-linux:

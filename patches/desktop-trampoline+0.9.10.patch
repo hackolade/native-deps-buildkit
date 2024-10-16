@@ -1,0 +1,109 @@
+diff --git a/node_modules/desktop-trampoline/README.md b/node_modules/desktop-trampoline/README.md
+index e084154..c11096f 100644
+--- a/node_modules/desktop-trampoline/README.md
++++ b/node_modules/desktop-trampoline/README.md
+@@ -1,5 +1,14 @@
+ # Desktop Trampoline
+ 
++## Repackaged version of Desktop Trampoline
++
++This is a convenience package that will install all prebuilds for all supported platforms, to the contrary to the upstream package that constraint the installation only to the runtime platform (os/cpu).
++This typically enable cross building an Electron application.
++
++The package is cleaned up to only embbed the necessary.
++
++=================
++
+ A cross-platform no-dependency C executable trampoline which lets GitHub Desktop
+ intercede in order to provide Git with any additional info it needs (like
+ credentials through `GIT_ASKPASS` or `SSH_ASKPASS`).
+diff --git a/node_modules/desktop-trampoline/index.js b/node_modules/desktop-trampoline/index.js
+index be164b0..fd9c4e3 100644
+--- a/node_modules/desktop-trampoline/index.js
++++ b/node_modules/desktop-trampoline/index.js
+@@ -1,41 +1,39 @@
+-const Path = require('path')
++
++const os = require('os');
++const path = require('path');
++
++const prebuildTargetPath = () => path.dirname(require.resolve(`@hackolade/desktop-trampoline-${os.platform()}-${os.arch()}`));
++const isWindows = os.platform() === 'win32';
+  
+ function getDesktopAskpassTrampolinePath() {
+-  return Path.join(
+-    __dirname,
+-    'build',
+-    'Release',
++  return Ppath.join(prebuildTargetPath(),
+     getDesktopAskpassTrampolineFilename()
+-  )
++  );
+ }
+ 
+ function getDesktopAskpassTrampolineFilename() {
+-  return process.platform === 'win32'
++  return isWindows
+     ? 'desktop-askpass-trampoline.exe'
+     : 'desktop-askpass-trampoline'
+ }
+ 
+ function getDesktopCredentialHelperTrampolinePath() {
+-  return Path.join(
+-    __dirname,
+-    'build',
+-    'Release',
+-    getDesktopCredentialHelperTrampolineFilename()
+-  )
++  return path.join(prebuildTargetPath(),
++    getDesktopCredentialHelperTrampolineFilename());
+ }
+ 
+ function getDesktopCredentialHelperTrampolineFilename() {
+-  return process.platform === 'win32'
++  return isWindows
+     ? 'desktop-credential-helper-trampoline.exe'
+     : 'desktop-credential-helper-trampoline'
+ }
+ 
+ function getSSHWrapperPath() {
+-  return Path.join(__dirname, 'build', 'Release', getSSHWrapperFilename())
++  return path.join(prebuildTargetPath(), getSSHWrapperFilename());
+ }
+ 
+ function getSSHWrapperFilename() {
+-  return process.platform === 'win32' ? 'ssh-wrapper.exe' : 'ssh-wrapper'
++  return isWindows ? 'ssh-wrapper.exe' : 'ssh-wrapper'
+ }
+ 
+ module.exports = {
+diff --git a/node_modules/desktop-trampoline/package.json b/node_modules/desktop-trampoline/package.json
+index 78f90f5..2fe1613 100644
+--- a/node_modules/desktop-trampoline/package.json
++++ b/node_modules/desktop-trampoline/package.json
+@@ -11,7 +11,7 @@
+   "types": "./index.d.ts",
+   "scripts": {
+     "build": "node-gyp rebuild",
+-    "install": "prebuild-install || node-gyp rebuild",
++    "install": "prebuild-install",
+     "test": "jest",
+     "lint": "prettier -c **/*.js **/*.md",
+     "lint:fix": "prettier --write **/*.js **/*.md",
+@@ -29,14 +29,12 @@
+     "url": "https://github.com/desktop/desktop-trampoline/issues"
+   },
+   "homepage": "https://github.com/desktop/desktop-trampoline#readme",
+-  "dependencies": {
+-    "node-addon-api": "^4.3.0",
+-    "prebuild-install": "^7.1.2"
+-  },
+   "devDependencies": {
+     "jest": "^27.5.0",
++    "node-addon-api": "^4.3.0",
+     "node-gyp": "^10.1.0",
+     "prebuild": "^13.0.1",
++    "prebuild-install": "^7.1.2",
+     "prettier": "^2.5.1",
+     "split2": "^4.1.0"
+   },
