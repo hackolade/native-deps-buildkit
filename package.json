@@ -132,5 +132,17 @@
 	},
 	"engines": {
 		"node": "^20"
+	},
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": "20.x",
+			"onFail": "warn"
+		},
+		"packageManager": {
+			"name": "npm",
+			"onFail": "warn",
+			"version": "10.x"
+		}
 	}
 }
