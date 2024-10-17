@@ -72,14 +72,15 @@
 				"to_build": false
 			},
 			"desktop-trampoline": {
-				"version": "33.0.2-0.9.10",
+				"version": "33.0.3-0.9.10",
 				"napi": false,
 				"prebuild_install": true,
 				"prebuilds_as_npm_packages": false,
 				"to_build": false,
-				"prebuildPackageMainEntry": "desktop-trampoline",
+				"prebuildPackageMainEntry": "desktop-askpass-trampoline",
 				"prebuildPackageFiles": [
-					"desktop-trampoline",
+					"desktop-askpass-trampoline",
+					"desktop-credential-helper-trampoline",
 					"ssh-wrapper"
 				]
 			},
